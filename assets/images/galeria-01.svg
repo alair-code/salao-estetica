@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2c221b"/>
+      <stop offset="1" stop-color="#1b1410"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#g)"/>
+  <circle cx="200" cy="200" r="86" fill="none" stroke="#c8a15a" stroke-opacity="0.55" stroke-width="1.5"/>
+  <circle cx="200" cy="200" r="104" fill="none" stroke="#c8a15a" stroke-opacity="0.25" stroke-width="1"/>
+  <path d="M200 148l14 30 33 3-25 22 7 32-29-18-29 18 7-32-25-22 33-3z" fill="none" stroke="#b76e79" stroke-opacity="0.8" stroke-width="1.5" stroke-linejoin="round"/>
+  <text x="200" y="360" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="24" fill="#f7f1ea">Nosso espaço</text>
+  <text x="200" y="390" text-anchor="middle" font-family="Georgia, serif" font-size="13" letter-spacing="4" fill="#c8a15a">CANTINHO DA BELEZA</text>
+</svg>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- SEO: preenchido também por js/config.js em tempo de execução -->
+  <title>Salão e Estética Cantinho da Beleza | Manhumirim - MG</title>
+  <meta name="description" content="Salão de beleza e estética em Manhumirim - MG. Cabelo, estética facial e corporal em um ambiente acolhedor. Agende pelo WhatsApp (33) 98436-8440.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Salão e Estética Cantinho da Beleza | Manhumirim - MG">
+  <meta property="og:description" content="Salão de beleza e estética em Manhumirim - MG. Agende pelo WhatsApp (33) 98436-8440.">
+  <meta property="og:url" content="">
+  <meta property="og:site_name" content="Salão e Estética Cantinho da Beleza">
+  <meta property="og:locale" content="pt_BR">
+
+  <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Configuração do cliente + lógica do site -->
+  <script src="js/config.js" defer></script>
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+
+  <a class="pular-link" href="#conteudo">Pular para o conteúdo</a>
+  <!-- Textos de fallback: tudo é substituído em tempo de execução pelo js/config.js -->
+
+  <!-- ==================== HEADER ==================== -->
+  <header id="cabecalho" class="cabecalho">
+    <div class="container cabecalho__conteudo">
+
+      <a href="#inicio" class="logo" aria-label="Voltar ao início">
+        <img data-config-img="identidade.logo" class="logo__img" alt="Logo">
+        <span class="logo__texto">
+          <span class="logo__nome" data-config="empresa.nomeCurto">Cantinho da Beleza</span>
+          <span class="logo__slogan" data-config="empresa.slogan">Salão de Beleza &amp; Estética</span>
+        </span>
+      </a>
+
+      <nav id="menuNavegacao" class="navegacao" data-config-aria="textos.navegacao.aria" aria-label="Navegação principal">
+        <!-- Links gerados a partir de config.menu -->
+      </nav>
+
+      <div class="cabecalho__acoes">
+        <a class="botao botao--primario cabecalho__acao cabecalho__acao--desktop" data-href="whats" target="_blank" rel="noopener">
+          <span data-icone="whatsapp"></span>
+          <span data-config="hero.textoBotaoPrimario">Agendar pelo WhatsApp</span>
+        </a>
+
+        <button id="menuToggle" class="menu-toggle" type="button"
+                aria-expanded="false" aria-controls="menuNavegacao" aria-label="Abrir menu">
+          <span data-icone="menu"></span>
+          <span data-icone="fechar" data-icone-alternado></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- ==================== HERO ==================== -->
+    <section id="inicio" class="hero">
+      <div class="container hero__conteudo">
+        <span class="hero__etiqueta" data-config="hero.etiqueta">Salão de Beleza &amp; Estética</span>
+        <h1 id="heroTitulo" class="hero__titulo"></h1>
+        <p class="hero__descricao" data-config="hero.descricao"></p>
+
+        <div class="hero__acoes">
+          <a class="botao botao--whatsapp" data-href="whats" target="_blank" rel="noopener">
+            <span data-icone="whatsapp"></span>
+            <span data-config="hero.textoBotaoPrimario">Agendar pelo WhatsApp</span>
+          </a>
+          <a class="botao botao--contorno botao--sobre-fundo" href="#servicos">
+            <span data-config="hero.textoBotaoSecundario">Conhecer os serviços</span>
+            <span data-icone="seta"></span>
+          </a>
+        </div>
+
+        <div class="hero__detalhe" data-config-if="empresa.cidade">
+          <span data-config="textos.hero.cidadePrefixo"></span>
+          <span data-config="empresa.cidade"></span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SOBRE ==================== -->
+    <section id="sobre" class="secao">
+      <div class="container sobre-grid">
+        <div class="sobre-texto">
+          <span class="secao-etiqueta" data-config="textos.sobre.etiqueta">Sobre nós</span>
+          <h2 class="secao-titulo" data-config="sobre.titulo"></h2>
+          <p data-config-if="sobre.paragrafos.0" data-config="sobre.paragrafos.0"></p>
+          <p data-config-if="sobre.paragrafos.1" data-config="sobre.paragrafos.1"></p>
+
+          <div id="sobreCitacao" class="sobre-citacao"></div>
+        </div>
+
+        <div id="sobreDestaques" class="sobre-destaques">
+          <!-- Destaques gerados a partir de config.textos.sobre.destaques -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== SERVIÇOS ==================== -->
+    <section id="servicos" class="secao secao--alt" hidden>
+      <div class="container">
+        <header class="secao-cabecalho secao-cabecalho--centro">
+          <span class="secao-etiqueta" data-config="textos.servicos.etiqueta">Serviços</span>
+          <h2 class="secao-titulo" data-config="textos.servicos.titulo">Nossos serviços</h2>
+          <p class="secao-descricao" data-config="textos.servicos.descricao">Escolha o cuidado ideal para você e agende pelo WhatsApp.</p>
+        </header>
+
+        <div id="servicosLista"></div>
+      </div>
+    </section>
+
+    <!-- ==================== DIFERENCIAIS ==================== -->
+    <section id="diferenciais" class="secao" hidden>
+      <div class="container">
+        <header class="secao-cabecalho secao-cabecalho--centro">
+          <span class="secao-etiqueta" data-config="textos.diferenciais.etiqueta">Diferenciais</span>
+          <h2 class="secao-titulo" data-config="textos.diferenciais.titulo">Por que nos escolher</h2>
+        </header>
+
+        <div id="diferenciaisLista" class="diferenciais-grid"></div>
+      </div>
+    </section>
+
+    <!-- ==================== GALERIA ==================== -->
+    <section id="galeria" class="secao secao--alt" hidden>
+      <div class="container">
+        <header class="secao-cabecalho secao-cabecalho--centro">
+          <span class="secao-etiqueta" data-config="textos.galeria.etiqueta">Galeria</span>
+          <h2 class="secao-titulo" data-config="textos.galeria.titulo">Nossos trabalhos e espaço</h2>
+          <p class="secao-descricao" data-config="textos.galeria.descricao">Toque nas fotos para ampliar.</p>
+        </header>
+
+        <div id="galeriaGrade" class="galeria-grade"></div>
+      </div>
+    </section>
+
+    <!-- ==================== DEPOIMENTOS ==================== -->
+    <section id="depoimentos" class="secao" hidden>
+      <div class="container">
+        <header class="secao-cabecalho secao-cabecalho--centro">
+          <span class="secao-etiqueta" data-config="textos.depoimentos.etiqueta">Depoimentos</span>
+          <h2 class="secao-titulo" data-config="textos.depoimentos.titulo">O que dizem nossas clientes</h2>
+        </header>
+
+        <div id="depoimentosGrade" class="depoimentos-grade"></div>
+      </div>
+    </section>
+
+    <!-- ==================== LOCALIZAÇÃO ==================== -->
+    <section id="localizacao" class="secao">
+      <div class="container">
+        <header class="secao-cabecalho">
+          <span class="secao-etiqueta" data-config="textos.localizacao.etiqueta">Localização</span>
+          <h2 class="secao-titulo" data-config="textos.localizacao.tituloVisita">Visite nosso espaço</h2>
+        </header>
+
+        <div class="localizacao-grid">
+          <div class="localizacao__endereco">
+
+            <div class="localizacao-item">
+              <span data-icone="pin"></span>
+              <div>
+                <strong data-config="empresa.nome"></strong>
+                <span data-config="empresa.endereco"></span>
+                <span data-config-if="empresa.referencia" data-config="empresa.referencia"></span>
+              </div>
+            </div>
+
+            <div id="horariosCard" class="localizacao-item" hidden>
+              <span data-icone="relogio"></span>
+              <div>
+                <strong data-config="textos.localizacao.horarioTitulo">Horário de funcionamento</strong>
+                <ul id="horariosLista" class="horarios-lista"></ul>
+              </div>
+            </div>
+
+            <div class="localizacao-item">
+              <span data-icone="telefone"></span>
+              <div>
+                <strong data-config="textos.localizacao.telefoneTitulo">Telefone e WhatsApp</strong>
+                <a class="localizacao__telefone" data-href="tel" data-config="empresa.telefone"></a>
+                <a data-config-if="empresa.email" data-href="email" class="localizacao__email" data-config="empresa.email"></a>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mapa-card">
+            <span data-icone="mapa"></span>
+            <h3 data-config="textos.localizacao.mapaTitulo">Estamos aqui</h3>
+            <p data-config="empresa.endereco"></p>
+            <a class="botao botao--claro" data-href="maps" target="_blank" rel="noopener">
+              <span data-config="textos.localizacao.botaoMaps">Ver rota no Google Maps</span>
+              <span data-icone="seta"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTATO ==================== -->
+    <section id="contato" class="secao secao--alt">
+      <div class="container">
+        <div class="contato-caixa">
+          <span class="secao-etiqueta" data-config="textos.contato.etiqueta">Contato</span>
+          <h2 class="secao-titulo" data-config="textos.contato.titulo">Agende seu horário</h2>
+          <p class="contato-caixa__texto" data-config="textos.contato.descricao">
+            Estamos prontas para receber você. Fale com a gente pelo WhatsApp e
+            escolha o melhor horário para o seu cuidado.
+          </p>
+
+          <a class="contato-caixa__telefone" data-href="tel">
+            <span data-icone="telefone"></span>
+            <span data-config="empresa.telefone"></span>
+          </a>
+
+          <div class="contato-caixa__acoes">
+            <a class="botao botao--whatsapp" data-href="whats" target="_blank" rel="noopener">
+              <span data-icone="whatsapp"></span>
+              <span data-config="textos.contato.botaoWhatsapp">Enviar mensagem no WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="rodape">
+    <div class="container">
+
+      <div class="rodape-grid">
+        <div>
+          <a href="#inicio" class="logo">
+            <img data-config-img="identidade.logo" class="logo__img" alt="Logo">
+            <span class="logo__texto">
+              <span class="logo__nome" data-config="empresa.nomeCurto">Cantinho da Beleza</span>
+              <span class="logo__slogan" data-config="empresa.slogan">Salão de Beleza &amp; Estética</span>
+            </span>
+          </a>
+          <p class="rodape__mensagem" data-config-if="rodape.mensagem" data-config="rodape.mensagem"></p>
+
+          <div class="rodape__redes">
+            <a class="rodape__rede" data-config-if="identidade.instagram" data-href="instagram"
+               target="_blank" rel="noopener" aria-label="Instagram">
+              <span data-icone="instagram"></span>
+            </a>
+            <a class="rodape__rede" data-config-if="identidade.facebook" data-href="facebook"
+               target="_blank" rel="noopener" aria-label="Facebook">
+              <span data-icone="facebook"></span>
+            </a>
+            <a class="rodape__rede" data-href="whats" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <span data-icone="whatsapp"></span>
+            </a>
+          </div>
+        </div>
+
+        <nav aria-label="Links do rodapé">
+          <h3 class="rodape__titulo" data-config="textos.rodape.tituloNavegacao">Navegação</h3>
+          <ul id="rodapeMenu" class="rodape__lista">
+            <!-- Links gerados a partir de config.menu -->
+          </ul>
+        </nav>
+
+        <div>
+          <h3 class="rodape__titulo" data-config="textos.rodape.tituloContato">Contato</h3>
+          <ul class="rodape__lista">
+            <li>
+              <a data-href="whats" target="_blank" rel="noopener">
+                <span data-config="empresa.telefone"></span>
+              </a>
+            </li>
+            <li data-config-if="empresa.email">
+              <a data-href="email">
+                <span data-config="empresa.email"></span>
+              </a>
+            </li>
+            <li>
+              <a data-href="maps" target="_blank" rel="noopener" data-config-if="empresa.endereco">
+                <span data-config="empresa.cidade"></span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="rodape__base">
+        <p>
+          © <span data-ano-atual></span>
+          <span data-config="empresa.nome"></span>. <span data-config="textos.rodape.direitos">Todos os direitos reservados.</span>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==================== WHATSAPP FLUTUANTE ==================== -->
+  <a class="whatsapp-flutuante" data-href="whats" target="_blank" rel="noopener"
+     data-config-aria="textos.contato.whatsappFlutuante" aria-label="Conversar no WhatsApp">
+    <span data-icone="whatsapp"></span>
+  </a>
+
+  <!-- ==================== LIGHTBOX ==================== -->
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true"
+       data-config-aria="textos.lightbox.dialogo" aria-label="Visualização ampliada de foto" aria-hidden="true">
+    <figure class="lightbox__figura">
+      <img id="lightboxImg" alt="">
+      <figcaption>
+        <span id="lightboxLegenda" class="lightbox__legenda"></span>
+        <span id="lightboxDescricao" class="lightbox__descricao"></span>
+        <span id="lightboxContador" class="lightbox__contador"></span>
+      </figcaption>
+    </figure>
+
+    <button id="lightboxFechar" class="lightbox__botao lightbox__fechar" type="button" data-config-aria="textos.lightbox.fechar" aria-label="Fechar visualização">
+      <span data-icone="fechar"></span>
+    </button>
+    <button id="lightboxPrev" class="lightbox__botao lightbox__anterior" type="button" data-config-aria="textos.lightbox.anterior" aria-label="Foto anterior">
+      <span data-icone="seta"></span>
+    </button>
+    <button id="lightboxNext" class="lightbox__botao lightbox__proximo" type="button" data-config-aria="textos.lightbox.proximo" aria-label="Próxima foto">
+      <span data-icone="seta"></span>
+    </button>
+  </div>
+
+</body>
+</html>

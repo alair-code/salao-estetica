@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#3a2a24"/>
+      <stop offset="1" stop-color="#241a15"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#g)"/>
+  <path d="M200 130c-38 44-58 78-58 108a58 58 0 0 0 116 0c0-30-20-64-58-108z" fill="none" stroke="#b76e79" stroke-opacity="0.8" stroke-width="1.5"/>
+  <path d="M200 168c-22 28-34 52-34 72a34 34 0 0 0 68 0c0-20-12-44-34-72z" fill="none" stroke="#c8a15a" stroke-opacity="0.45" stroke-width="1"/>
+  <text x="200" y="360" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="24" fill="#f7f1ea">Beleza e cuidado</text>
+  <text x="200" y="390" text-anchor="middle" font-family="Georgia, serif" font-size="13" letter-spacing="4" fill="#c8a15a">CANTINHO DA BELEZA</text>
+</svg>

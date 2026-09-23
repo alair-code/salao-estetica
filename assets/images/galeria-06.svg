@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 500">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#302521"/>
+      <stop offset="1" stop-color="#1d1511"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="500" fill="url(#g)"/>
+  <g stroke="#c8a15a" stroke-opacity="0.65" stroke-width="1.5" fill="none" stroke-linecap="round">
+    <path d="M200 130v40M140 155l25 30M260 155l-25 30M120 215h38M242 215h38"/>
+    <circle cx="200" cy="230" r="34" stroke="#b76e79" stroke-opacity="0.8"/>
+  </g>
+  <text x="200" y="360" text-anchor="middle" font-family="Georgia, serif" font-style="italic" font-size="24" fill="#f7f1ea">Toque final</text>
+  <text x="200" y="390" text-anchor="middle" font-family="Georgia, serif" font-size="13" letter-spacing="4" fill="#c8a15a">CANTINHO DA BELEZA</text>
+</svg>

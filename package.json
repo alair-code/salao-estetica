@@ -1,0 +1,12 @@
+{
+  "name": "template-salao-estetica",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Template profissional de site para salão de beleza e estética (HTML/CSS/JS puro, configurável via js/config.js)",
+  "scripts": {
+    "test": "node tests/run.js"
+  },
+  "devDependencies": {
+    "jsdom": "^30.1.1"
+  }
+}
