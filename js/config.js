@@ -14,7 +14,7 @@ window.siteConfig = {
     favicon: "",
     instagram: "",
     facebook: "",
-    corPrincipal: "#9b6b62",
+    corPrincipal: "#84564d",
     corDestaque: "#caa69d"
   },
   seo: {
