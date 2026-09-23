@@ -1,215 +1,100 @@
 (() => {
   "use strict";
-
   const config = window.siteConfig;
-  if (!config) {
-    console.error("siteConfig não foi carregado.");
-    return;
-  }
-
-  const $ = (selector, root = document) => root.querySelector(selector);
-  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
-
-  const createWhatsAppUrl = () => {
-    const phone = String(config.empresa.whatsapp || "").replace(/\D/g, "");
-    const message = encodeURIComponent(config.contato?.mensagemWhatsapp || "");
-    return phone ? `https://wa.me/${phone}${message ? `?text=${message}` : ""}` : "#";
+  if (!config) { console.error("siteConfig não foi carregado."); return; }
+  const $ = (s, r = document) => r.querySelector(s);
+  const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+  const esc = (v) => String(v ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;" }[c]));
+  const text = (s,v) => $$(s).forEach(e => e.textContent = v ?? "");
+  const html = (s,v) => $$(s).forEach(e => e.innerHTML = v ?? "");
+  const waUrl = () => {
+    const phone = String(config.empresa.whatsapp || "").replace(/D/g,"");
+    const msg = encodeURIComponent(config.contato?.mensagemWhatsapp || "");
+    return phone ? `https://wa.me/${phone}${msg ? `?text=${msg}` : ""}` : "#";
   };
-
-  const setText = (selector, value) => {
-    $$(selector).forEach((element) => {
-      element.textContent = value || "";
-    });
+  const phone = (v) => {
+    const d = String(v || "").replace(/D/g,"");
+    return d.length === 11 ? `(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}` : d.length === 10 ? `(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}` : v || "";
   };
-
-  const initBaseData = () => {
+  const setImage = (img, placeholder, src, alt) => {
+    const image = $(img), fallback = $(placeholder);
+    if (image && src) { image.src = src; image.alt = alt || ""; image.hidden = false; fallback?.setAttribute("hidden",""); }
+  };
+  const init = () => {
     document.title = config.seo?.titulo || config.empresa.nome;
-    const description = $('meta[name="description"]');
-    if (description) description.setAttribute("content", config.seo?.descricao || config.empresa.descricao || "");
-
-    const ogTitle = $('meta[property="og:title"]');
-    const ogDescription = $('meta[property="og:description"]');
-    if (ogTitle) ogTitle.setAttribute("content", config.seo?.titulo || config.empresa.nome);
-    if (ogDescription) ogDescription.setAttribute("content", config.seo?.descricao || "");
-
-    const favicon = $("#favicon");
-    if (favicon && config.identidade?.favicon) favicon.href = config.identidade.favicon;
-
+    $('meta[name="description"]')?.setAttribute("content", config.seo?.descricao || "");
+    $('meta[property="og:title"]')?.setAttribute("content", config.seo?.titulo || config.empresa.nome);
+    $('meta[property="og:description"]')?.setAttribute("content", config.seo?.descricao || "");
+    if (config.seo?.imagemSocial) $('meta[property="og:image"]')?.setAttribute("content", config.seo.imagemSocial);
+    if (config.identidade?.favicon) $("#favicon").href = config.identidade.favicon;
     document.documentElement.style.setProperty("--accent", config.identidade?.corPrincipal || "#9b6b62");
     document.documentElement.style.setProperty("--accent-soft", config.identidade?.corDestaque || "#caa69d");
 
-    setText("[data-company-name]", config.empresa.nome);
-    setText("[data-city]", config.empresa.cidade);
-    setText("[data-phone]", formatPhone(config.empresa.telefone));
-    setText("[data-address]", config.empresa.endereco);
-    setText("[data-reference]", config.empresa.referencia);
-    setText("[data-about-text]", config.empresa.descricao);
-    setText("[data-year]", new Date().getFullYear());
+    text("[data-company-name]", config.empresa.nome); text("[data-business-type]", config.empresa.tipo || "Salão & Estética");
+    text("[data-city]", config.empresa.cidade); text("[data-phone]", phone(config.empresa.telefone)); text("[data-address]", config.empresa.endereco); text("[data-reference]", config.empresa.referencia);
+    text("[data-about-text]", config.empresa.descricao); text("[data-year]", new Date().getFullYear());
+    const c = config.conteudo || {};
+    html("[data-hero-eyebrow]", esc(c.heroEyebrow || "")); html("[data-hero-title]", c.heroTitulo || ""); html("[data-hero-text]", esc(c.heroTexto || ""));
+    text("[data-card-kicker]", c.heroCardKicker || ""); html("[data-hero-card-title]", c.heroCardTitulo || ""); text("[data-hero-card-text]", c.heroCardTexto || "");
+    html("[data-services-title]", c.servicosTitulo || "Serviços"); text("[data-services-intro]", c.servicosIntro || "");
+    html("[data-about-title]", c.sobreTitulo || "Sobre"); text("[data-about-badge]", c.sobreBadge || "");
+    html("[data-gallery-title]", c.galeriaTitulo || "Galeria"); text("[data-gallery-intro]", c.galeriaIntro || "");
+    html("[data-booking-title]", c.agendamentoTitulo || "Agendamento"); text("[data-booking-text]", c.agendamentoTexto || "");
 
-    const whatsappUrl = createWhatsAppUrl();
-    $$("[data-whatsapp-link]").forEach((link) => {
-      link.href = whatsappUrl;
-      if (whatsappUrl === "#") link.hidden = true;
-    });
+    const brand = config.identidade?.logo;
+    $$("[data-brand-logo],[data-footer-brand-logo]").forEach(e => { if (brand) { e.src = brand; e.hidden = false; } });
+    $$("[data-brand-mark],[data-footer-brand-mark]").forEach(e => { if (brand) e.hidden = true; });
 
-    const mapsQuery = encodeURIComponent(config.empresa.endereco || "");
-    const mapsLink = $("[data-maps-link]");
-    if (mapsLink && mapsQuery) {
-      mapsLink.href = `https://www.google.com/maps/search/?api=1&query=${mapsQuery}`;
-    }
+    const w = waUrl();
+    $$("[data-whatsapp-link]").forEach(a => { a.href = w; if (w === "#") a.hidden = true; });
+    const booking = config.contato?.agendamento || {};
+    const bookingUrl = booking.tipo === "link" && booking.link ? booking.link : w;
+    const bookingSection = $("[data-booking-section]");
+    if (bookingSection) bookingSection.hidden = !bookingUrl || bookingUrl === "#";
+    $$("[data-booking-link]").forEach(a => { a.href = bookingUrl; if (bookingUrl === "#") a.hidden = true; });
 
-    const instagram = config.identidade?.instagram;
-    $$("[data-instagram-link]").forEach((link) => {
-      if (instagram) {
-        link.href = instagram;
-        link.hidden = false;
-      } else {
-        link.hidden = true;
-      }
-    });
+    const maps = $("[data-maps-link]");
+    if (maps && config.empresa.endereco) maps.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(config.empresa.endereco);
+    const social = [["[data-instagram-link]",config.identidade?.instagram],["[data-facebook-link]",config.identidade?.facebook]];
+    social.forEach(([s,url]) => $$(s).forEach(a => { if (url) { a.href=url; a.hidden=false; } else a.hidden=true; }));
+
+    setImage("[data-hero-image]","[data-hero-placeholder]",config.imagens?.hero,config.empresa.nome);
+    setImage("[data-about-image]","[data-about-placeholder]",config.imagens?.sobre,config.empresa.nome);
+    initDifferentials(); initPoints(); initServices(); initGallery(); initTestimonials(); initHours(); initLightbox(); initMenu(); initReveal();
   };
-
-  const formatPhone = (phone) => {
-    const digits = String(phone || "").replace(/\D/g, "");
-    if (digits.length === 11) return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
-    if (digits.length === 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
-    return phone || "";
+  const initDifferentials = () => {
+    const c=$("[data-differentials]"), items=Array.isArray(config.diferenciais)?config.diferenciais:[];
+    if(!c)return; c.innerHTML=items.slice(0,4).map((x,i)=>`<div><strong>0${i+1}</strong><span>${esc(x)}</span></div>`).join("");
   };
-
+  const initPoints = () => {
+    const c=$("[data-about-points]"), items=Array.isArray(config.pontosSobre)?config.pontosSobre:[];
+    if(!c)return; c.innerHTML=items.map(x=>`<div><span>✦</span><strong>${esc(x.titulo)}</strong><small>${esc(x.texto)}</small></div>`).join("");
+  };
   const initServices = () => {
-    const container = $("[data-services]");
-    if (!container) return;
-    const services = Array.isArray(config.servicos) ? config.servicos : [];
-
-    if (!services.length) {
-      container.innerHTML = '<p class="empty-state">Adicione os serviços do cliente no arquivo js/config.js.</p>';
-      return;
-    }
-
-    container.innerHTML = services.map((service, index) => `
-      <article class="service-card reveal">
-        <span class="service-number">0${index + 1}</span>
-        <span class="service-category">${escapeHtml(service.categoria || "Serviço")}</span>
-        <h3>${escapeHtml(service.nome || "Serviço")}</h3>
-        <p>${escapeHtml(service.descricao || "")}</p>
-        ${service.preco ? `<strong class="service-price">${escapeHtml(service.preco)}</strong>` : ""}
-      </article>
-    `).join("");
+    const c=$("[data-services]"), items=Array.isArray(config.servicos)?config.servicos:[];
+    if(!c)return;
+    c.innerHTML = items.length ? items.map((s,i)=>`<article class="service-card reveal"><span class="service-number">${String(i+1).padStart(2,"0")}</span><span class="service-category">${esc(s.categoria||"Serviço")}</span><h3>${esc(s.nome||"Serviço")}</h3><p>${esc(s.descricao||"")}</p>${s.preco?`<strong class="service-price">${esc(s.preco)}</strong>`:""}</article>`).join("") : '<p class="empty-state">Nenhum serviço cadastrado ainda. Configure a propriedade <strong>servicos</strong> em js/config.js.</p>';
   };
-
   const initGallery = () => {
-    const container = $("[data-gallery]");
-    if (!container) return;
-    const gallery = Array.isArray(config.galeria) ? config.galeria : [];
-
-    container.innerHTML = gallery.length
-      ? gallery.map((item, index) => `
-        <button class="gallery-item reveal" type="button" data-gallery-image="${escapeAttribute(item.imagem)}" data-gallery-alt="${escapeAttribute(item.titulo || "Galeria")}">
-          <img src="${escapeAttribute(item.imagem)}" alt="${escapeAttribute(item.titulo || "Imagem da galeria")}" loading="${index < 2 ? "eager" : "lazy"}">
-          <span class="gallery-overlay"><strong>${escapeHtml(item.titulo || "")}</strong><small>${escapeHtml(item.descricao || "")}</small></span>
-        </button>
-      `).join("")
-      : '<p class="empty-state">Adicione fotos na propriedade galeria do arquivo js/config.js.</p>';
-
-    $$(".gallery-item", container).forEach((item) => {
-      item.addEventListener("click", () => openLightbox(item.dataset.galleryImage, item.dataset.galleryAlt));
-    });
+    const c=$("[data-gallery]"), items=Array.isArray(config.galeria)?config.galeria:[];
+    if(!c)return;
+    c.innerHTML = items.length ? items.map((g,i)=>`<button class="gallery-item reveal" type="button" data-gallery-image="${esc(g.imagem)}" data-gallery-alt="${esc(g.titulo||"Galeria")}"><img src="${esc(g.imagem)}" alt="${esc(g.titulo||"Imagem da galeria")}" loading="${i<2?"eager":"lazy"}"><span class="gallery-overlay"><strong>${esc(g.titulo||"")}</strong><small>${esc(g.descricao||"")}</small></span></button>`).join("") : '<p class="empty-state">Nenhuma foto cadastrada. Adicione imagens em <strong>galeria</strong> no js/config.js.</p>';
+    $$(".gallery-item",c).forEach(e=>e.addEventListener("click",()=>openLightbox(e.dataset.galleryImage,e.dataset.galleryAlt)));
   };
-
   const initTestimonials = () => {
-    const section = $("[data-testimonials-section]");
-    const container = $("[data-testimonials]");
-    if (!section || !container) return;
-    const testimonials = Array.isArray(config.depoimentos) ? config.depoimentos : [];
-
-    if (!testimonials.length) {
-      section.hidden = true;
-      return;
-    }
-
-    container.innerHTML = testimonials.map((item) => `
-      <article class="testimonial-card reveal">
-        <span class="quote">“</span>
-        <p>${escapeHtml(item.texto || "")}</p>
-        <strong>${escapeHtml(item.nome || "Cliente")}</strong>
-      </article>
-    `).join("");
+    const s=$("[data-testimonials-section]"), c=$("[data-testimonials]"), items=Array.isArray(config.depoimentos)?config.depoimentos:[];
+    if(!s||!c)return; s.hidden=!items.length;
+    c.innerHTML=items.map(x=>`<article class="testimonial-card reveal"><span class="quote">“</span><p>${esc(x.texto||"")}</p><strong>${esc(x.nome||"Cliente")}</strong></article>`).join("");
   };
-
-  const openLightbox = (src, alt) => {
-    const box = $("[data-lightbox]");
-    const image = $("[data-lightbox-image]");
-    if (!box || !image) return;
-    image.src = src;
-    image.alt = alt || "";
-    box.setAttribute("aria-hidden", "false");
-    document.body.classList.add("no-scroll");
+  const initHours = () => {
+    const s=$("[data-hours-section]"), c=$("[data-hours]"), h=config.funcionamento||{}, labels={segunda:"Segunda-feira",terca:"Terça-feira",quarta:"Quarta-feira",quinta:"Quinta-feira",sexta:"Sexta-feira",sabado:"Sábado",domingo:"Domingo"};
+    const items=Object.entries(labels).filter(([k])=>h[k]);
+    if(!s||!c)return; s.hidden=!items.length; c.innerHTML=items.map(([k,l])=>`<div><span>${l}</span><strong>${esc(h[k])}</strong></div>`).join("");
   };
-
-  const closeLightbox = () => {
-    const box = $("[data-lightbox]");
-    if (!box) return;
-    box.setAttribute("aria-hidden", "true");
-    document.body.classList.remove("no-scroll");
-  };
-
-  const initLightbox = () => {
-    $("[data-lightbox]")?.addEventListener("click", (event) => {
-      if (event.target === event.currentTarget) closeLightbox();
-    });
-    $(".lightbox-close")?.addEventListener("click", closeLightbox);
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape") closeLightbox();
-    });
-  };
-
-  const initMobileMenu = () => {
-    const toggle = $(".menu-toggle");
-    const nav = $("#main-nav");
-    if (!toggle || !nav) return;
-
-    toggle.addEventListener("click", () => {
-      const open = toggle.getAttribute("aria-expanded") === "true";
-      toggle.setAttribute("aria-expanded", String(!open));
-      nav.classList.toggle("is-open", !open);
-      document.body.classList.toggle("menu-open", !open);
-    });
-
-    $$("#main-nav a").forEach((link) => link.addEventListener("click", () => {
-      toggle.setAttribute("aria-expanded", "false");
-      nav.classList.remove("is-open");
-      document.body.classList.remove("menu-open");
-    }));
-  };
-
-  const initReveal = () => {
-    const elements = $$(".reveal");
-    if (!("IntersectionObserver" in window)) {
-      elements.forEach((element) => element.classList.add("is-visible"));
-      return;
-    }
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          obs.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    elements.forEach((element) => observer.observe(element));
-  };
-
-  const escapeHtml = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({
-    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;"
-  }[char]));
-
-  const escapeAttribute = escapeHtml;
-
-  initBaseData();
-  initServices();
-  initGallery();
-  initTestimonials();
-  initLightbox();
-  initMobileMenu();
-  initReveal();
+  const openLightbox=(src,alt)=>{const b=$("[data-lightbox]"),i=$("[data-lightbox-image]");if(!b||!i)return;i.src=src;i.alt=alt||"";b.setAttribute("aria-hidden","false");document.body.classList.add("no-scroll");};
+  const closeLightbox=()=>{$("[data-lightbox]")?.setAttribute("aria-hidden","true");document.body.classList.remove("no-scroll");};
+  const initLightbox=()=>{$("[data-lightbox]")?.addEventListener("click",e=>{if(e.target===e.currentTarget)closeLightbox();});$(".lightbox-close")?.addEventListener("click",closeLightbox);document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLightbox();});};
+  const initMenu=()=>{const b=$(".menu-toggle"),n=$("#main-nav");if(!b||!n)return;b.addEventListener("click",()=>{const open=b.getAttribute("aria-expanded")==="true";b.setAttribute("aria-expanded",String(!open));n.classList.toggle("is-open",!open);document.body.classList.toggle("menu-open",!open);});$$(".main-nav a").forEach(a=>a.addEventListener("click",()=>{b.setAttribute("aria-expanded","false");n.classList.remove("is-open");document.body.classList.remove("menu-open");}));};
+  const initReveal=()=>{const es=$$(".reveal");if(!("IntersectionObserver"in window)){es.forEach(e=>e.classList.add("is-visible"));return;}const o=new IntersectionObserver((entries,obs)=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is-visible");obs.unobserve(e.target);}}),{threshold:.12});es.forEach(e=>o.observe(e));};
+  init();
 })();
