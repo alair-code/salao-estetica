@@ -8,7 +8,7 @@
   const text = (s,v) => $$(s).forEach(e => e.textContent = v ?? "");
   const html = (s,v) => $$(s).forEach(e => e.innerHTML = v ?? "");
   const waUrl = () => {
-    const phone = String(config.empresa.whatsapp || "").replace(/\D/g,"");
+    const phone = String(config.contato?.whatsapp || "").replace(/\D/g,"");
     const msg = encodeURIComponent(config.contato?.mensagemWhatsapp || "");
     return phone ? `https://wa.me/${phone}${msg ? `?text=${msg}` : ""}` : "#";
   };
@@ -30,7 +30,7 @@
     document.documentElement.style.setProperty("--accent", config.identidade?.corPrincipal || "#9b6b62");
     document.documentElement.style.setProperty("--accent-soft", config.identidade?.corDestaque || "#caa69d");
 
-    text("[data-company-name]", config.empresa.nome); text("[data-business-type]", config.empresa.tipo || "Salão & Estética");
+    text("[data-company-name]", config.empresa.nome); text("[data-business-type]", config.empresa.tipo || "");
     text("[data-city]", config.empresa.cidade); text("[data-phone]", phone(config.empresa.telefone)); text("[data-address]", config.empresa.endereco); text("[data-reference]", config.empresa.referencia);
     text("[data-about-text]", config.empresa.descricao); text("[data-year]", new Date().getFullYear());
     const c = config.conteudo || {};
@@ -40,6 +40,11 @@
     html("[data-about-title]", c.sobreTitulo || "Sobre"); text("[data-about-badge]", c.sobreBadge || "");
     html("[data-gallery-title]", c.galeriaTitulo || "Galeria"); text("[data-gallery-intro]", c.galeriaIntro || "");
     html("[data-booking-title]", c.agendamentoTitulo || "Agendamento"); text("[data-booking-text]", c.agendamentoTexto || "");
+    text("[data-testimonials-eyebrow]", c.depoimentosEyebrow || ""); html("[data-testimonials-title]", c.depoimentosTitulo || "");
+    text("[data-hours-eyebrow]", c.funcionamentoEyebrow || ""); html("[data-hours-title]", c.funcionamentoTitulo || ""); text("[data-hours-text]", c.funcionamentoTexto || "");
+    text("[data-location-eyebrow]", c.localizacaoEyebrow || ""); html("[data-location-title]", c.localizacaoTitulo || "");
+    text("[data-contact-label]", c.contatoWhatsAppLabel || ""); text("[data-contact-text]", c.contatoWhatsAppTexto || "");
+    text("[data-footer-description]", c.footerDescricao || "");
 
     const brand = config.identidade?.logo;
     $$("[data-brand-logo],[data-footer-brand-logo]").forEach(e => { if (brand) { e.src = brand; e.hidden = false; } });
@@ -91,9 +96,34 @@
     const items=Object.entries(labels).filter(([k])=>h[k]);
     if(!s||!c)return; s.hidden=!items.length; c.innerHTML=items.map(([k,l])=>`<div><span>${l}</span><strong>${esc(h[k])}</strong></div>`).join("");
   };
-  const openLightbox=(src,alt)=>{const b=$("[data-lightbox]"),i=$("[data-lightbox-image]");if(!b||!i)return;i.src=src;i.alt=alt||"";b.setAttribute("aria-hidden","false");document.body.classList.add("no-scroll");};
-  const closeLightbox=()=>{$("[data-lightbox]")?.setAttribute("aria-hidden","true");document.body.classList.remove("no-scroll");};
-  const initLightbox=()=>{$("[data-lightbox]")?.addEventListener("click",e=>{if(e.target===e.currentTarget)closeLightbox();});$(".lightbox-close")?.addEventListener("click",closeLightbox);document.addEventListener("keydown",e=>{if(e.key==="Escape")closeLightbox();});};
+  let lastFocusedElement = null;
+  const openLightbox=(src,alt)=>{
+    const b=$("[data-lightbox]"),i=$("[data-lightbox-image]"),close=$(".lightbox-close");
+    if(!b||!i)return;
+    lastFocusedElement=document.activeElement;
+    i.src=src;i.alt=alt||"";
+    b.setAttribute("aria-hidden","false");
+    document.body.classList.add("no-scroll");
+    requestAnimationFrame(()=>close?.focus());
+  };
+  const closeLightbox=()=>{
+    const b=$("[data-lightbox]");
+    if(!b)return;
+    b.setAttribute("aria-hidden","true");
+    document.body.classList.remove("no-scroll");
+    lastFocusedElement?.focus?.();
+    lastFocusedElement=null;
+  };
+  const initLightbox=()=>{
+    const b=$("[data-lightbox]"),close=$(".lightbox-close");
+    b?.addEventListener("click",e=>{if(e.target===e.currentTarget)closeLightbox();});
+    close?.addEventListener("click",closeLightbox);
+    document.addEventListener("keydown",e=>{
+      if(b?.getAttribute("aria-hidden")!=="false")return;
+      if(e.key==="Escape"){e.preventDefault();closeLightbox();return;}
+      if(e.key==="Tab"){e.preventDefault();close?.focus();}
+    });
+  };
   const initMenu=()=>{const b=$(".menu-toggle"),n=$("#main-nav");if(!b||!n)return;const setOpen=(open)=>{b.setAttribute("aria-expanded",String(open));b.setAttribute("aria-label",open?"Fechar menu":"Abrir menu");n.classList.toggle("is-open",open);document.body.classList.toggle("menu-open",open);};b.addEventListener("click",()=>setOpen(b.getAttribute("aria-expanded")!=="true"));$(".main-nav a").forEach(a=>a.addEventListener("click",()=>setOpen(false)));document.addEventListener("keydown",e=>{if(e.key==="Escape")setOpen(false);});window.addEventListener("resize",()=>{if(window.innerWidth>720)setOpen(false);});};
   const initReveal=()=>{const es=$$(".reveal");if(!("IntersectionObserver"in window)){es.forEach(e=>e.classList.add("is-visible"));return;}const o=new IntersectionObserver((entries,obs)=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("is-visible");obs.unobserve(e.target);}}),{threshold:.12});es.forEach(e=>o.observe(e));};
   init();
