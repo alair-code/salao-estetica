@@ -4,7 +4,6 @@ window.siteConfig = {
     tipo: "Salão & Estética",
     cidade: "Manhumirim - MG",
     telefone: "33984368440",
-    whatsapp: "5533984368440",
     endereco: "Av. Padre Júlio Maria, 25 - Centro, Manhumirim - MG, 36970-000",
     referencia: "Em cima da Loja da Margarida",
     descricao: "Um espaço pensado para apresentar serviços de salão de beleza e estética com uma experiência acolhedora e profissional."
@@ -36,9 +35,20 @@ window.siteConfig = {
     galeriaTitulo: "Galeria de <em>inspirações.</em>",
     galeriaIntro: "Adicione as fotos reais do cliente diretamente no js/config.js.",
     agendamentoTitulo: "Seu horário, <em>do seu jeito.</em>",
-    agendamentoTexto: "Entre em contato para consultar disponibilidade e agendar seu atendimento."
+    agendamentoTexto: "Entre em contato para consultar disponibilidade e agendar seu atendimento.",
+    depoimentosEyebrow: "EXPERIÊNCIAS",
+    depoimentosTitulo: "Quem vive o momento, <em>compartilha.</em>",
+    funcionamentoEyebrow: "FUNCIONAMENTO",
+    funcionamentoTitulo: "Escolha o melhor <em>momento.</em>",
+    funcionamentoTexto: "Consulte os horários de atendimento configurados para este espaço.",
+    localizacaoEyebrow: "ONDE ESTAMOS",
+    localizacaoTitulo: "Venha conhecer o <em>nosso espaço.</em>",
+    contatoWhatsAppLabel: "WHATSAPP",
+    contatoWhatsAppTexto: "Fale conosco para conhecer os serviços e consultar horários.",
+    footerDescricao: "Template comercial reutilizável"
   },
   contato: {
+    whatsapp: "5533984368440",
     mensagemWhatsapp: "Olá! Gostaria de conhecer os serviços do Salão e Estética Cantinho da Beleza e consultar os horários disponíveis.",
     agendamento: { tipo: "whatsapp", link: "" }
   },
