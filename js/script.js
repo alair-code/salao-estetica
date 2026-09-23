@@ -8,12 +8,12 @@
   const text = (s,v) => $$(s).forEach(e => e.textContent = v ?? "");
   const html = (s,v) => $$(s).forEach(e => e.innerHTML = v ?? "");
   const waUrl = () => {
-    const phone = String(config.empresa.whatsapp || "").replace(/\\D/g,"");
+    const phone = String(config.empresa.whatsapp || "").replace(/\D/g,"");
     const msg = encodeURIComponent(config.contato?.mensagemWhatsapp || "");
     return phone ? `https://wa.me/${phone}${msg ? `?text=${msg}` : ""}` : "#";
   };
   const phone = (v) => {
-    const d = String(v || "").replace(/\\D/g,"");
+    const d = String(v || "").replace(/\D/g,"");
     return d.length === 11 ? `(${d.slice(0,2)}) ${d.slice(2,7)}-${d.slice(7)}` : d.length === 10 ? `(${d.slice(0,2)}) ${d.slice(2,6)}-${d.slice(6)}` : v || "";
   };
   const setImage = (img, placeholder, src, alt) => {
