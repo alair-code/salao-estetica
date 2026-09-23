@@ -42,7 +42,7 @@
     html("[data-booking-title]", c.agendamentoTitulo || "Agendamento"); text("[data-booking-text]", c.agendamentoTexto || "");
     text("[data-testimonials-eyebrow]", c.depoimentosEyebrow || ""); html("[data-testimonials-title]", c.depoimentosTitulo || "");
     text("[data-hours-eyebrow]", c.funcionamentoEyebrow || ""); html("[data-hours-title]", c.funcionamentoTitulo || ""); text("[data-hours-text]", c.funcionamentoTexto || "");
-    text("[data-location-eyebrow]", c.localizacaoEyebrow || ""); html("[data-location-title]", c.localizacaoTitulo || "");
+    text("[data-location-eyebrow]", c.localizacaoEyebrow || ""); html("[data-location-title]", c.localizacaoTitulo || ""); text("[data-location-company]", config.empresa.nome || "");
     text("[data-contact-label]", c.contatoWhatsAppLabel || ""); text("[data-contact-text]", c.contatoWhatsAppTexto || "");
     text("[data-footer-description]", c.footerDescricao || "");
 
