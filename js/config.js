@@ -1,4 +1,4 @@
-const siteConfig = {
+window.siteConfig = {
   empresa: {
     nome: "Salão e Estética Cantinho da Beleza",
     tipo: "Salão & Estética",
@@ -40,29 +40,18 @@ const siteConfig = {
   },
   contato: {
     mensagemWhatsapp: "Olá! Gostaria de conhecer os serviços do Salão e Estética Cantinho da Beleza e consultar os horários disponíveis.",
-    agendamento: {
-      tipo: "whatsapp",
-      link: ""
-    }
+    agendamento: { tipo: "whatsapp", link: "" }
   },
   funcionamento: {
     segunda: "", terca: "", quarta: "", quinta: "", sexta: "", sabado: "", domingo: ""
   },
-  diferenciais: [
-    "Salão de beleza",
-    "Estética",
-    "Atendimento personalizado",
-    "Seu momento, seu cuidado"
-  ],
+  diferenciais: ["Salão de beleza", "Estética", "Atendimento personalizado", "Seu momento, seu cuidado"],
   pontosSobre: [
     { titulo: "Cuidado", texto: "Detalhes pensados para sua experiência." },
     { titulo: "Beleza", texto: "Serviços apresentados de forma personalizada." },
     { titulo: "Bem-estar", texto: "Um momento reservado para você." }
   ],
-  imagens: {
-    hero: "",
-    sobre: ""
-  },
+  imagens: { hero: "", sobre: "" },
   servicos: [],
   galeria: [],
   depoimentos: []
