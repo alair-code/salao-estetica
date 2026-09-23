@@ -275,50 +275,26 @@ button {
 }
 
 /* ---------- Header ---------- */
+/* Cabeçalho fixo e SEMPRE visível: fundo escuro permanente combinando
+   com o hero — logo, menu e toggle legíveis desde o primeiro pixel,
+   sem depender de rolagem. Ao rolar, apenas ganha sombra e compacta. */
 .cabecalho {
   position: fixed;
   inset-inline: 0;
   top: 0;
   z-index: 60;
+  background-color: rgba(35, 27, 22, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   transition: background-color var(--transicao), box-shadow var(--transicao),
     padding var(--transicao);
   padding-block: 1.1rem;
 }
 
 .cabecalho.is-scrolled {
-  background-color: rgba(250, 246, 241, 0.92);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  box-shadow: 0 1px 0 var(--cor-borda), 0 10px 30px -20px rgba(35, 27, 22, 0.35);
+  background-color: rgba(35, 27, 22, 0.97);
+  box-shadow: 0 1px 0 rgba(247, 241, 234, 0.08), 0 12px 30px -20px rgba(0, 0, 0, 0.6);
   padding-block: 0.7rem;
-}
-
-/* Estado topo (sobre o hero escuro): texto claro para contraste.
-   Sem isso, a logo e o menu somem no fundo escuro até a primeira rolagem.
-   :not(.menu-aberto) evita texto claro sobre o painel claro do menu mobile. */
-.cabecalho:not(.is-scrolled):not(.menu-aberto) .logo__nome {
-  color: #fdf9f4;
-}
-
-.cabecalho:not(.is-scrolled):not(.menu-aberto) .logo__slogan {
-  color: #e9c98f;
-}
-
-.cabecalho:not(.is-scrolled):not(.menu-aberto) .navegacao__link {
-  color: rgba(247, 241, 234, 0.85);
-}
-
-.cabecalho:not(.is-scrolled):not(.menu-aberto) .navegacao__link:hover,
-.cabecalho:not(.is-scrolled):not(.menu-aberto) .navegacao__link:focus-visible {
-  color: #e9c98f;
-}
-
-.cabecalho:not(.is-scrolled):not(.menu-aberto) .navegacao__link::after {
-  background: #e9c98f;
-}
-
-.cabecalho:not(.is-scrolled):not(.menu-aberto) .menu-toggle {
-  color: #fdf9f4;
 }
 
 .cabecalho__conteudo {
@@ -349,14 +325,14 @@ button {
   font-family: var(--fonte-titulos);
   font-size: 1.45rem;
   font-weight: 600;
-  color: var(--cor-escura);
+  color: #fdf9f4;
 }
 
 .logo__slogan {
   font-size: 0.66rem;
   letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--cor-primaria);
+  color: #e9c98f;
 }
 
 .navegacao {
@@ -392,6 +368,24 @@ button {
   transform: scaleX(1);
 }
 
+/* No desktop os links ficam sobre o cabeçalho escuro: texto claro.
+   No mobile o painel do menu tem fundo claro e mantém a cor escura da
+   regra base, garantindo contraste nos dois contextos. */
+@media (min-width: 821px) {
+  .navegacao__link {
+    color: rgba(247, 241, 234, 0.85);
+  }
+
+  .navegacao__link:hover,
+  .navegacao__link:focus-visible {
+    color: #e9c98f;
+  }
+
+  .navegacao__link::after {
+    background: #e9c98f;
+  }
+}
+
 .cabecalho__acao {
   display: inline-flex;
 }
@@ -409,7 +403,7 @@ button {
   width: 44px;
   height: 44px;
   align-items: center;
-  color: var(--cor-escura);
+  color: #fdf9f4;
 }
 
 .menu-toggle .icon {
