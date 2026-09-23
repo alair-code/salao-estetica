@@ -293,6 +293,34 @@ button {
   padding-block: 0.7rem;
 }
 
+/* Estado topo (sobre o hero escuro): texto claro para contraste.
+   Sem isso, a logo e o menu somem no fundo escuro até a primeira rolagem.
+   :not(.menu-aberto) evita texto claro sobre o painel claro do menu mobile. */
+.cabecalho:not(.is-scrolled):not(.menu-aberto) .logo__nome {
+  color: #fdf9f4;
+}
+
+.cabecalho:not(.is-scrolled):not(.menu-aberto) .logo__slogan {
+  color: #e9c98f;
+}
+
+.cabecalho:not(.is-scrolled):not(.menu-aberto) .navegacao__link {
+  color: rgba(247, 241, 234, 0.85);
+}
+
+.cabecalho:not(.is-scrolled):not(.menu-aberto) .navegacao__link:hover,
+.cabecalho:not(.is-scrolled):not(.menu-aberto) .navegacao__link:focus-visible {
+  color: #e9c98f;
+}
+
+.cabecalho:not(.is-scrolled):not(.menu-aberto) .navegacao__link::after {
+  background: #e9c98f;
+}
+
+.cabecalho:not(.is-scrolled):not(.menu-aberto) .menu-toggle {
+  color: #fdf9f4;
+}
+
 .cabecalho__conteudo {
   display: flex;
   align-items: center;

@@ -634,6 +634,10 @@
         ? (textosNav.fecharMenu || "Fechar menu")
         : (textosNav.abrirMenu || "Abrir menu"));
       menu.classList.toggle("is-open", aberto);
+      // Avisa ao header que o painel claro do menu está aberto (mobile),
+      // para os ícones não ficarem claros sobre fundo claro.
+      var cabecalho = $("#cabecalho");
+      if (cabecalho) cabecalho.classList.toggle("menu-aberto", aberto);
       if (iconeMenu) iconeMenu.hidden = aberto;
       if (iconeFechar) iconeFechar.hidden = !aberto;
       document.body.classList.toggle("no-scroll", aberto);
