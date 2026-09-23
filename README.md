@@ -17,6 +17,7 @@ Para transformar o template em outro cliente, comece por **js/config.js**. O arq
 - Depoimentos
 - Imagens do Hero e da seção Sobre
 - Destino do agendamento
+- Textos institucionais e títulos das seções
 
 Não é necessário espalhar os dados do cliente pelo HTML.
 
@@ -85,6 +86,8 @@ Por padrão, o botão usa WhatsApp:
 
 ```javascript
 contato: {
+  whatsapp: "5533984368440",
+  mensagemWhatsapp: "Olá! Gostaria de conhecer os serviços e consultar um horário.",
   agendamento: {
     tipo: "whatsapp",
     link: ""
@@ -108,3 +111,6 @@ Por ser um site estático, os arquivos podem ser publicados na Vercel ou em outr
 ## Licença
 
 A licença comercial/proprietária deve ser definida separadamente de acordo com o modelo de venda do template.
+## Arquitetura
+
+O conteúdo específico do cliente deve ficar em `js/config.js`. O HTML mantém apenas a estrutura e os atributos `data-*`, enquanto `js/script.js` faz a renderização dinâmica. O template não utiliza banco de dados, framework ou backend.
