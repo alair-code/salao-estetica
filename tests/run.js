@@ -29,6 +29,19 @@ function montarSite(configOverride) {
   const erros = [];
   w.addEventListener("error", (e) => erros.push(e.message));
 
+  // jsdom não implementa matchMedia (usado no menu mobile). Em navegadores
+  // reais a API sempre existe; aqui simulamos viewport desktop.
+  if (typeof w.matchMedia !== "function") {
+    w.matchMedia = () => ({
+      matches: false,
+      media: "",
+      addEventListener() {},
+      removeEventListener() {},
+      addListener() {},
+      removeListener() {},
+    });
+  }
+
   if (configOverride !== null) {
     // Simula o js/config.js (do cliente atual ou de outro cliente)
     w.eval(configOverride);
@@ -58,9 +71,9 @@ const $ = (s) => site.doc.querySelector(s);
 const $$ = (s) => [...site.doc.querySelectorAll(s)];
 
 check(site.erros.length === 0, "sem erros de runtime");
-check($("#heroTitulo").textContent.includes("cuidado e leveza"), "hero: título + destaque renderizados");
-check($$(".servico-card").length === 9, "serviços: 9 cards");
-check($$(".servicos-categoria").length === 2, "2 categorias (Salão de Beleza + Estética)");
+check($("#heroTitulo").textContent.includes("toque de cuidado"), "hero: título + destaque renderizados");
+check($$(".servico-card").length === 15, "serviços: 15 cards (massoterapia + salão + estética)");
+check($$(".servicos-categoria").length === 3, "3 categorias (Massoterapia + Salão + Estética)");
 check(!$("#servicos").hidden, "seção #servicos visível");
 check(
   $$(".servico-card__cta").every((a) => a.href.startsWith("https://wa.me/5533984368440")),
@@ -73,7 +86,7 @@ check($("#horariosCard").hidden === true, "horários vazios → card oculto");
 check($$(".diferencial-card").length === 5, "diferenciais: 5 cards");
 check($$(".navegacao__link").length === 6, "menu: 6 links a partir do config");
 check($$("#rodapeMenu li").length === 6, "rodapé: menu espelhado");
-check($(".navegacao__cta").textContent.includes("Agendar pelo WhatsApp"), "CTA do menu mobile com texto");
+check($(".navegacao__cta").textContent.includes("Quero agendar minha sessão"), "CTA do menu mobile com texto");
 check($(".navegacao__cta").href.startsWith("https://wa.me/5533984368440"), "CTA do menu com link WhatsApp");
 check(
   $$('[data-href="whats"]').every((a) => a.href.startsWith("https://wa.me/5533984368440")),
@@ -168,8 +181,9 @@ check($A(".depoimento-card__avatar").textContent === "A", "outro cliente: avatar
 check($A("#horariosLista").querySelectorAll("li").length === 4, "outro cliente: só os dias preenchidos na lista");
 check(!$A("#horariosCard").hidden, "outro cliente: card de horários visível");
 check($A(".rodape__mensagem").textContent === "Desde 2010 cuidando de você.", "outro cliente: mensagem do rodapé");
+check($A(".hero__descricao").textContent.includes("Viçosa"), "outro cliente: copy própria aplicada");
 check(
-  $A('.rodape__rede[aria-label="Instagram"]').getAttribute("href") === "https://instagram.com/studiovitoria",
+  $A(".rodape__rede[aria-label=\"Instagram\"]").getAttribute("href") === "https://instagram.com/studiovitoria",
   "outro cliente: Instagram visível e correto"
 );
 check($A('.rodape__rede[aria-label="Facebook"]').hidden === true, "outro cliente: Facebook sem config → oculto");

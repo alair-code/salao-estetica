@@ -22,13 +22,14 @@ var siteConfig = {
   empresa: {
     nome: "Salão e Estética Cantinho da Beleza",
     nomeCurto: "Cantinho da Beleza",            // usado no header e footer
-    slogan: "Salão de Beleza & Estética",
+    slogan: "Massoterapia & Estética",
     cidade: "Manhumirim - MG",
     telefone: "(33) 98436-8440",
     whatsapp: "5533984368440",                  // apenas números, com DDI (55) + DDD
     endereco: "Av. Padre Júlio Maria, 25 - Centro, Manhumirim - MG, 36970-000",
     referencia: "Em cima da Loja da Margarida",
     email: "",                                   // opcional
+    instagram: "https://www.instagram.com/andreia_massoterapia_estetica/",
 
     // Link direto do Google Maps (botão "Compartilhar > Copiar link" do lugar).
     // Vazio = o site gera a rota automaticamente a partir do endereço.
@@ -39,7 +40,7 @@ var siteConfig = {
   identidade: {
     logo: "",                                   // ex.: "assets/images/logo.png" — vazio = usa o nome em texto
     favicon: "assets/images/favicon.svg",
-    instagram: "",                              // ex.: "https://instagram.com/seuperfil"
+    instagram: "https://www.instagram.com/andreia_massoterapia_estetica/",
     facebook: "",                               // ex.: "https://facebook.com/suapagina"
 
     // Paleta de cores do site (personalizável por cliente).
@@ -58,7 +59,7 @@ var siteConfig = {
   /* ---------- 3. CONTATO / WHATSAPP ---------- */
   contato: {
     whatsapp: "5533984368440",                  // apenas números, com DDI + DDD
-    mensagemWhatsapp: "Olá! Gostaria de conhecer os serviços e agendar um horário."
+    mensagemWhatsapp: "Olá! Vim pelo site e quero agendar minha sessão. Pode me passar os horários disponíveis?"
   },
 
   /* ---------- 4. HORÁRIO DE FUNCIONAMENTO ---------- */
@@ -77,7 +78,7 @@ var siteConfig = {
   /* ---------- 5. SEO (título e descrição no Google) ---------- */
   seo: {
     titulo: "Salão e Estética Cantinho da Beleza | Manhumirim - MG",
-    descricao: "Salão de beleza e estética em Manhumirim - MG. Cabelo, estética facial e corporal em um ambiente acolhedor. Agende pelo WhatsApp (33) 98436-8440."
+    descricao: "Massagem modeladora, drenagem linfática, limpeza de pele e depilação em Manhumirim - MG. Resultados eficazes com técnica especializada. Agende pelo WhatsApp (33) 98436-8440."
   },
 
   /* ---------- 5a. MENU DE NAVEGAÇÃO ---------- */
@@ -93,23 +94,24 @@ var siteConfig = {
 
   /* ---------- 6. HERO (primeira dobra) ---------- */
   hero: {
-    etiqueta: "Salão de Beleza & Estética",
-    titulo: "Onde a sua beleza recebe",
-    destaque: "cuidado e leveza",               // palavra(s) destacadas no título
-    descricao: "Um espaço pensado para valorizar a sua autoestima, com atendimento acolhedor e serviços de cabelo e estética em Manhumirim - MG.",
-    textoBotaoPrimario: "Agendar pelo WhatsApp",
-    textoBotaoSecundario: "Conhecer os serviços",
+    etiqueta: "Massoterapeuta & Esteticista",
+    titulo: "Sua transformação começa",
+    destaque: "com um toque de cuidado",
+    descricao: "Massagem modeladora, drenagem linfática e tratamentos faciais e corporais com técnica especializada. Resultados que você sente na primeira sessão — e um cuidado que vai além do esperado.",
+    textoBotaoPrimario: "Quero agendar minha sessão",
+    textoBotaoSecundario: "Ver tratamentos",
     imagem: ""                                  // opcional: "assets/images/hero.jpg" como fundo
   },
 
   /* ---------- 7. SOBRE ---------- */
   sobre: {
-    titulo: "Um espaço de cuidado e beleza",
+    titulo: "Cuidado especialista, resultado real",
     paragrafos: [
-      "O Cantinho da Beleza foi criado para ser mais do que um salão: é um lugar onde cada cliente é recebida com atenção, carinho e respeito pelo seu tempo.",
-      "Aqui, beleza e bem-estar caminham juntos. Dos cuidados com os cabelos aos procedimentos de estética, cada detalhe é pensado para que você saia se sentindo ainda melhor."
+      "Aqui, cada sessão é feita com técnica especializada e olhar atento ao que o seu corpo e a sua pele precisam. Da massagem modeladora à limpeza de pele, o foco é um só: resultado que você vê e sente.",
+      "Mais que um salão, um espaço para relaxar, cuidar e sair se sentindo renovada — com aquele atendimento próximo, de quem acompanha a sua evolução sessão após sessão.",
+      "Agende sua avaliação e descubra o tratamento ideal para você. Sua transformação começa com uma mensagem."
     ],
-    citacao: "Beleza é se sentir bem na própria pele."   // opcional — vazio oculta
+    citacao: "Resultados eficazes com técnica especializada: agende sua transformação."   // opcional — vazio oculta
   },
 
   /* ---------- 8. SERVIÇOS ---------- */
@@ -117,6 +119,18 @@ var siteConfig = {
   // Ícones disponíveis: tesoura, escova, hidratacao, coloracao, penteado,
   // pele, sobrancelha, corpo, folha, coracao, estrela, brilho, atendimento
   servicos: [
+    {
+      categoria: "Massoterapia & Corporal",
+      descricao: "Resultados eficazes com técnica especializada — é aqui que a transformação acontece.",
+      itens: [
+        { nome: "Massagem modeladora", descricao: "Modela o corpo, reduz medidas e potencializa os resultados que você busca.", icone: "corpo" },
+        { nome: "Drenagem linfática", descricao: "Reduz retenção e inchaço, aliviando a sensação de peso e cansaço.", icone: "folha" },
+        { nome: "Massagem relaxante", descricao: "Alívio do estresse e da tensão muscular em um momento só seu.", icone: "coracao" },
+        { nome: "Reflexologia podal e palmar", descricao: "Bem-estar profundo por meio de pontos de pressão nos pés e nas mãos.", icone: "estrela" },
+        { nome: "Tratamento de estrias", descricao: "Estímulo de colágeno para suavizar e uniformizar a aparência da pele.", icone: "pele" },
+        { nome: "Aplicação de enzimas", descricao: "Protocolos corporais que aceleram e potencializam seus resultados.", icone: "brilho" }
+      ]
+    },
     {
       categoria: "Salão de Beleza",
       descricao: "Cuidados completos com os cabelos, do corte ao acabamento.",
@@ -185,7 +199,7 @@ var siteConfig = {
       fecharMenu: "Fechar menu"
     },
     hero: {
-      cidadePrefixo: "Salão e estética em"          // ex.: "Salão e estética em Manhumirim - MG"
+      cidadePrefixo: "Massoterapeuta & esteticista em"          // ex.: "Salão e estética em Manhumirim - MG"
     },
     sobre: {
       etiqueta: "Sobre nós",
@@ -196,10 +210,10 @@ var siteConfig = {
       ]
     },
     servicos: {
-      etiqueta: "Serviços",
-      titulo: "Nossos serviços",
-      descricao: "Escolha o cuidado ideal para você e agende pelo WhatsApp.",
-      ctaCard: "Agendar"                            // link de WhatsApp dentro de cada card
+      etiqueta: "Tratamentos",
+      titulo: "Tratamentos feitos para você",
+      descricao: "Escolha o cuidado ideal para o seu momento e agende pelo WhatsApp — atendimento acolhedor e técnica especializada.",
+      ctaCard: "Agendar sessão"                          // link de WhatsApp dentro de cada card
     },
     diferenciais: {
       etiqueta: "Diferenciais",
@@ -224,9 +238,9 @@ var siteConfig = {
     },
     contato: {
       etiqueta: "Contato",
-      titulo: "Agende seu horário",
-      descricao: "Estamos prontas para receber você. Fale com a gente pelo WhatsApp e escolha o melhor horário para o seu cuidado.",
-      botaoWhatsapp: "Enviar mensagem no WhatsApp",
+      titulo: "Sua transformação começa com uma mensagem",
+      descricao: "Pronta para se sentir ainda melhor? Envie uma mensagem, conte o que você deseja e receba a recomendação do tratamento ideal — sem compromisso. O horário que combina com você está esperando.",
+      botaoWhatsapp: "Quero agendar minha sessão",
       whatsappFlutuante: "Conversar no WhatsApp"     // aria-label do botão flutuante
     },
     rodape: {
