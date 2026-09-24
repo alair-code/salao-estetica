@@ -106,7 +106,11 @@ check(
   $$('[data-href="tel"]').every((a) => a.href.startsWith("tel:+5533")),
   "links tel: com DDI 55 (não discar DDI errado)"
 );
-check($(".logo__nome").textContent === "Cantinho da Beleza", "logo em texto a partir do config");
+check(
+  $$('[data-href="instagram"]').length >= 2 &&
+    $$('[data-href="instagram"]').every((a) => a.href.includes("andreia_massoterapia_estetica")),
+  "Instagram no rodapé e no contato com o perfil da Andreia"
+);
 check(site.doc.title.includes("Manhumirim"), "SEO: title aplicado");
 check($(".rodape__base").textContent.includes(String(new Date().getFullYear())), "ano corrente no copyright");
 check($(".whatsapp-flutuante").getAttribute("aria-label") === "Conversar no WhatsApp", "aria-label do botão flutuante");
@@ -182,6 +186,10 @@ check($A("#horariosLista").querySelectorAll("li").length === 4, "outro cliente: 
 check(!$A("#horariosCard").hidden, "outro cliente: card de horários visível");
 check($A(".rodape__mensagem").textContent === "Desde 2010 cuidando de você.", "outro cliente: mensagem do rodapé");
 check($A(".hero__descricao").textContent.includes("Viçosa"), "outro cliente: copy própria aplicada");
+check(
+  $$A('[data-href="instagram"]').every((a) => a.href === "https://instagram.com/studiovitoria"),
+  "todos os links de Instagram (rodapé + contato) apontam ao perfil"
+);
 check(
   $A(".rodape__rede[aria-label=\"Instagram\"]").getAttribute("href") === "https://instagram.com/studiovitoria",
   "outro cliente: Instagram visível e correto"

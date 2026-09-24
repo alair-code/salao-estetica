@@ -241,6 +241,7 @@ var siteConfig = {
       titulo: "Sua transformação começa com uma mensagem",
       descricao: "Pronta para se sentir ainda melhor? Envie uma mensagem, conte o que você deseja e receba a recomendação do tratamento ideal — sem compromisso. O horário que combina com você está esperando.",
       botaoWhatsapp: "Quero agendar minha sessão",
+      botaoInstagram: "Seguir no Instagram",
       whatsappFlutuante: "Conversar no WhatsApp"     // aria-label do botão flutuante
     },
     rodape: {
