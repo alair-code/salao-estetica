@@ -141,6 +141,11 @@
   }
 
   function mapsUrl() {
+    // Prioriza o link oficial do lugar no Google Maps (config.empresa.mapsLink).
+    // Sem ele, gera a rota automaticamente a partir do endereço cadastrado.
+    var link = (config.empresa && config.empresa.mapsLink) || "";
+    if (typeof link === "string" && /^https?:\/\//i.test(link.trim())) return link.trim();
+
     var endereco = (config.empresa && config.empresa.endereco) || "";
     return endereco
       ? "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(endereco)

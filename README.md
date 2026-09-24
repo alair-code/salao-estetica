@@ -60,7 +60,7 @@ python3 -m http.server 8080
 
 | Bloco | Para que serve |
 |---|---|
-| `empresa` | Nome, nome curto (logo em texto), slogan, cidade, telefone, WhatsApp, endereço, referência e e-mail |
+| `empresa` | Nome, nome curto (logo em texto), slogan, cidade, telefone, WhatsApp, endereço, referência, e-mail e link do Google Maps (`mapsLink`) |
 | `identidade` | Logo, favicon, Instagram, Facebook e **paleta de cores** (`identidade.cores`) |
 | `contato` | Número de WhatsApp (só números, com DDI) e mensagem pré-preenchida |
 | `funcionamento` | Horários por dia da semana — vazio oculta a linha |
@@ -94,6 +94,22 @@ identidade: {
   }
 }
 ```
+
+### Exemplo — localização no Google Maps
+
+Os botões de mapa do site usam o link oficial do lugar, se configurado:
+
+```js
+empresa: {
+  // ...
+  endereco: "Av. Padre Júlio Maria, 25 - Centro, Manhumirim - MG, 36970-000",
+  // Cole aqui o link gerado por "Compartilhar → Copiar link" no Google Maps:
+  mapsLink: "https://maps.app.goo.gl/xxxxxxxx"
+}
+```
+
+- Com `mapsLink` preenchido, os botões abrem **exatamente o lugar** (pin do Google Business) no app/navegador.
+- Vazio = o site gera a rota automaticamente a partir do `endereco`.
 
 ### Exemplo — horários e WhatsApp
 

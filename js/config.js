@@ -28,7 +28,11 @@ var siteConfig = {
     whatsapp: "5533984368440",                  // apenas números, com DDI (55) + DDD
     endereco: "Av. Padre Júlio Maria, 25 - Centro, Manhumirim - MG, 36970-000",
     referencia: "Em cima da Loja da Margarida",
-    email: ""                                   // opcional
+    email: "",                                   // opcional
+
+    // Link direto do Google Maps (botão "Compartilhar > Copiar link" do lugar).
+    // Vazio = o site gera a rota automaticamente a partir do endereço.
+    mapsLink: "https://maps.app.goo.gl/ocMxSTeCDn7E89Ps5"
   },
 
   /* ---------- 2. IDENTIDADE VISUAL ---------- */

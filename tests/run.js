@@ -80,8 +80,14 @@ check(
   "links WhatsApp gerados (" + $$('[data-href="whats"]').length + ")"
 );
 check(
-  $$('[data-href="maps"]').every((a) => a.href.includes("google.com/maps")),
-  "links Maps gerados (" + $$('[data-href="maps"]').length + ")"
+  $$('[data-href="maps"]').every(
+    (a) => a.href === config.empresa.mapsLink || a.href.includes("google.com/maps")
+  ),
+  "links Maps gerados (" + $$('[data-href="maps"]').length + ") com o link oficial do lugar"
+);
+check(
+  $$('[data-href="maps"]').every((a) => a.href === config.empresa.mapsLink),
+  "mapsLink do config tem prioridade sobre a busca por endereço"
 );
 check(
   $$('[data-href="tel"]').every((a) => a.href.startsWith("tel:+5533")),
