@@ -150,7 +150,7 @@ npm install   # ou bun install (instala apenas o jsdom)
 npm test      # ou bun run test
 ```
 
-Saída esperada: `TODOS OS 54 TESTES PASSARAM`.
+Saída esperada: `TODOS OS 56 TESTES PASSARAM`.
 
 Se você alterar `js/script.js` ou o `index.html`, rode `npm test` antes de publicar. Quem apenas editar `js/config.js` não precisa dos testes — mas eles também validam o site do cliente atual.
 
