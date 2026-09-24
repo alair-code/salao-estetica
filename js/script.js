@@ -669,6 +669,48 @@
     aoRolar();
   }
 
+  /* ---------- 12b. Scrollspy (link ativo no menu) ---------- */
+
+  function initScrollspy() {
+    var nav = $("#menuNavegacao");
+    if (!nav) return;
+
+    var pares = $$(".navegacao__link", nav)
+      .filter(function (link) {
+        return (link.getAttribute("href") || "").charAt(0) === "#";
+      })
+      .map(function (link) {
+        return { link: link, secao: document.getElementById(link.getAttribute("href").slice(1)) };
+      })
+      .filter(function (par) { return par.secao; });
+
+    if (!pares.length) return;
+
+    var atual = null;
+
+    function atualizar() {
+      // Ponto de referência ~140px abaixo do topo (abaixo do header fixo).
+      var linha = window.scrollY + 140;
+      var escolhido = null;
+
+      pares.forEach(function (par) {
+        if (par.secao.offsetTop <= linha) escolhido = par;
+      });
+
+      // No topo da página, destaca o primeiro item.
+      if (window.scrollY < 80) escolhido = pares[0];
+
+      if (escolhido !== atual) {
+        if (atual) atual.link.classList.remove("is-ativo");
+        atual = escolhido;
+        if (atual) atual.link.classList.add("is-ativo");
+      }
+    }
+
+    window.addEventListener("scroll", atualizar, { passive: true });
+    atualizar();
+  }
+
   /* ---------- 13. Animações de entrada ---------- */
 
   function initReveals() {
@@ -714,6 +756,7 @@
 
     initMenu();
     initHeaderScroll();
+    initScrollspy();
     initReveals();
 
     // Ícones estáticos escritos direto no HTML.
