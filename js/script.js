@@ -634,19 +634,27 @@
     var iconeFechar = botao.querySelector('[data-icone="fechar"]');
 
     function atualizarEstado(aberto) {
+      var mobile = window.matchMedia("(max-width: 820px)").matches;
+
       botao.setAttribute("aria-expanded", String(aberto));
       botao.setAttribute("aria-label", aberto
         ? (textosNav.fecharMenu || "Fechar menu")
         : (textosNav.abrirMenu || "Abrir menu"));
       menu.classList.toggle("is-open", aberto);
-      menu.setAttribute("aria-hidden", String(!aberto));
-      menu.inert = !aberto;
+      menu.setAttribute("aria-hidden", String(mobile && !aberto));
+      menu.inert = mobile && !aberto;
       if (iconeMenu) iconeMenu.hidden = aberto;
       if (iconeFechar) iconeFechar.hidden = !aberto;
-      document.body.classList.toggle("no-scroll", aberto);
+      document.body.classList.toggle("no-scroll", mobile && aberto);
     }
 
     atualizarEstado(false);
+
+    window.addEventListener("resize", function () {
+      if (!window.matchMedia("(max-width: 820px)").matches) {
+        atualizarEstado(false);
+      }
+    });
 
     botao.addEventListener("click", function () {
       var aberto = botao.getAttribute("aria-expanded") !== "true";
