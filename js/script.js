@@ -639,6 +639,8 @@
         ? (textosNav.fecharMenu || "Fechar menu")
         : (textosNav.abrirMenu || "Abrir menu"));
       menu.classList.toggle("is-open", aberto);
+      menu.setAttribute("aria-hidden", String(!aberto));
+      menu.inert = !aberto;
       if (iconeMenu) iconeMenu.hidden = aberto;
       if (iconeFechar) iconeFechar.hidden = !aberto;
       document.body.classList.toggle("no-scroll", aberto);
@@ -647,12 +649,28 @@
     atualizarEstado(false);
 
     botao.addEventListener("click", function () {
-      atualizarEstado(botao.getAttribute("aria-expanded") !== "true");
+      var aberto = botao.getAttribute("aria-expanded") !== "true";
+      atualizarEstado(aberto);
+      if (aberto) {
+        var primeiroLink = menu.querySelector("a, button, [tabindex]:not([tabindex=\"-1\"])");
+        if (primeiroLink) primeiroLink.focus();
+      }
     });
 
     // Fecha ao clicar em um link (bom para âncoras no mobile).
     menu.addEventListener("click", function (event) {
-      if (event.target.closest("a")) atualizarEstado(false);
+      if (event.target.closest("a")) {
+        atualizarEstado(false);
+        botao.focus();
+      }
+    });
+
+    // Fecha ao clicar fora do painel em telas menores.
+    document.addEventListener("click", function (event) {
+      if (!menu.classList.contains("is-open")) return;
+      if (menu.contains(event.target) || botao.contains(event.target)) return;
+      atualizarEstado(false);
+      botao.focus();
     });
 
     // Fecha com Esc.
