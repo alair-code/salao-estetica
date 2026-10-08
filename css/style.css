@@ -628,6 +628,7 @@ button {
   font-size: clamp(2.6rem, 6.5vw, 4.3rem);
   color: #fdf9f4;
   letter-spacing: 0.01em;
+  text-wrap: balance;
 }
 
 .hero__titulo em {
@@ -1477,36 +1478,30 @@ button {
     scroll-behavior: auto;
   }
 
+  /* Desativa animações e transições não essenciais em todo o site,
+     incluindo menu mobile e efeitos de hover, não apenas o hero. */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+
   .hero--com-imagem::after {
-    animation: none;
+    animation: none !important;
     transform: scale(1.02);
     will-change: auto;
-  }
-
-  .cabecalho__conteudo,
-  .navegacao.is-open > * {
-    animation: none;
-  }
-
-  .botao--primario::after {
-    transition: none;
   }
 
   [data-reveal] {
     opacity: 1;
     transform: none;
-    transition: none;
   }
 
   .whatsapp-flutuante::before {
-    animation: none;
-  }
-
-  .galeria-item img,
-  .botao,
-  .servico-card,
-  .diferencial-card {
-    transition: none;
+    animation: none !important;
   }
 }
 
@@ -1645,6 +1640,10 @@ button {
 }
 
 @media (max-width: 420px) {
+  .hero__titulo {
+    font-size: clamp(2.2rem, 10vw, 2.6rem);
+  }
+
   .servicos-grid,
   .galeria-grade {
     grid-template-columns: 1fr;
