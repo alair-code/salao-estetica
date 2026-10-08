@@ -84,7 +84,17 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - A imagem não corta elementos importantes em telas pequenas.
 - A capa continua funcional sem imagem configurada.
 
-**Status:** ⬜ Pendente
+**Status:** ✅ Implementado e revisado por inspeção de código
+
+### Resultado do Bloco 2
+
+- A imagem continua opcional e vem de `hero.imagem` em `js/config.js`; nenhum arquivo de mídia novo foi inventado ou adicionado.
+- A composição da imagem e o contraste agora ficam no CSS. O gradiente usa `--cor-escura`, acompanhando a paleta configurada pelo cliente em vez de depender de valores fixos no JavaScript.
+- Em telas maiores, a imagem prioriza o lado direito para reservar área visual ao conteúdo à esquerda. Em telas pequenas, será necessário validar o enquadramento real com imagens representativas; isso fica registrado como verificação pendente da etapa de responsividade.
+- Sem imagem configurada, a classe e a camada de mídia não são aplicadas, preservando o fundo alternativo. Se o arquivo configurado falhar ao carregar, o fundo escuro e o gradiente continuam oferecendo uma base de contraste.
+- Foram acrescentadas verificações automatizadas para o caso sem imagem e para a passagem do caminho configurado à camada visual. A suíte ainda precisa ser executada em ambiente com as dependências instaladas; não se declara resultado de testes nesta atualização.
+
+**Limites desta etapa:** não foi feita validação visual em navegador nem confirmado o enquadramento com uma fotografia real. O suporte a `color-mix()` é usado para misturar a cor do tema com transparência; navegadores antigos sem esse recurso devem ser verificados na auditoria final.
 
 ---
 
