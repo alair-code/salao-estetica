@@ -2,7 +2,7 @@
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** planejamento; executar um bloco por vez  
+**Status:** Blocos 1 a 3 implementados/revisados por inspeção; próximo bloco autorizado pelo plano: Bloco 4  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ## Regras para toda a execução
@@ -123,6 +123,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - Foi adicionada uma animação CSS lenta de escala (28 segundos, alternada entre 1,02 e 1,09), sem JavaScript nem dependências adicionais.
 - A camada não recebe eventos de ponteiro, preservando os cliques nos CTAs.
 - A animação é desligada em `prefers-reduced-motion: reduce`; o enquadramento mobile foi transferido para a camada visual.
+- Foi adicionado um fallback com `@supports` para navegadores sem `color-mix()`, usando a cor configurável `--cor-escura` para manter uma composição de contraste e preservar a imagem.
 - O teste de movimento fluido e desempenho em dispositivos reais ainda não foi executado. A suíte headless existente não comprova fluidez visual, e a capa ainda precisa ser conferida com uma fotografia real.
 
 **Limites desta etapa:** o zoom animado transforma apenas a camada visual e foi dimensionado para evitar bordas vazias; ainda é necessária validação visual no navegador para confirmar enquadramento e desempenho em aparelhos reais.
@@ -220,7 +221,7 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | Bloco | Status | Evidência / observações |
 |---|---|---|
 | 1. Auditoria e base visual | Concluído e revisado | Auditoria refinada; gradiente com cores fixas registrado como ponto de atenção. Nenhum arquivo funcional alterado. Testes automatizados e validação visual não executados. |
-| 2. Composição da capa | Implementado; revisão por inspeção concluída | CSS com gradiente ligado à cor do tema, imagem configurável separada e enquadramento desktop/mobile definido. Testes adicionados, mas ainda não executados; validação visual com fotografia real pendente. | |
+| 2. Composição da capa | Implementado; revisão por inspeção concluída | CSS com gradiente ligado à cor do tema, imagem configurável separada e enquadramento desktop/mobile definido. Testes adicionados, mas ainda não executados; validação visual com fotografia real pendente. |
 | 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Validação visual, testes automatizados e desempenho em dispositivos reais ainda pendentes. |
 | 4. Entrada do conteúdo | Pendente | |
 | 5. Acessibilidade e responsividade | Pendente | |
