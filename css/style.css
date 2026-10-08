@@ -572,6 +572,26 @@ button {
   will-change: transform;
 }
 
+/* Fallback para navegadores sem color-mix(): mantém a fotografia e
+   usa a cor configurável do tema, sem depender de tons fixos do cliente. */
+@supports not (color: color-mix(in srgb, #000 50%, transparent)) {
+  .hero--com-imagem::after {
+    background-image:
+      linear-gradient(
+        90deg,
+        var(--cor-escura) 0%,
+        var(--cor-escura) 30%,
+        transparent 100%
+      ),
+      linear-gradient(
+        0deg,
+        var(--cor-escura),
+        transparent
+      ),
+      var(--hero-imagem);
+  }
+}
+
 .hero--com-imagem::before {
   z-index: 1;
 }
