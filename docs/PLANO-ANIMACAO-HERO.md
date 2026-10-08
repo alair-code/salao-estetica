@@ -154,7 +154,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - A animação usa a Web Animations API, sem dependências adicionais e sem regras CSS que deixem o conteúdo invisível por padrão.
 - Se a API não estiver disponível, se a consulta de preferência não puder ser feita ou se uma animação falhar, o conteúdo continua visível. A preferência `prefers-reduced-motion: reduce` desativa a sequência.
 - A animação é inicializada após a renderização e as interações principais, sem mudar o fluxo ou a posição final do layout; os links e CTAs existentes foram preservados.
-- Foram adicionados testes à suíte para verificar a presença do conteúdo e dos CTAs, a sequência de atrasos e o respeito à preferência de movimento reduzido.
+- Foram adicionados testes à suíte para verificar a presença do conteúdo e dos CTAs, o fallback quando a Web Animations API não existe, a sequência de atrasos e o respeito à preferência de movimento reduzido.
 
 **Limites desta etapa:** os testes foram adicionados, mas não executados neste ambiente remoto. Não houve validação visual em navegador, com carregamento lento ou em aparelhos reais. A auditoria completa de responsividade e acessibilidade continua no Bloco 5.
 
