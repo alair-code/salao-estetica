@@ -77,6 +77,15 @@ check($("#heroTitulo").textContent.includes("toque de cuidado"), "hero: título 
 check($(".hero__etiqueta").textContent.trim().length > 0, "hero: etiqueta permanece disponível");
 check($(".hero__descricao").textContent.trim().length > 0, "hero: descrição permanece disponível");
 check($(".hero__acoes .botao").length === 2, "hero: CTAs preservados");
+const siteSemAnimacao = montarSite(configReal, (w) => {
+  w.Element.prototype.animate = undefined;
+});
+check(siteSemAnimacao.erros.length === 0, "hero: sem erro quando a API de animação não existe");
+check(
+  siteSemAnimacao.doc.querySelector("#heroTitulo").textContent.trim().length > 0 &&
+  siteSemAnimacao.doc.querySelectorAll(".hero__acoes .botao").length === 2,
+  "hero: conteúdo e CTAs permanecem disponíveis sem a API de animação"
+);
 const chamadasAnimacao = [];
 const siteAnimado = montarSite(configReal, (w) => {
   w.Element.prototype.animate = function (keyframes, options) {
