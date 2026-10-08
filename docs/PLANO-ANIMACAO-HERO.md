@@ -52,10 +52,18 @@ A imagem deve continuar opcional e configurável por cliente. Se não houver ima
 - **Movimento reduzido:** já existe `@media (prefers-reduced-motion: reduce)` que desativa transições e revelações existentes. Qualquer animação nova do hero também precisará respeitar essa preferência explicitamente.
 - **Cabeçalho e layout:** o cabeçalho tem estado visual ao rolar (`.is-scrolled`) e a navegação mobile tem lógica própria. A animação não deve alterar altura/fluxo do hero, encobrir os CTAs ou interferir no menu.
 - **Testes:** `package.json` define `npm test` como `node tests/run.js`; a suíte usa `jsdom` e verifica renderização e interações. O README informa 56 testes esperados, mas a suíte não foi executada nesta auditoria remota — esse número não foi tratado como resultado confirmado.
-- **Riscos principais:** imagem configurada com caminho inválido; contraste insuficiente; sobreposição entre movimento e texto; animação que cria rolagem horizontal ou deslocamento de layout; preferência de movimento reduzido não aplicada ao hero.
+- **Riscos principais:** imagem configurada com caminho inválido; contraste insuficiente; sobreposição entre movimento e texto; animação que cria rolagem horizontal ou deslocamento de layout; preferência de movimento reduzido não aplicada ao hero. O gradiente de contraste atualmente é montado em `js/script.js` com valores de cor fixos (`rgba(28,20,16,...)`), portanto não acompanha diretamente a paleta do cliente.
 - **Abordagem mínima recomendada para os próximos blocos:** manter a configuração centralizada, preservar o fallback atual, preferir uma camada visual de imagem separada do conteúdo para animar apenas a imagem e manter os elementos textuais estáveis. Evitar dependências novas e não alterar a lógica funcional do menu/CTAs.
 
-Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por inspeção do código no GitHub; testes visuais em navegador e execução da suíte ainda não foram realizados.
+Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por inspeção do código no GitHub; testes visuais em navegador e execução da suíte ainda não foram realizados. A responsividade foi avaliada apenas pelas regras e media queries existentes, não validada visualmente em dispositivos reais.
+
+
+### Revisão e refinamento do Bloco 1
+
+- Confirmado que `npm test` executa `node tests/run.js` e que o README declara 56 testes como saída esperada. Isso é documentação do projeto, não evidência de que os testes passaram nesta etapa.
+- Refinada a lista de riscos para registrar que o gradiente de contraste atual usa cores fixas no JavaScript. No Bloco 2, avaliar uma solução em CSS que mantenha o contraste e respeite melhor a identidade configurada, sem mudar a aparência sem necessidade.
+- Mantida a decisão de não alterar HTML, CSS ou JavaScript no bloco de auditoria. Nenhuma correção funcional era necessária para concluir esta etapa de planejamento.
+- **Limite da revisão:** não houve execução local da suíte nem validação visual em navegador; por isso, este bloco está pronto como auditoria/documentação, mas não representa aprovação funcional do hero animado.
 
 ---
 
@@ -191,7 +199,7 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 
 | Bloco | Status | Evidência / observações |
 |---|---|---|
-| 1. Auditoria e base visual | Concluído | Estrutura, CSS, configuração, animações, movimento reduzido e comando de testes documentados; nenhum arquivo funcional alterado. Testes automatizados não executados nesta auditoria remota. |
+| 1. Auditoria e base visual | Concluído e revisado | Auditoria refinada; gradiente com cores fixas registrado como ponto de atenção. Nenhum arquivo funcional alterado. Testes automatizados e validação visual não executados. |
 | 2. Composição da capa | Pendente | |
 | 3. Movimento cinematográfico | Pendente | |
 | 4. Entrada do conteúdo | Pendente | |
