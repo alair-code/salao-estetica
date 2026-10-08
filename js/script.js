@@ -767,6 +767,45 @@
     elementos.forEach(function (el) { observer.observe(el); });
   }
 
+  /* ---------- 13b. Entrada suave do hero ---------- */
+
+  function initHeroEntrance() {
+    var hero = $("#inicio");
+    if (!hero) return;
+
+    // Sem Web Animations API, sem matchMedia ou com movimento reduzido,
+    // o conteúdo permanece visível e não depende da animação.
+    if (typeof Element === "undefined" ||
+        typeof Element.prototype.animate !== "function" ||
+        typeof window.matchMedia !== "function") return;
+
+    try {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    } catch (e) {
+      return;
+    }
+
+    var elementos = $(".hero__etiqueta, .hero__titulo, .hero__descricao, .hero__acoes", hero);
+    elementos.forEach(function (el, indice) {
+      try {
+        el.animate(
+          [
+            { opacity: 0, transform: "translateY(12px)" },
+            { opacity: 1, transform: "translateY(0)" }
+          ],
+          {
+            duration: 620,
+            delay: indice * 90,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "both"
+          }
+        );
+      } catch (e) {
+        // Uma falha de animação nunca deve ocultar ou bloquear o conteúdo.
+      }
+    });
+  }
+
   /* ---------- 14. Boot ---------- */
 
   function init() {
@@ -790,6 +829,7 @@
     initHeaderScroll();
     initScrollspy();
     initReveals();
+    initHeroEntrance();
 
     // Ícones estáticos escritos direto no HTML.
     $$("[data-icone]").forEach(function (el) {
