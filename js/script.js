@@ -282,10 +282,11 @@
         titulo.textContent = hero.titulo || "";
       }
     }
-    if (hero.imagem) {
+    if (hero.imagem && String(hero.imagem).trim()) {
       var section = $("#inicio");
       if (section) {
-        section.style.backgroundImage = "linear-gradient(rgba(28,20,16,.78), rgba(28,20,16,.82)), url('" + hero.imagem + "')";
+        // A imagem é configurável; composição e contraste ficam no CSS do tema.
+        section.style.setProperty("--hero-imagem", "url(" + JSON.stringify(String(hero.imagem).trim()) + ")");
         section.classList.add("hero--com-imagem");
       }
     }
