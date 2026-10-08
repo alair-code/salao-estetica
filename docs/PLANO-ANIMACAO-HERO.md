@@ -115,7 +115,17 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - Não há deslocamento do layout, rolagem horizontal ou interferência nos cliques.
 - O desempenho continua aceitável em desktop e celular.
 
-**Status:** ⬜ Pendente
+**Status:** ✅ Implementado; revisão por inspeção concluída
+
+### Resultado do Bloco 3
+
+- A fotografia foi isolada em uma camada decorativa `::after`, para que o zoom não mova título, descrição, botões ou o fluxo do documento.
+- Foi adicionada uma animação CSS lenta de escala (28 segundos, alternada entre 1,02 e 1,09), sem JavaScript nem dependências adicionais.
+- A camada não recebe eventos de ponteiro, preservando os cliques nos CTAs.
+- A animação é desligada em `prefers-reduced-motion: reduce`; o enquadramento mobile foi transferido para a camada visual.
+- O teste de movimento fluido e desempenho em dispositivos reais ainda não foi executado. A suíte headless existente não comprova fluidez visual, e a capa ainda precisa ser conferida com uma fotografia real.
+
+**Limites desta etapa:** o zoom animado transforma apenas a camada visual e foi dimensionado para evitar bordas vazias; ainda é necessária validação visual no navegador para confirmar enquadramento e desempenho em aparelhos reais.
 
 ---
 
@@ -211,10 +221,10 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 |---|---|---|
 | 1. Auditoria e base visual | Concluído e revisado | Auditoria refinada; gradiente com cores fixas registrado como ponto de atenção. Nenhum arquivo funcional alterado. Testes automatizados e validação visual não executados. |
 | 2. Composição da capa | Implementado; revisão por inspeção concluída | CSS com gradiente ligado à cor do tema, imagem configurável separada e enquadramento desktop/mobile definido. Testes adicionados, mas ainda não executados; validação visual com fotografia real pendente. | |
-| 3. Movimento cinematográfico | Pendente | |
+| 3. Movimento cinematográfico | Implementado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, sem mover conteúdo; respeita movimento reduzido. Validação visual e de desempenho em dispositivos reais pendente. | |
 | 4. Entrada do conteúdo | Pendente | |
 | 5. Acessibilidade e responsividade | Pendente | |
 | 6. Personalização e fallback | Pendente | |
 | 7. Auditoria final | Pendente | |
 
-**Próxima ação:** revisar e aprovar o resultado do Bloco 2 antes de iniciar o **Bloco 3 — Animar a imagem de fundo com movimento cinematográfico**.
+**Próxima ação:** revisar e aprovar o resultado do Bloco 3 antes de iniciar o **Bloco 4 — Entrada suave do conteúdo**.
