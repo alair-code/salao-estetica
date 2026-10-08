@@ -1537,6 +1537,11 @@ button {
   .hero {
     min-height: auto;
   }
+
+  .hero--com-imagem {
+    /* Mantém o assunto visual ligeiramente à direita do texto no mobile. */
+    background-position: 64% center;
+  }
 }
 
 @media (max-width: 640px) {
