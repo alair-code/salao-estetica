@@ -12,6 +12,7 @@ const fs = require("fs");
 const path = require("path");
 
 const root = path.join(__dirname, "..");
+const css = fs.readFileSync(path.join(root, "css", "style.css"), "utf8");
 
 /* ---------- Infraestrutura ---------- */
 
@@ -73,6 +74,15 @@ const $ = (s) => site.doc.querySelector(s);
 const $$ = (s) => [...site.doc.querySelectorAll(s)];
 
 check(site.erros.length === 0, "sem erros de runtime");
+check(
+  /@media \\(prefers-reduced-motion: reduce\\)[\\s\\S]*?animation-duration:\\s*0\\.01ms\\s*!important/.test(css) &&
+  /@media \\(prefers-reduced-motion: reduce\\)[\\s\\S]*?transition-duration:\\s*0\\.01ms\\s*!important/.test(css),
+  "acessibilidade: movimento reduzido desativa animações e transições não essenciais"
+);
+check(
+  /@media \\(max-width: 420px\\)[\\s\\S]*?\\.hero__titulo[\\s\\S]*?font-size:\\s*clamp\\(2\\.2rem, 10vw, 2\\.6rem\\)/.test(css),
+  "responsividade: título do hero ajusta a tipografia em telas estreitas"
+);
 check($("#heroTitulo").textContent.includes("toque de cuidado"), "hero: título + destaque renderizados");
 check($(".hero__etiqueta").textContent.trim().length > 0, "hero: etiqueta permanece disponível");
 check($(".hero__descricao").textContent.trim().length > 0, "hero: descrição permanece disponível");
