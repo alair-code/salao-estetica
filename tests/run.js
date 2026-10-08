@@ -118,6 +118,11 @@ check(
   site.doc.documentElement.style.getPropertyValue("--cor-primaria").trim() === "#b76e79",
   "paleta do config aplicada via CSS vars"
 );
+check(!$("#inicio").classList.contains("hero--com-imagem"), "hero sem imagem mantém fundo alternativo");
+check(
+  !$("#inicio").style.getPropertyValue("--hero-imagem"),
+  "hero sem imagem não cria camada de mídia"
+);
 
 // Interações: lightbox
 $(".galeria-item").click();
@@ -206,6 +211,10 @@ check(
 check($$A('[data-href="email"]').every((a) => a.href === "mailto:contato@studiovitoria.com"), "outro cliente: e-mail gerado");
 check($$A(".navegacao__link").length === 2, "outro cliente: menu próprio (2 itens)");
 check($A("#inicio").classList.contains("hero--com-imagem"), "outro cliente: imagem de fundo do hero aplicada");
+check(
+  $A("#inicio").style.getPropertyValue("--hero-imagem").includes("hero.jpg"),
+  "outro cliente: imagem configurada é passada à camada visual do hero"
+);
 
 /* ============================================================
    PARTE 3 — Robustez: config.js ausente
