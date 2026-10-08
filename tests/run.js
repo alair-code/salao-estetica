@@ -19,7 +19,7 @@ let falhas = 0;
 const resultado = [];
 const check = (ok, nome) => resultado.push([ok, nome]);
 
-function montarSite(configOverride) {
+function montarSite(configOverride, prepararWindow) {
   const dom = new JSDOM(fs.readFileSync(path.join(root, "index.html"), "utf8"), {
     url: "https://exemplo.teste/",
     runScripts: "outside-only",
@@ -41,6 +41,8 @@ function montarSite(configOverride) {
       removeListener() {},
     });
   }
+
+  if (typeof prepararWindow === "function") prepararWindow(w);
 
   if (configOverride !== null) {
     // Simula o js/config.js (do cliente atual ou de outro cliente)
@@ -72,6 +74,27 @@ const $$ = (s) => [...site.doc.querySelectorAll(s)];
 
 check(site.erros.length === 0, "sem erros de runtime");
 check($("#heroTitulo").textContent.includes("toque de cuidado"), "hero: título + destaque renderizados");
+check($(".hero__etiqueta").textContent.trim().length > 0, "hero: etiqueta permanece disponível");
+check($(".hero__descricao").textContent.trim().length > 0, "hero: descrição permanece disponível");
+check($(".hero__acoes .botao").length === 2, "hero: CTAs preservados");
+const chamadasAnimacao = [];
+const siteAnimado = montarSite(configReal, (w) => {
+  w.Element.prototype.animate = function (keyframes, options) {
+    chamadasAnimacao.push({ elemento: this.className, keyframes, options });
+    return {};
+  };
+});
+check(chamadasAnimacao.length === 4, "hero: anima os quatro grupos de conteúdo quando a API está disponível");
+check(
+  chamadasAnimacao.map((item) => item.options.delay).join(",") === "0,90,180,270",
+  "hero: entrada em sequência com atrasos curtos"
+);
+const chamadasMovimentoReduzido = [];
+montarSite(configReal, (w) => {
+  w.matchMedia = (query) => ({ matches: query.includes("prefers-reduced-motion"), media: query });
+  w.Element.prototype.animate = function () { chamadasMovimentoReduzido.push(this); return {}; };
+});
+check(chamadasMovimentoReduzido.length === 0, "hero: respeita prefers-reduced-motion");
 check($$(".servico-card").length === 15, "serviços: 15 cards (massoterapia + salão + estética)");
 check($$(".servicos-categoria").length === 3, "3 categorias (Massoterapia + Salão + Estética)");
 check(!$("#servicos").hidden, "seção #servicos visível");
