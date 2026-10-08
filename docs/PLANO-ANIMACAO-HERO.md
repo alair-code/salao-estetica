@@ -2,7 +2,7 @@
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 4 implementados/revisados por inspeção; próximo bloco autorizado pelo plano: Bloco 5  
+**Status:** Blocos 1 a 5 implementados/revisados por inspeção; próximo bloco autorizado pelo plano: Bloco 6  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ## Regras para toda a execução
@@ -176,7 +176,17 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - Conteúdo, botões e foco de teclado continuam utilizáveis.
 - Não há cortes, sobreposição ou rolagem horizontal nas larguras verificadas.
 
-**Status:** ⬜ Pendente
+**Status:** ✅ Implementado; revisão por inspeção concluída
+
+### Resultado do Bloco 5
+
+- A preferência `prefers-reduced-motion: reduce` agora reduz de forma global as durações de animações e transições não essenciais, incluindo efeitos do menu mobile, hover e elementos revelados por rolagem.
+- O movimento cinematográfico da imagem do hero continua explicitamente desativado quando o usuário solicita movimento reduzido.
+- O título do hero usa `text-wrap: balance` para melhorar a distribuição das linhas quando suportado e ajusta o tamanho da fonte em telas de até 420 px.
+- O foco visível já existente e a estrutura dos CTAs foram preservados; a imagem e o movimento continuam decorativos, sem serem necessários para compreender o conteúdo.
+- Foram adicionadas verificações à suíte para as regras de movimento reduzido e o ajuste tipográfico em telas estreitas.
+
+**Limites desta etapa:** as verificações foram adicionadas, mas a suíte não foi executada neste ambiente remoto. Não houve medição automatizada de contraste nem inspeção visual em navegador, teclado, leitor de tela ou dispositivos reais. O enquadramento da fotografia configurada também permanece dependente de validação visual.
 
 ---
 
@@ -234,7 +244,7 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | 2. Composição da capa | Implementado; revisão por inspeção concluída | CSS com gradiente ligado à cor do tema, imagem configurável separada e enquadramento desktop/mobile definido. Testes adicionados, mas ainda não executados; validação visual com fotografia real pendente. |
 | 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Validação visual, testes automatizados e desempenho em dispositivos reais ainda pendentes. |
 | 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes adicionados, ainda não executados; validação visual pendente. |
-| 5. Acessibilidade e responsividade | Pendente | |
+| 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido global, ajuste tipográfico do hero até 420 px e testes adicionados. Suíte não executada; contraste e responsividade visual em dispositivos reais pendentes. |
 | 6. Personalização e fallback | Pendente | |
 | 7. Auditoria final | Pendente | |
 
@@ -242,4 +252,6 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 
 **Revisão do Bloco 4:** implementada a entrada suave para etiqueta, título, descrição e CTAs. A animação é progressiva e opcional, com fallback visível e respeito a `prefers-reduced-motion`. Testes automatizados foram adicionados, mas ainda não executados; validação visual continua pendente.
 
-**Próxima ação:** o Bloco 4 está pronto para seguir para o **Bloco 5 — Acessibilidade, movimento reduzido e responsividade**, mantendo testes e validação visual como pendências.
+**Revisão do Bloco 5:** movimento reduzido reforçado para cobrir animações e transições globais, com ajuste tipográfico do hero em telas estreitas. Foram adicionadas verificações automatizadas, ainda não executadas; contraste e responsividade visual permanecem pendentes.
+
+**Próxima ação:** o Bloco 5 está pronto para seguir para o **Bloco 6 — Personalização e fallback por cliente**, mantendo a execução dos testes e a validação visual como pendências.
