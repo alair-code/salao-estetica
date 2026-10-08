@@ -221,7 +221,7 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 |---|---|---|
 | 1. Auditoria e base visual | Concluído e revisado | Auditoria refinada; gradiente com cores fixas registrado como ponto de atenção. Nenhum arquivo funcional alterado. Testes automatizados e validação visual não executados. |
 | 2. Composição da capa | Implementado; revisão por inspeção concluída | CSS com gradiente ligado à cor do tema, imagem configurável separada e enquadramento desktop/mobile definido. Testes adicionados, mas ainda não executados; validação visual com fotografia real pendente. | |
-| 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Validação visual, testes automatizados e desempenho em dispositivos reais ainda pendentes. | |
+| 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Validação visual, testes automatizados e desempenho em dispositivos reais ainda pendentes. |
 | 4. Entrada do conteúdo | Pendente | |
 | 5. Acessibilidade e responsividade | Pendente | |
 | 6. Personalização e fallback | Pendente | |
