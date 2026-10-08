@@ -41,7 +41,21 @@ A imagem deve continuar opcional e configurável por cliente. Se não houver ima
 - Nenhum arquivo funcional foi alterado neste bloco.
 - Existe um plano de implementação compatível com o template.
 
-**Status:** ⬜ Pendente
+**Status:** ✅ Concluído — auditoria realizada; nenhum arquivo funcional foi alterado.
+
+### Resultado da auditoria
+
+- **HTML (index.html):** o hero é a seção `#inicio.hero`, com etiqueta, título, descrição, dois CTAs e detalhe de cidade dentro de `.hero__conteudo`. A estrutura é semântica e os links existentes devem ser preservados.
+- **CSS (css/style.css):** o hero já tem fundo alternativo em gradientes e padrão decorativo; no desktop usa `min-height: 100svh`, alinhamento vertical e espaçamento responsivo. A classe `.hero--com-imagem` usa `background-size: cover` e `background-position: center`. Em telas de até 820px a altura passa a ser automática; até 640px os botões ocupam a largura disponível.
+- **Configuração e renderização:** `js/config.js` mantém `hero.imagem` opcional e vazia por padrão. `renderHero()` em `js/script.js` aplica a imagem e um gradiente escuro inline somente quando o caminho está preenchido. Título, destaque e descrição vêm da configuração. Não foi encontrada uma imagem de capa dedicada no repositório; portanto, não se deve pressupor que exista um arquivo de hero pronto.
+- **Animações existentes:** há animações de entrada para elementos com `data-reveal`, acionadas por `IntersectionObserver`. Os elementos do hero não usam `data-reveal`, então a futura entrada do conteúdo deverá ser implementada deliberadamente, sem depender do observer das outras seções.
+- **Movimento reduzido:** já existe `@media (prefers-reduced-motion: reduce)` que desativa transições e revelações existentes. Qualquer animação nova do hero também precisará respeitar essa preferência explicitamente.
+- **Cabeçalho e layout:** o cabeçalho tem estado visual ao rolar (`.is-scrolled`) e a navegação mobile tem lógica própria. A animação não deve alterar altura/fluxo do hero, encobrir os CTAs ou interferir no menu.
+- **Testes:** `package.json` define `npm test` como `node tests/run.js`; a suíte usa `jsdom` e verifica renderização e interações. O README informa 56 testes esperados, mas a suíte não foi executada nesta auditoria remota — esse número não foi tratado como resultado confirmado.
+- **Riscos principais:** imagem configurada com caminho inválido; contraste insuficiente; sobreposição entre movimento e texto; animação que cria rolagem horizontal ou deslocamento de layout; preferência de movimento reduzido não aplicada ao hero.
+- **Abordagem mínima recomendada para os próximos blocos:** manter a configuração centralizada, preservar o fallback atual, preferir uma camada visual de imagem separada do conteúdo para animar apenas a imagem e manter os elementos textuais estáveis. Evitar dependências novas e não alterar a lógica funcional do menu/CTAs.
+
+Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por inspeção do código no GitHub; testes visuais em navegador e execução da suíte ainda não foram realizados.
 
 ---
 
@@ -177,7 +191,7 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 
 | Bloco | Status | Evidência / observações |
 |---|---|---|
-| 1. Auditoria e base visual | Pendente | |
+| 1. Auditoria e base visual | Concluído | Estrutura, CSS, configuração, animações, movimento reduzido e comando de testes documentados; nenhum arquivo funcional alterado. Testes automatizados não executados nesta auditoria remota. |
 | 2. Composição da capa | Pendente | |
 | 3. Movimento cinematográfico | Pendente | |
 | 4. Entrada do conteúdo | Pendente | |
@@ -185,4 +199,4 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | 6. Personalização e fallback | Pendente | |
 | 7. Auditoria final | Pendente | |
 
-**Próxima ação:** executar somente o **Bloco 1 — Auditoria e definição da base visual**. Não iniciar o Bloco 2 até revisar e aprovar o resultado do primeiro.
+**Próxima ação:** revisar e aprovar o resultado do Bloco 1 antes de iniciar o **Bloco 2 — Preparar a imagem e a composição da capa**.
