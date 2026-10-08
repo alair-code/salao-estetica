@@ -541,8 +541,22 @@ button {
 }
 
 .hero--com-imagem {
+  /* A camada escura usa a cor de tema do cliente, sem fixar tons no JS. */
+  background-image:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--cor-escura) 94%, transparent) 0%,
+      color-mix(in srgb, var(--cor-escura) 82%, transparent) 48%,
+      color-mix(in srgb, var(--cor-escura) 46%, transparent) 100%
+    ),
+    linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--cor-escura) 38%, transparent),
+      color-mix(in srgb, var(--cor-escura) 24%, transparent)
+    ),
+    var(--hero-imagem);
   background-size: cover;
-  background-position: center;
+  background-position: center right;
 }
 
 .hero__conteudo {
