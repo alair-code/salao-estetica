@@ -84,6 +84,7 @@ const siteAnimado = montarSite(configReal, (w) => {
     return {};
   };
 });
+check(siteAnimado.erros.length === 0, "hero: animação não gera erro de runtime");
 check(chamadasAnimacao.length === 4, "hero: anima os quatro grupos de conteúdo quando a API está disponível");
 check(
   chamadasAnimacao.map((item) => item.options.delay).join(",") === "0,90,180,270",
