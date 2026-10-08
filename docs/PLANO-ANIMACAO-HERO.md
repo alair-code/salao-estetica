@@ -2,7 +2,7 @@
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 3 implementados/revisados por inspeção; próximo bloco autorizado pelo plano: Bloco 4  
+**Status:** Blocos 1 a 4 implementados/revisados por inspeção; próximo bloco autorizado pelo plano: Bloco 5  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ## Regras para toda a execução
@@ -146,7 +146,17 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - O conteúdo continua acessível e funcional sem animações.
 - A sequência não torna a abertura do site lenta.
 
-**Status:** ⬜ Pendente
+**Status:** ✅ Implementado; revisão por inspeção concluída
+
+### Resultado do Bloco 4
+
+- A entrada suave é aplicada à etiqueta, ao título, à descrição e ao grupo de botões do hero, com deslocamento vertical de 12 px, duração de 620 ms e intervalos de 90 ms.
+- A animação usa a Web Animations API, sem dependências adicionais e sem regras CSS que deixem o conteúdo invisível por padrão.
+- Se a API não estiver disponível, se a consulta de preferência não puder ser feita ou se uma animação falhar, o conteúdo continua visível. A preferência `prefers-reduced-motion: reduce` desativa a sequência.
+- A animação é inicializada após a renderização e as interações principais, sem mudar o fluxo ou a posição final do layout; os links e CTAs existentes foram preservados.
+- Foram adicionados testes à suíte para verificar a presença do conteúdo e dos CTAs, a sequência de atrasos e o respeito à preferência de movimento reduzido.
+
+**Limites desta etapa:** os testes foram adicionados, mas não executados neste ambiente remoto. Não houve validação visual em navegador, com carregamento lento ou em aparelhos reais. A auditoria completa de responsividade e acessibilidade continua no Bloco 5.
 
 ---
 
@@ -223,11 +233,13 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | 1. Auditoria e base visual | Concluído e revisado | Auditoria refinada; gradiente com cores fixas registrado como ponto de atenção. Nenhum arquivo funcional alterado. Testes automatizados e validação visual não executados. |
 | 2. Composição da capa | Implementado; revisão por inspeção concluída | CSS com gradiente ligado à cor do tema, imagem configurável separada e enquadramento desktop/mobile definido. Testes adicionados, mas ainda não executados; validação visual com fotografia real pendente. |
 | 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Validação visual, testes automatizados e desempenho em dispositivos reais ainda pendentes. |
-| 4. Entrada do conteúdo | Pendente | |
+| 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes adicionados, ainda não executados; validação visual pendente. |
 | 5. Acessibilidade e responsividade | Pendente | |
 | 6. Personalização e fallback | Pendente | |
 | 7. Auditoria final | Pendente | |
 
 **Revisão do Bloco 3:** corrigida a ausência de fallback quando `color-mix()` não é suportado. A imagem e o contraste alternativo usam `--cor-escura`, preservando a personalização do tema. A revisão foi feita por inspeção do código; não foram executados testes automatizados nem validação visual em navegadores/dispositivos.
 
-**Próxima ação:** o Bloco 3 está pronto para seguir para o **Bloco 4 — Entrada suave do conteúdo**, mantendo a validação visual e os testes como pendências da auditoria final.
+**Revisão do Bloco 4:** implementada a entrada suave para etiqueta, título, descrição e CTAs. A animação é progressiva e opcional, com fallback visível e respeito a `prefers-reduced-motion`. Testes automatizados foram adicionados, mas ainda não executados; validação visual continua pendente.
+
+**Próxima ação:** o Bloco 4 está pronto para seguir para o **Bloco 5 — Acessibilidade, movimento reduzido e responsividade**, mantendo testes e validação visual como pendências.
