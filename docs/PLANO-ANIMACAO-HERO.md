@@ -210,11 +210,11 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | Bloco | Status | Evidência / observações |
 |---|---|---|
 | 1. Auditoria e base visual | Concluído e revisado | Auditoria refinada; gradiente com cores fixas registrado como ponto de atenção. Nenhum arquivo funcional alterado. Testes automatizados e validação visual não executados. |
-| 2. Composição da capa | Pendente | |
+| 2. Composição da capa | Implementado; revisão por inspeção concluída | CSS com gradiente ligado à cor do tema, imagem configurável separada e enquadramento desktop/mobile definido. Testes adicionados, mas ainda não executados; validação visual com fotografia real pendente. | |
 | 3. Movimento cinematográfico | Pendente | |
 | 4. Entrada do conteúdo | Pendente | |
 | 5. Acessibilidade e responsividade | Pendente | |
 | 6. Personalização e fallback | Pendente | |
 | 7. Auditoria final | Pendente | |
 
-**Próxima ação:** revisar e aprovar o resultado do Bloco 1 antes de iniciar o **Bloco 2 — Preparar a imagem e a composição da capa**.
+**Próxima ação:** revisar e aprovar o resultado do Bloco 2 antes de iniciar o **Bloco 3 — Animar a imagem de fundo com movimento cinematográfico**.
