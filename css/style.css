@@ -541,7 +541,17 @@ button {
 }
 
 .hero--com-imagem {
-  /* A camada escura usa a cor de tema do cliente, sem fixar tons no JS. */
+  /* A fotografia fica numa camada própria, independente do conteúdo. */
+  background-image: none;
+  isolation: isolate;
+}
+
+.hero--com-imagem::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -5%;
+  pointer-events: none;
   background-image:
     linear-gradient(
       90deg,
@@ -557,6 +567,22 @@ button {
     var(--hero-imagem);
   background-size: cover;
   background-position: center right;
+  transform: scale(1.02);
+  animation: hero-zoom-cinematico 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+.hero--com-imagem::before {
+  z-index: 1;
+}
+
+.hero--com-imagem .hero__conteudo {
+  z-index: 2;
+}
+
+@keyframes hero-zoom-cinematico {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.09); }
 }
 
 .hero__conteudo {
@@ -1431,6 +1457,12 @@ button {
     scroll-behavior: auto;
   }
 
+  .hero--com-imagem::after {
+    animation: none;
+    transform: scale(1.02);
+    will-change: auto;
+  }
+
   .cabecalho__conteudo,
   .navegacao.is-open > * {
     animation: none;
@@ -1538,8 +1570,7 @@ button {
     min-height: auto;
   }
 
-  .hero--com-imagem {
-    /* Mantém o assunto visual ligeiramente à direita do texto no mobile. */
+  .hero--com-imagem::after {
     background-position: 64% center;
   }
 }
