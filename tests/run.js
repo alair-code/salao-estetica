@@ -103,7 +103,7 @@ check(
 check($("#heroTitulo").textContent.includes("toque de cuidado"), "hero: título + destaque renderizados");
 check($(".hero__etiqueta").textContent.trim().length > 0, "hero: etiqueta permanece disponível");
 check($(".hero__descricao").textContent.trim().length > 0, "hero: descrição permanece disponível");
-check($(".hero__acoes .botao").length === 2, "hero: CTAs preservados");
+check($$(".hero__acoes .botao").length === 2, "hero: CTAs preservados");
 const siteSemAnimacao = montarSite(configReal, (w) => {
   w.Element.prototype.animate = undefined;
 });
