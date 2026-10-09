@@ -206,7 +206,17 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - Nenhum caminho de imagem inexistente é introduzido.
 - O fallback mantém a apresentação organizada.
 
-**Status:** ⬜ Pendente
+**Status:** ✅ Implementado; revisão por inspeção concluída
+
+### Resultado do Bloco 6
+
+- Confirmado que a imagem do hero e os textos permanecem centralizados em `js/config.js`; não foi necessário criar novas opções de animação nem mover dados de cliente para o CSS.
+- Refinado `renderHero()` para ocultar etiqueta, título, descrição e botões quando os respectivos valores opcionais estiverem vazios, evitando espaços sem conteúdo no topo do site.
+- O grupo de ações também é ocultado quando os dois botões estão vazios. Se apenas um texto de botão estiver preenchido, o botão correspondente continua disponível.
+- A imagem continua opcional: caminho vazio ou composto apenas por espaços não ativa a camada fotográfica; o fundo alternativo permanece disponível.
+- Adicionados testes para campos opcionais vazios e para o fallback de imagem, além das verificações existentes para outro cliente com imagem configurada.
+
+**Limites desta etapa:** os testes foram adicionados, mas não executados neste ambiente remoto. O comportamento com arquivo de imagem existente e inexistente precisa ser confirmado visualmente no navegador; o CSS preserva o fundo alternativo caso a imagem não carregue.
 
 ---
 
@@ -245,7 +255,7 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Validação visual, testes automatizados e desempenho em dispositivos reais ainda pendentes. |
 | 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes adicionados, ainda não executados; validação visual pendente. |
 | 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px; testes adicionados. Suíte não executada; contraste e responsividade visual em dispositivos reais pendentes. |
-| 6. Personalização e fallback | Pendente | |
+| 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos opcionais vazios são ocultados e o fallback da imagem é testado. Suíte ainda não executada; validação visual de imagem ausente/inválida pendente. |
 | 7. Auditoria final | Pendente | |
 
 **Revisão do Bloco 3:** corrigida a ausência de fallback quando `color-mix()` não é suportado. A imagem e o contraste alternativo usam `--cor-escura`, preservando a personalização do tema. A revisão foi feita por inspeção do código; não foram executados testes automatizados nem validação visual em navegadores/dispositivos.
@@ -254,4 +264,6 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 
 **Revisão do Bloco 5:** corrigido um detalhe de acessibilidade: apenas encurtar a duração da animação ainda deixava os atrasos em cascata do menu mobile ativos. Agora animações CSS são desativadas e os atrasos de transição são zerados quando movimento reduzido está ativo. O teste verifica essas regras e o ajuste tipográfico em telas estreitas. A suíte ainda não foi executada; contraste e responsividade visual permanecem pendentes.
 
-**Próxima ação:** o Bloco 5 está pronto para seguir para o **Bloco 6 — Personalização e fallback por cliente**, mantendo a execução dos testes e a validação visual como pendências.
+**Revisão do Bloco 6:** `renderHero()` agora oculta campos opcionais vazios e evita marcação de destaque sem conteúdo. Foram adicionados testes para a ausência de texto, botões e imagem. A suíte ainda não foi executada; validação visual continua pendente.
+
+**Próxima ação:** o Bloco 6 está pronto para seguir para o **Bloco 7 — Auditoria final e testes de regressão**, mantendo a execução dos testes e a validação visual como pendências.
