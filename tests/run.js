@@ -269,7 +269,7 @@ check(B.erros.length === 0, "sem config.js: sem crash");
 check(B.doc.title.length > 0, "sem config.js: fallback do HTML preservado");
 
 const configHeroVazio = configReal.replace(
-  /hero: \{[\s\S]*?imagem: ""\s*\}/,
+  /hero: \{[\s\S]*?imagem: ""[^\n]*\n\s*\}/,
   'hero: { etiqueta: "", titulo: "", destaque: "", descricao: "", textoBotaoPrimario: "", textoBotaoSecundario: "", imagem: "   " }'
 );
 const siteHeroVazio = montarSite(configHeroVazio);
