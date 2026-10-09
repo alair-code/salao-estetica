@@ -180,7 +180,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 
 ### Resultado do Bloco 5
 
-- A preferência `prefers-reduced-motion: reduce` agora reduz de forma global as durações de animações e transições não essenciais, incluindo efeitos do menu mobile, hover e elementos revelados por rolagem.
+- A preferência `prefers-reduced-motion: reduce` agora desativa animações CSS globalmente e reduz a duração das transições, zerando também seus atrasos. Isso evita que itens do menu mobile com atrasos em cascata permaneçam temporariamente invisíveis.
 - O movimento cinematográfico da imagem do hero continua explicitamente desativado quando o usuário solicita movimento reduzido.
 - O título do hero usa `text-wrap: balance` para melhorar a distribuição das linhas quando suportado e ajusta o tamanho da fonte em telas de até 420 px.
 - O foco visível já existente e a estrutura dos CTAs foram preservados; a imagem e o movimento continuam decorativos, sem serem necessários para compreender o conteúdo.
@@ -244,7 +244,7 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | 2. Composição da capa | Implementado; revisão por inspeção concluída | CSS com gradiente ligado à cor do tema, imagem configurável separada e enquadramento desktop/mobile definido. Testes adicionados, mas ainda não executados; validação visual com fotografia real pendente. |
 | 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Validação visual, testes automatizados e desempenho em dispositivos reais ainda pendentes. |
 | 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes adicionados, ainda não executados; validação visual pendente. |
-| 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido global, ajuste tipográfico do hero até 420 px e testes adicionados. Suíte não executada; contraste e responsividade visual em dispositivos reais pendentes. |
+| 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px; testes adicionados. Suíte não executada; contraste e responsividade visual em dispositivos reais pendentes. |
 | 6. Personalização e fallback | Pendente | |
 | 7. Auditoria final | Pendente | |
 
@@ -252,6 +252,6 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 
 **Revisão do Bloco 4:** implementada a entrada suave para etiqueta, título, descrição e CTAs. A animação é progressiva e opcional, com fallback visível e respeito a `prefers-reduced-motion`. Testes automatizados foram adicionados, mas ainda não executados; validação visual continua pendente.
 
-**Revisão do Bloco 5:** movimento reduzido reforçado para cobrir animações e transições globais, com ajuste tipográfico do hero em telas estreitas. Foram adicionadas verificações automatizadas, ainda não executadas; contraste e responsividade visual permanecem pendentes.
+**Revisão do Bloco 5:** corrigido um detalhe de acessibilidade: apenas encurtar a duração da animação ainda deixava os atrasos em cascata do menu mobile ativos. Agora animações CSS são desativadas e os atrasos de transição são zerados quando movimento reduzido está ativo. O teste verifica essas regras e o ajuste tipográfico em telas estreitas. A suíte ainda não foi executada; contraste e responsividade visual permanecem pendentes.
 
 **Próxima ação:** o Bloco 5 está pronto para seguir para o **Bloco 6 — Personalização e fallback por cliente**, mantendo a execução dos testes e a validação visual como pendências.
