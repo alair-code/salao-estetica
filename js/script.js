@@ -293,7 +293,11 @@
         titulo.textContent = hero.titulo || "";
       }
     }
-    if (botaoPrimario) botaoPrimario.hidden = !isFilled(hero.textoBotaoPrimario);
+    var temWhatsApp = isFilled(config.contato && config.contato.whatsapp);
+    if (botaoPrimario) {
+      // Não exibe CTA de agendamento se não houver destino configurado.
+      botaoPrimario.hidden = !isFilled(hero.textoBotaoPrimario) || !temWhatsApp;
+    }
     if (botaoSecundario) botaoSecundario.hidden = !isFilled(hero.textoBotaoSecundario);
     if (acoes) {
       acoes.hidden = ![botaoPrimario, botaoSecundario].some(function (botao) {
