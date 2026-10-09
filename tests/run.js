@@ -150,8 +150,18 @@ const configUmaImagemLista = configReal.replace(
 const siteUmaImagemLista = montarSite(configUmaImagemLista);
 check(
   !siteUmaImagemLista.doc.querySelector("#inicio").classList.contains("hero--com-slides") &&
-    siteUmaImagemLista.doc.querySelectorAll(".hero__slide").length === 0,
-  "hero: lista com uma imagem mantém o comportamento estático legado"
+    siteUmaImagemLista.doc.querySelectorAll(".hero__slide").length === 0 &&
+    siteUmaImagemLista.doc.querySelector("#inicio").classList.contains("hero--com-imagem") &&
+    siteUmaImagemLista.doc.querySelector("#inicio").style.getPropertyValue("--hero-imagem").includes("hero-1.jpg"),
+  "hero: lista com uma imagem usa capa estática quando hero.imagem está vazio"
+);
+const configImagemLegadaComListaUnica = configReal
+  .replace('imagem: ""', 'imagem: "assets/images/capa-legada.jpg"')
+  .replace('movimento: "zoom"', 'movimento: "zoom", imagens: ["assets/images/hero-1.jpg"]');
+const siteImagemLegadaComListaUnica = montarSite(configImagemLegadaComListaUnica);
+check(
+  siteImagemLegadaComListaUnica.doc.querySelector("#inicio").style.getPropertyValue("--hero-imagem").includes("capa-legada.jpg"),
+  "hero: imagem legada tem prioridade quando a lista opcional contém apenas uma imagem"
 );
 check(
   /@keyframes hero-crossfade-primeiro/.test(css) &&
