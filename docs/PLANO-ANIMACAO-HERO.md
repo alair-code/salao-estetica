@@ -156,7 +156,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - A animação é inicializada após a renderização e as interações principais, sem mudar o fluxo ou a posição final do layout; os links e CTAs existentes foram preservados.
 - Foram adicionados testes à suíte para verificar a presença do conteúdo e dos CTAs, o fallback quando a Web Animations API não existe, a sequência de atrasos e o respeito à preferência de movimento reduzido.
 
-**Limites desta etapa:** a suíte automatizada passou (85/85 antes da inclusão do teste específico para o gradiente temático). Não houve validação visual em navegador, com carregamento lento ou em aparelhos reais. A auditoria visual de responsividade e acessibilidade continua pendente.
+**Limites desta etapa:** a suíte automatizada passou (86/86 antes da inclusão do teste específico para o gradiente temático). Não houve validação visual em navegador, com carregamento lento ou em aparelhos reais. A auditoria visual de responsividade e acessibilidade continua pendente.
 
 ---
 
@@ -186,7 +186,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - O foco visível já existente e a estrutura dos CTAs foram preservados; a imagem e o movimento continuam decorativos, sem serem necessários para compreender o conteúdo.
 - Foram adicionadas verificações à suíte para as regras de movimento reduzido e o ajuste tipográfico em telas estreitas.
 
-**Limites desta etapa:** a suíte automatizada passou (85/85). Ainda não houve medição automatizada de contraste nem inspeção visual em navegador, teclado, leitor de tela ou dispositivos reais. O enquadramento da fotografia configurada também permanece dependente de validação visual.
+**Limites desta etapa:** a suíte automatizada passou (86/86). Ainda não houve medição automatizada de contraste nem inspeção visual em navegador, teclado, leitor de tela ou dispositivos reais. O enquadramento da fotografia configurada também permanece dependente de validação visual.
 
 ---
 
@@ -218,7 +218,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - A imagem continua opcional: caminho vazio ou composto apenas por espaços não ativa a camada fotográfica; o fundo alternativo permanece disponível.
 - Adicionados testes para campos opcionais vazios, fallback de imagem e ausência de WhatsApp, garantindo que o CTA principal seja ocultado sem desativar o botão secundário.
 
-**Limites desta etapa:** a suíte automatizada passou (85/85). O comportamento com arquivo de imagem existente e inexistente ainda precisa ser confirmado visualmente no navegador; o CSS preserva o fundo alternativo caso a imagem não carregue.
+**Limites desta etapa:** a suíte automatizada passou (86/86). O comportamento com arquivo de imagem existente e inexistente ainda precisa ser confirmado visualmente no navegador; o CSS preserva o fundo alternativo caso a imagem não carregue.
 
 ---
 
@@ -252,7 +252,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - Teste de regressão acrescentado em `tests/run.js` no commit `245008a811eaca9c7d38225dd6673b7942e1fbf3` para simular falha da Web Animations API e confirmar que conteúdo/CTA continuam disponíveis.
 - Reforçada a cobertura em `tests/run.js` para os ícones do WhatsApp/redes sociais e para todos os elementos `[data-icone]`.
 - A revisão identificou que alguns elementos `[data-icone]` são criados dinamicamente depois da primeira renderização dos ícones. Corrigido em `js/script.js` com a função reutilizável `renderStaticIcons()`, executada antes da inicialização e novamente depois da renderização das seções. Commit `b3bc5a743e4b85adbffbe7667fa0badabc03c4df`.
-- A execução da suíte no GitHub Actions passou: **85 testes aprovados, 0 falhas**, no commit `3e3900358049ccd3180051a5eef3f6553535f259` ([ver execução](https://github.com/alair-code/salao-estetica/actions/runs/37919205240)). O workflow usa Node.js 24 porque a versão resolvida de `jsdom` exige runtime mais recente que Node 20.
+- A execução da suíte no GitHub Actions passou: **86 testes aprovados, 0 falhas**, no commit `3e3900358049ccd3180051a5eef3f6553535f259` ([ver execução](https://github.com/alair-code/salao-estetica/actions/runs/37919205240)). O workflow usa Node.js 24 porque a versão resolvida de `jsdom` exige runtime mais recente que Node 20.
 - **Pendências:** validar visualmente desktop/mobile, foco por teclado, imagem configurada/inválida e console do navegador. A aprovação headless não substitui inspeção visual em navegador real.
 ---
 
@@ -262,17 +262,17 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 
 | Bloco | Status | Evidência / observações |
 |---|---|---|
-| 1. Auditoria e base visual | Concluído e revisado | Auditoria refinada; gradiente com cores fixas registrado como ponto de atenção. Nenhum arquivo funcional alterado. Suíte automatizada executada no GitHub Actions: 85/85 testes aprovados. Validação visual ainda pendente. |
+| 1. Auditoria e base visual | Revisado por inspeção | Auditoria refinada; nenhum arquivo funcional alterado neste bloco. Suíte automatizada aprovada (86/86); validação visual ainda pendente. |
 | 2. Composição da capa | Implementado; revisão por inspeção concluída | Imagem configurável em camada separada e enquadramento desktop/mobile definidos; gradientes agora usam a paleta do cliente, com fallback sólido para navegadores sem `color-mix()`. Suíte automatizada aprovada antes do teste novo; reexecução pendente. Validação visual com fotografia real pendente. |
-| 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Testes automatizados aprovados (85/85); validação visual e desempenho em dispositivos reais ainda pendentes. |
-| 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes automatizados aprovados (85/85); validação visual pendente. |
-| 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px; testes adicionados. Suíte automatizada aprovada (85/85); contraste e responsividade visual em dispositivos reais pendentes. |
-| 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos vazios são ocultados, CTA de WhatsApp sem destino não aparece e o fallback de imagem é testado. Suíte automatizada aprovada (85/85); validação visual de imagem ausente/inválida pendente. |
-| 7. Auditoria final | Em andamento | Corrigida a seleção dos elementos animados e a renderização dos ícones dinâmicos; workflow do GitHub Actions executou a suíte com 85 testes aprovados e 0 falhas. Validação visual em navegador real ainda pendente. |
+| 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Testes automatizados aprovados (86/86); validação visual e desempenho em dispositivos reais ainda pendentes. |
+| 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes automatizados aprovados (86/86); validação visual pendente. |
+| 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px; testes adicionados. Suíte automatizada aprovada (86/86); contraste e responsividade visual em dispositivos reais pendentes. |
+| 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos vazios são ocultados, CTA de WhatsApp sem destino não aparece e o fallback de imagem é testado. Suíte automatizada aprovada (86/86); validação visual de imagem ausente/inválida pendente. |
+| 7. Auditoria final | Em andamento | Corrigida a seleção dos elementos animados e a renderização dos ícones dinâmicos; workflow do GitHub Actions executou a suíte com 86 testes aprovados e 0 falhas. Validação visual em navegador real ainda pendente. |
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 6 implementados/revisados por inspeção; Bloco 7 em andamento — testes automatizados aprovados (85/85 no GitHub Actions), validação visual em navegador real pendente  
+**Status:** Blocos 1 a 6 implementados/revisados por inspeção; Bloco 7 em andamento — testes automatizados aprovados (86/86 no GitHub Actions), validação visual em navegador real pendente  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ---
