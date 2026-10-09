@@ -61,7 +61,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 ### Revisão e refinamento do Bloco 1
 
 - Confirmado que `npm test` executa `node tests/run.js` e que o README declara 56 testes como saída esperada. Isso é documentação do projeto, não evidência de que os testes passaram nesta etapa.
-- Refinada a lista de riscos para registrar que o gradiente de contraste atual usa cores fixas no JavaScript. No Bloco 2, avaliar uma solução em CSS que mantenha o contraste e respeite melhor a identidade configurada, sem mudar a aparência sem necessidade.
+- Identificado que o fundo decorativo do hero ainda usava tons fixos, apesar da paleta personalizável. Corrigido no Bloco 7: os gradientes agora derivam de `--cor-primaria` e `--cor-dourado`; navegadores sem `color-mix()` recebem fundo sólido `--cor-escura` como fallback. A alteração preserva a personalização sem adicionar dependências.
 - Mantida a decisão de não alterar HTML, CSS ou JavaScript no bloco de auditoria. Nenhuma correção funcional era necessária para concluir esta etapa de planejamento.
 - **Limite da revisão:** não houve execução local da suíte nem validação visual em navegador; por isso, este bloco está pronto como auditoria/documentação, mas não representa aprovação funcional do hero animado.
 
@@ -156,7 +156,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - A animação é inicializada após a renderização e as interações principais, sem mudar o fluxo ou a posição final do layout; os links e CTAs existentes foram preservados.
 - Foram adicionados testes à suíte para verificar a presença do conteúdo e dos CTAs, o fallback quando a Web Animations API não existe, a sequência de atrasos e o respeito à preferência de movimento reduzido.
 
-**Limites desta etapa:** os testes foram adicionados, mas não executados neste ambiente remoto. Não houve validação visual em navegador, com carregamento lento ou em aparelhos reais. A auditoria completa de responsividade e acessibilidade continua no Bloco 5.
+**Limites desta etapa:** a suíte automatizada passou (85/85 antes da inclusão do teste específico para o gradiente temático). Não houve validação visual em navegador, com carregamento lento ou em aparelhos reais. A auditoria visual de responsividade e acessibilidade continua pendente.
 
 ---
 
@@ -263,7 +263,7 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | Bloco | Status | Evidência / observações |
 |---|---|---|
 | 1. Auditoria e base visual | Concluído e revisado | Auditoria refinada; gradiente com cores fixas registrado como ponto de atenção. Nenhum arquivo funcional alterado. Suíte automatizada executada no GitHub Actions: 85/85 testes aprovados. Validação visual ainda pendente. |
-| 2. Composição da capa | Implementado; revisão por inspeção concluída | CSS com gradiente ligado à cor do tema, imagem configurável separada e enquadramento desktop/mobile definido. Suíte automatizada aprovada (85/85); validação visual com fotografia real pendente. |
+| 2. Composição da capa | Implementado; revisão por inspeção concluída | Imagem configurável em camada separada e enquadramento desktop/mobile definidos; gradientes agora usam a paleta do cliente, com fallback sólido para navegadores sem `color-mix()`. Suíte automatizada aprovada antes do teste novo; reexecução pendente. Validação visual com fotografia real pendente. |
 | 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Testes automatizados aprovados (85/85); validação visual e desempenho em dispositivos reais ainda pendentes. |
 | 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes automatizados aprovados (85/85); validação visual pendente. |
 | 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px; testes adicionados. Suíte automatizada aprovada (85/85); contraste e responsividade visual em dispositivos reais pendentes. |
