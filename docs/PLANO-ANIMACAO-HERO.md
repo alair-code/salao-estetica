@@ -2,7 +2,7 @@
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 7 implementados/revisados por inspeção e testes; Bloco 8 implementado com 94/94 testes aprovados no CI; Bloco 9 avaliado, sem alteração funcional por já existir iluminação temática; validação visual em navegador real ainda pendente; Blocos 10 e 11 planejados  
+**Status:** Blocos 1 a 7 implementados/revisados por inspeção e testes; Bloco 8 implementado com 94/94 testes aprovados no CI; Bloco 9 avaliado, sem alteração funcional por já existir iluminação temática; validação visual em navegador real ainda pendente; Bloco 10 implementado; Bloco 11 planejado  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ## Regras para toda a execução
@@ -370,7 +370,16 @@ A solicitação “prossiga” foi interpretada como autorização para avançar
 - Erros de carregamento não deixam a capa vazia nem interrompem a página.
 - A preferência por movimento reduzido é respeitada.
 
-**Status:** ⏳ Planejado — iniciar somente após concluir o Bloco 9.
+**Status:** ✅ Implementado; testes adicionados. A execução inicial de CI identificou um erro na fixture de teste, já corrigido; aguardar nova execução. Validação visual real continua pendente.
+
+### Resultado do Bloco 10
+
+- Adicionada a propriedade opcional `hero.imagens`, sem remover nem alterar o uso legado de `hero.imagem`.
+- A dissolução usa duas camadas CSS, com ciclo lento de 16 segundos; apenas as duas primeiras imagens válidas são usadas, evitando carregar uma galeria inteira no hero.
+- Zero ou uma imagem na lista mantém a apresentação estática antiga. A imagem principal `hero.imagem` continua funcionando como antes quando a lista não tem duas entradas válidas.
+- Textos e CTAs permanecem fora das camadas visuais; elas não recebem eventos de ponteiro e ficam ocultas de tecnologias assistivas.
+- `prefers-reduced-motion: reduce` mantém a primeira camada estática e desativa a transição.
+- Limitação: validação visual com fotografias reais e falhas reais de carregamento ainda está pendente.
 
 ---
 
@@ -404,7 +413,7 @@ A solicitação “prossiga” foi interpretada como autorização para avançar
 1. **Fechar a pendência visual do Bloco 7** — conferir hero, foco, menu, CTAs e imagem em navegador real quando houver ambiente de validação.
 2. **Fechar a pendência visual do Bloco 8** — verificar zoom, lateral e movimento desativado em desktop e celular.
 3. **Bloco 9** — avaliar iluminação ambiente sutil, somente se agregar valor sem complexidade excessiva.
-4. **Bloco 10** — avaliar dissolução entre imagens, recurso opcional para clientes que configurarem várias capas.
+4. **Bloco 10** — implementado; falta validar visualmente com imagens reais.
 5. **Bloco 11** — auditoria integrada e regressão de todos os efeitos.
 
 Não antecipar os blocos seguintes. Ao terminar cada etapa, revisar o código, executar os testes disponíveis, registrar limitações reais neste documento e só então avançar.
