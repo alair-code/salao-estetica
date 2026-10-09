@@ -2,7 +2,7 @@
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 7 implementados/revisados por inspeção e testes; Bloco 8 implementado com 94/94 testes aprovados no CI; Bloco 9 avaliado, sem alteração funcional por já existir iluminação temática; validação visual em navegador real ainda pendente; Bloco 10 implementado; Bloco 11 planejado  
+**Status:** Blocos 1 a 7 implementados/revisados por inspeção e testes; Bloco 8 implementado com 94/94 testes aprovados no CI; Bloco 9 avaliado, sem alteração funcional por já existir iluminação temática; validação visual em navegador real ainda pendente; Bloco 10 implementado; CI aprovado com 98/98 testes; Bloco 11 planejado  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ## Regras para toda a execução
@@ -370,7 +370,7 @@ A solicitação “prossiga” foi interpretada como autorização para avançar
 - Erros de carregamento não deixam a capa vazia nem interrompem a página.
 - A preferência por movimento reduzido é respeitada.
 
-**Status:** ✅ Implementado; testes adicionados. A execução inicial de CI identificou um erro na fixture de teste, já corrigido; aguardar nova execução. Validação visual real continua pendente.
+**Status:** ✅ Implementado e validado por CI — 98/98 testes aprovados no commit `97a7c6f34476c683b8e2426831d8892307b2a1a2`. Validação visual real continua pendente.
 
 ### Resultado do Bloco 10
 
