@@ -2,7 +2,7 @@
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 6 implementados/revisados por inspeção; Bloco 7 em andamento — correção estática aplicada, testes automatizados e validação visual pendentes; Blocos 8 a 11 planejados  
+**Status:** Blocos 1 a 6 implementados e revisados por inspeção; Bloco 7 em andamento — testes automatizados aprovados (86/86), validação visual em navegador real pendente; Blocos 8 a 11 planejados  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ## Regras para toda a execução
@@ -51,19 +51,19 @@ A imagem deve continuar opcional e configurável por cliente. Se não houver ima
 - **Animações existentes:** há animações de entrada para elementos com `data-reveal`, acionadas por `IntersectionObserver`. Os elementos do hero não usam `data-reveal`, então a futura entrada do conteúdo deverá ser implementada deliberadamente, sem depender do observer das outras seções.
 - **Movimento reduzido:** já existe `@media (prefers-reduced-motion: reduce)` que desativa transições e revelações existentes. Qualquer animação nova do hero também precisará respeitar essa preferência explicitamente.
 - **Cabeçalho e layout:** o cabeçalho tem estado visual ao rolar (`.is-scrolled`) e a navegação mobile tem lógica própria. A animação não deve alterar altura/fluxo do hero, encobrir os CTAs ou interferir no menu.
-- **Testes:** `package.json` define `npm test` como `node tests/run.js`; a suíte usa `jsdom` e verifica renderização e interações. O README informa 56 testes esperados, mas a suíte não foi executada nesta auditoria remota — esse número não foi tratado como resultado confirmado.
-- **Riscos principais:** imagem configurada com caminho inválido; contraste insuficiente; sobreposição entre movimento e texto; animação que cria rolagem horizontal ou deslocamento de layout; preferência de movimento reduzido não aplicada ao hero. O gradiente de contraste atualmente é montado em `js/script.js` com valores de cor fixos (`rgba(28,20,16,...)`), portanto não acompanha diretamente a paleta do cliente.
+- **Testes:** `package.json` define `npm test` como `node tests/run.js`; a suíte usa `jsdom` e verifica renderização, links e interações. A suíte foi executada no GitHub Actions e passou com 86/86 testes; isso cobre comportamentos automatizáveis, não substitui inspeção visual real.
+- **Riscos principais:** imagem configurada com caminho inválido; contraste insuficiente; sobreposição entre movimento e texto; animação que cria rolagem horizontal ou deslocamento de layout; preferência de movimento reduzido não aplicada ao hero. O gradiente decorativo do fundo usava cores fixas no CSS; isso foi corrigido durante o Bloco 7 para usar `--cor-primaria` e `--cor-dourado`, com fallback para `--cor-escura` sem suporte a `color-mix()`.
 - **Abordagem mínima recomendada para os próximos blocos:** manter a configuração centralizada, preservar o fallback atual, preferir uma camada visual de imagem separada do conteúdo para animar apenas a imagem e manter os elementos textuais estáveis. Evitar dependências novas e não alterar a lógica funcional do menu/CTAs.
 
-Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por inspeção do código no GitHub; testes visuais em navegador e execução da suíte ainda não foram realizados. A responsividade foi avaliada apenas pelas regras e media queries existentes, não validada visualmente em dispositivos reais.
+Nenhum arquivo funcional foi alterado no Bloco 1. Naquele momento, a auditoria foi feita por inspeção; posteriormente, a suíte foi executada e aprovada (86/86). A responsividade continua avaliada apenas pelas regras e media queries, sem validação visual em dispositivos reais.
 
 
 ### Revisão e refinamento do Bloco 1
 
-- Confirmado que `npm test` executa `node tests/run.js` e que o README declara 56 testes como saída esperada. Isso é documentação do projeto, não evidência de que os testes passaram nesta etapa.
+- Confirmado que `npm test` executa `node tests/run.js`. A saída esperada no README foi atualizada para 86 testes após a inclusão da cobertura do gradiente temático; a aprovação efetiva está registrada na execução do GitHub Actions.
 - Identificado que o fundo decorativo do hero ainda usava tons fixos, apesar da paleta personalizável. Corrigido no Bloco 7: os gradientes agora derivam de `--cor-primaria` e `--cor-dourado`; navegadores sem `color-mix()` recebem fundo sólido `--cor-escura` como fallback. A alteração preserva a personalização sem adicionar dependências.
 - Mantida a decisão de não alterar HTML, CSS ou JavaScript no bloco de auditoria. Nenhuma correção funcional era necessária para concluir esta etapa de planejamento.
-- **Limite da revisão:** não houve execução local da suíte nem validação visual em navegador; por isso, este bloco está pronto como auditoria/documentação, mas não representa aprovação funcional do hero animado.
+- **Limite da revisão:** o Bloco 1 foi uma auditoria por inspeção, não uma aprovação funcional. A suíte automatizada foi executada posteriormente (86/86); a validação visual do hero continua pendente no Bloco 7.
 
 ---
 
@@ -263,10 +263,10 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | Bloco | Status | Evidência / observações |
 |---|---|---|
 | 1. Auditoria e base visual | Revisado por inspeção | Auditoria refinada; nenhum arquivo funcional alterado neste bloco. Suíte automatizada aprovada (86/86); validação visual ainda pendente. |
-| 2. Composição da capa | Implementado; revisão por inspeção concluída | Imagem configurável em camada separada e enquadramento desktop/mobile definidos; gradientes agora usam a paleta do cliente, com fallback sólido para navegadores sem `color-mix()`. Suíte automatizada aprovada antes do teste novo; reexecução pendente. Validação visual com fotografia real pendente. |
+| 2. Composição da capa | Implementado; revisão por inspeção concluída | Imagem configurável em camada separada e enquadramento desktop/mobile definidos; gradientes usam a paleta do cliente, com fallback sólido para navegadores sem `color-mix()`. Suíte automatizada aprovada (86/86); validação visual com fotografia real pendente. |
 | 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Testes automatizados aprovados (86/86); validação visual e desempenho em dispositivos reais ainda pendentes. |
 | 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes automatizados aprovados (86/86); validação visual pendente. |
-| 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px; testes adicionados. Suíte automatizada aprovada (86/86); contraste e responsividade visual em dispositivos reais pendentes. |
+| 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px. Suíte automatizada aprovada (86/86); contraste e responsividade visual em dispositivos reais pendentes. |
 | 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos vazios são ocultados, CTA de WhatsApp sem destino não aparece e o fallback de imagem é testado. Suíte automatizada aprovada (86/86); validação visual de imagem ausente/inválida pendente. |
 | 7. Auditoria final | Em andamento | Corrigida a seleção dos elementos animados e a renderização dos ícones dinâmicos; workflow do GitHub Actions executou a suíte com 86 testes aprovados e 0 falhas. Validação visual em navegador real ainda pendente. |
 
