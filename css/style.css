@@ -581,6 +581,25 @@ button {
   will-change: transform;
 }
 
+/* Alternativa configurável: movimento lateral discreto, sem animar o conteúdo.
+   A camada excede a área do hero para evitar revelar bordas vazias. */
+.hero--movimento-lateral.hero--com-imagem::after {
+  inset: -7%;
+  transform: scale(1.06);
+  animation: hero-pan-lateral 32s ease-in-out infinite alternate;
+}
+
+.hero--movimento-desativado.hero--com-imagem::after {
+  animation: none;
+  transform: scale(1.02);
+  will-change: auto;
+}
+
+@keyframes hero-pan-lateral {
+  from { transform: scale(1.06) translateX(-1.2%); }
+  to { transform: scale(1.06) translateX(1.2%); }
+}
+
 /* Fallback para navegadores sem color-mix(): mantém a fotografia e
    usa a cor configurável do tema, sem depender de tons fixos do cliente. */
 @supports not (color: color-mix(in srgb, #000 50%, transparent)) {
