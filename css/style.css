@@ -625,6 +625,59 @@ button {
   }
 }
 
+/* Dissolução opcional entre duas imagens configuradas no hero.imagens.
+   A imagem principal antiga permanece intacta quando a lista não é usada. */
+.hero--com-slides::after {
+  opacity: 0;
+  animation: none;
+  will-change: auto;
+}
+
+.hero__slides {
+  position: absolute;
+  z-index: 0;
+  inset: -5%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center right;
+  transform: scale(1.04);
+  will-change: opacity;
+}
+
+.hero__slide.is-primeiro {
+  opacity: 1;
+  animation: hero-crossfade-primeiro 16s ease-in-out infinite;
+}
+
+.hero__slide.is-segundo {
+  opacity: 0;
+  animation: hero-crossfade-segundo 16s ease-in-out infinite;
+}
+
+@keyframes hero-crossfade-primeiro {
+  0%, 42% { opacity: 1; }
+  50%, 92% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes hero-crossfade-segundo {
+  0%, 42% { opacity: 0; }
+  50%, 92% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@supports not (color: color-mix(in srgb, #000 50%, transparent)) {
+  .hero__slide {
+    background-image: linear-gradient(90deg, var(--cor-escura), transparent) !important;
+  }
+}
+
 .hero--com-imagem::before {
   z-index: 1;
 }
@@ -1507,6 +1560,17 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero--com-slides .hero__slide {
+    animation: none !important;
+    opacity: 0 !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .hero--com-slides .hero__slide.is-primeiro {
+    opacity: 1 !important;
+  }
+
   html {
     scroll-behavior: auto;
   }
