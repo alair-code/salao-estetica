@@ -75,11 +75,15 @@ const $$ = (s) => [...site.doc.querySelectorAll(s)];
 
 check(site.erros.length === 0, "sem erros de runtime");
 check(
-  [".whatsapp-flutuante", ".rodape__rede[aria-label=\\\"Instagram\\\"]", ".rodape__rede[aria-label=\\\"Facebook\\\"]", ".rodape__rede[aria-label=\\\"WhatsApp\\\"]"]
-    .every((seletor) => {
-      const elemento = site.doc.querySelector(seletor);
-      return elemento && elemento.querySelector("[data-icone] svg.icon");
-    }),
+  [
+    ".whatsapp-flutuante",
+    '.rodape__rede[aria-label="Instagram"]',
+    '.rodape__rede[aria-label="Facebook"]',
+    '.rodape__rede[aria-label="WhatsApp"]',
+  ].every((seletor) => {
+    const elemento = site.doc.querySelector(seletor);
+    return elemento && elemento.querySelector("[data-icone] svg.icon");
+  }),
   "ícones do WhatsApp flutuante e das redes sociais são renderizados"
 );
 check(
