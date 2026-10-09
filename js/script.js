@@ -273,8 +273,19 @@
 
   function renderHero() {
     var hero = config.hero || {};
+    var etiqueta = $(".hero__etiqueta");
     var titulo = $("#heroTitulo");
+    var descricao = $(".hero__descricao");
+    var acoes = $(".hero__acoes");
+    var botaoPrimario = $(".hero__acoes .botao--whatsapp");
+    var botaoSecundario = $(".hero__acoes .botao--contorno");
+
+    // Campos opcionais vazios não devem deixar espaços em branco no hero.
+    if (etiqueta) etiqueta.hidden = !isFilled(hero.etiqueta);
+    if (descricao) descricao.hidden = !isFilled(hero.descricao);
     if (titulo) {
+      var temTitulo = isFilled(hero.titulo) || isFilled(hero.destaque);
+      titulo.hidden = !temTitulo;
       if (hero.destaque) {
         titulo.innerHTML =
           escapeHtml(hero.titulo) + " <em>" + escapeHtml(hero.destaque) + "</em>";
@@ -282,6 +293,14 @@
         titulo.textContent = hero.titulo || "";
       }
     }
+    if (botaoPrimario) botaoPrimario.hidden = !isFilled(hero.textoBotaoPrimario);
+    if (botaoSecundario) botaoSecundario.hidden = !isFilled(hero.textoBotaoSecundario);
+    if (acoes) {
+      acoes.hidden = ![botaoPrimario, botaoSecundario].some(function (botao) {
+        return botao && !botao.hidden;
+      });
+    }
+
     if (hero.imagem && String(hero.imagem).trim()) {
       var section = $("#inicio");
       if (section) {
