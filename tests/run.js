@@ -159,6 +159,25 @@ check(
     /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero--com-slides \.hero__slide[\s\S]*?animation:\s*none !important/.test(css),
   "hero: crossfade tem animações CSS e desativa troca com movimento reduzido"
 );
+const siteSlidesSemMovimento = montarSite(
+  configDuasImagens.replace('movimento: "zoom"', 'movimento: "nenhum"')
+);
+check(
+  siteSlidesSemMovimento.doc.querySelector("#inicio").classList.contains("hero--movimento-desativado") &&
+    /\.hero--movimento-desativado\.hero--com-slides \.hero__slide[\s\S]*?animation:\s*none/.test(css) &&
+    /\.hero--movimento-desativado\.hero--com-slides \.hero__slide\.is-primeiro[\s\S]*?opacity:\s*1/.test(css),
+  "hero: movimento nenhum mantém a primeira imagem estática no modo slides"
+);
+check(
+  !siteDuasImagens.doc.querySelector(".hero__slide").style.backgroundImage.includes("color-mix") &&
+    /@supports not \(color:\s*color-mix/.test(css) &&
+    /\.hero__slide::after[\s\S]*?background:[\s\S]*?var\(--cor-escura\)/.test(css),
+  "hero: imagens e gradiente têm fallback para navegadores sem color-mix"
+);
+check(
+  /\.hero--com-slides \.hero__slide\s*\{\s*background-position:\s*64% center/.test(css),
+  "hero: enquadramento das imagens é ajustado em telas pequenas"
+);
 check(
   siteMovimentoLateral.doc.querySelector("#inicio").classList.contains("hero--movimento-lateral") &&
     siteMovimentoLateral.doc.querySelector("#inicio").classList.contains("hero--com-imagem"),
