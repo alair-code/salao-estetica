@@ -284,6 +284,22 @@ check(
   "hero opcional: imagem vazia mantém o fallback"
 );
 
+const configSemWhatsApp = configReal.replace(
+  /whatsapp: "5533984368440"/,
+  'whatsapp: ""'
+);
+const siteSemWhatsAppHero = montarSite(configSemWhatsApp);
+check(siteSemWhatsAppHero.erros.length === 0, "hero sem WhatsApp: sem erro de runtime");
+check(
+  siteSemWhatsAppHero.doc.querySelector(".hero__acoes .botao--whatsapp").hidden,
+  "hero sem WhatsApp: CTA principal oculto para evitar link sem destino"
+);
+check(
+  !siteSemWhatsAppHero.doc.querySelector(".hero__acoes .botao--contorno").hidden &&
+    !siteSemWhatsAppHero.doc.querySelector(".hero__acoes").hidden,
+  "hero sem WhatsApp: botão secundário continua disponível"
+);
+
 /* ---------- Saída ---------- */
 
 let total = 0;
