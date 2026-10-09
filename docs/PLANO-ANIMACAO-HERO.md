@@ -2,7 +2,7 @@
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 7 implementados/revisados por inspeção e testes; Bloco 8 implementado com 94/94 testes aprovados no CI; Bloco 9 avaliado, sem alteração funcional por já existir iluminação temática; validação visual em navegador real ainda pendente; Bloco 10 implementado; CI aprovado com 98/98 testes; Bloco 11 planejado  
+**Status:** Blocos 1 a 7 implementados/revisados por inspeção e testes; Bloco 8 implementado com 94/94 testes aprovados no CI; Bloco 9 avaliado, sem alteração funcional por já existir iluminação temática; validação visual em navegador real ainda pendente; Bloco 10 revisado e refinado; CI final pendente; Bloco 11 planejado  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ## Regras para toda a execução
@@ -370,16 +370,19 @@ A solicitação “prossiga” foi interpretada como autorização para avançar
 - Erros de carregamento não deixam a capa vazia nem interrompem a página.
 - A preferência por movimento reduzido é respeitada.
 
-**Status:** ✅ Implementado e validado por CI — 98/98 testes aprovados no commit `97a7c6f34476c683b8e2426831d8892307b2a1a2`. Validação visual real continua pendente.
+**Status:** ✅ Revisão técnica aplicada; aguardar CI final após os ajustes. Validação visual real continua pendente.
 
 ### Resultado do Bloco 10
 
 - Adicionada a propriedade opcional `hero.imagens`, sem remover nem alterar o uso legado de `hero.imagem`.
 - A dissolução usa duas camadas CSS, com ciclo lento de 16 segundos; apenas as duas primeiras imagens válidas são usadas, evitando carregar uma galeria inteira no hero.
+- A imagem é definida separadamente dos gradientes; o CSS aplica contraste temático e possui fallback para navegadores sem `color-mix()`.
+- Em telas pequenas, o enquadramento das imagens muda para `64% center`.
+- Quando `hero.movimento` é `nenhum`, a primeira imagem permanece estática e a troca entre slides é desativada.
 - Zero ou uma imagem na lista mantém a apresentação estática antiga. A imagem principal `hero.imagem` continua funcionando como antes quando a lista não tem duas entradas válidas.
 - Textos e CTAs permanecem fora das camadas visuais; elas não recebem eventos de ponteiro e ficam ocultas de tecnologias assistivas.
 - `prefers-reduced-motion: reduce` mantém a primeira camada estática e desativa a transição.
-- Limitação: validação visual com fotografias reais e falhas reais de carregamento ainda está pendente.
+- Limitação: validação visual com fotografias reais e falhas reais de carregamento ainda está pendente. Imagens CSS de fundo não fornecem um evento de erro confiável; se uma URL falhar, a camada correspondente pode ficar sem fotografia durante parte do ciclo.
 
 ---
 
