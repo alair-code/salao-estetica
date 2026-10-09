@@ -272,12 +272,16 @@ const configHeroVazio = configReal.replace(
   /hero: \{[\s\S]*?imagem: ""[^\n]*\n\s*\}/,
   'hero: { etiqueta: "", titulo: "", destaque: "", descricao: "", textoBotaoPrimario: "", textoBotaoSecundario: "", imagem: "   " }'
 );
-const siteHeroVazio = montarSite(configHeroVazio);
+const animacoesHeroVazio = [];
+const siteHeroVazio = montarSite(configHeroVazio, (w) => {
+  w.Element.prototype.animate = function () { animacoesHeroVazio.push(this); return {}; };
+});
 check(siteHeroVazio.erros.length === 0, "hero opcional: sem erro de runtime");
 check(siteHeroVazio.doc.querySelector(".hero__etiqueta").hidden, "hero opcional: etiqueta vazia oculta");
 check(siteHeroVazio.doc.querySelector("#heroTitulo").hidden, "hero opcional: título vazio oculto");
 check(siteHeroVazio.doc.querySelector(".hero__descricao").hidden, "hero opcional: descrição vazia oculta");
 check(siteHeroVazio.doc.querySelector(".hero__acoes").hidden, "hero opcional: ações vazias ocultas");
+check(animacoesHeroVazio.length === 0, "hero opcional: campos ocultos não recebem animação");
 check(
   !siteHeroVazio.doc.querySelector("#inicio").classList.contains("hero--com-imagem") &&
     !siteHeroVazio.doc.querySelector("#inicio").style.getPropertyValue("--hero-imagem"),
