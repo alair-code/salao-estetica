@@ -663,12 +663,21 @@ button {
 
 .hero__slide.is-primeiro {
   opacity: 1;
-  animation: hero-crossfade-primeiro 16s ease-in-out infinite;
+  animation: hero-crossfade-primeiro 16s ease-in-out infinite, hero-zoom-cinematico 28s ease-in-out infinite alternate;
 }
 
 .hero__slide.is-segundo {
   opacity: 0;
-  animation: hero-crossfade-segundo 16s ease-in-out infinite;
+  animation: hero-crossfade-segundo 16s ease-in-out infinite, hero-zoom-cinematico 28s ease-in-out infinite alternate;
+}
+
+/* A opção lateral também funciona no modo de duas imagens. */
+.hero--movimento-lateral.hero--com-slides .hero__slide.is-primeiro {
+  animation: hero-crossfade-primeiro 16s ease-in-out infinite, hero-pan-lateral 32s ease-in-out infinite alternate;
+}
+
+.hero--movimento-lateral.hero--com-slides .hero__slide.is-segundo {
+  animation: hero-crossfade-segundo 16s ease-in-out infinite, hero-pan-lateral 32s ease-in-out infinite alternate;
 }
 
 @keyframes hero-crossfade-primeiro {
