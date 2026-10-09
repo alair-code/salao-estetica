@@ -835,7 +835,7 @@
   function init() {
     // Renderiza primeiro os ícones estáticos: uma falha em outra inicialização
     // (por exemplo, uma animação) não pode deixar WhatsApp e redes sociais vazios.
-    $("[data-icone]").forEach(function (el) {
+    $$("[data-icone]").forEach(function (el) {
       try {
         el.innerHTML = icon(el.getAttribute("data-icone"));
       } catch (e) {
