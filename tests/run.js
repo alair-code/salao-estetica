@@ -268,6 +268,22 @@ const B = montarSite(null);
 check(B.erros.length === 0, "sem config.js: sem crash");
 check(B.doc.title.length > 0, "sem config.js: fallback do HTML preservado");
 
+const configHeroVazio = configReal.replace(
+  /hero: \{[\s\S]*?imagem: ""\s*\}/,
+  'hero: { etiqueta: "", titulo: "", destaque: "", descricao: "", textoBotaoPrimario: "", textoBotaoSecundario: "", imagem: "   " }'
+);
+const siteHeroVazio = montarSite(configHeroVazio);
+check(siteHeroVazio.erros.length === 0, "hero opcional: sem erro de runtime");
+check(siteHeroVazio.doc.querySelector(".hero__etiqueta").hidden, "hero opcional: etiqueta vazia oculta");
+check(siteHeroVazio.doc.querySelector("#heroTitulo").hidden, "hero opcional: título vazio oculto");
+check(siteHeroVazio.doc.querySelector(".hero__descricao").hidden, "hero opcional: descrição vazia oculta");
+check(siteHeroVazio.doc.querySelector(".hero__acoes").hidden, "hero opcional: ações vazias ocultas");
+check(
+  !siteHeroVazio.doc.querySelector("#inicio").classList.contains("hero--com-imagem") &&
+    !siteHeroVazio.doc.querySelector("#inicio").style.getPropertyValue("--hero-imagem"),
+  "hero opcional: imagem vazia mantém o fallback"
+);
+
 /* ---------- Saída ---------- */
 
 let total = 0;
