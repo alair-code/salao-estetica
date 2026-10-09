@@ -833,6 +833,16 @@
   /* ---------- 14. Boot ---------- */
 
   function init() {
+    // Renderiza primeiro os ícones estáticos: uma falha em outra inicialização
+    // (por exemplo, uma animação) não pode deixar WhatsApp e redes sociais vazios.
+    $("[data-icone]").forEach(function (el) {
+      try {
+        el.innerHTML = icon(el.getAttribute("data-icone"));
+      } catch (e) {
+        // Mantém o restante do site funcional se um ícone falhar.
+      }
+    });
+
     applyColors();
     applySeo();
     bindFixedTexts();
@@ -855,10 +865,6 @@
     initReveals();
     initHeroEntrance();
 
-    // Ícones estáticos escritos direto no HTML.
-    $$("[data-icone]").forEach(function (el) {
-      el.innerHTML = icon(el.getAttribute("data-icone"));
-    });
   }
 
   if (document.readyState === "loading") {
