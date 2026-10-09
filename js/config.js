@@ -115,7 +115,7 @@ var siteConfig = {
     titulo: "Cuidado especialista, resultado real",
     paragrafos: [
       "Aqui, cada sessão é feita com técnica especializada e olhar atento ao que o seu corpo e a sua pele precisam. Da massagem modeladora à limpeza de pele, o foco é um só: resultado que você vê e sente.",
-      "Mais que um salão, um espaço para relaxar, cuidar e sair se sentindo renovada — com aquele atendimento próximo, de quem acompanha a sua evolução sessão após sessão.",
+      "Mais que um salão, um espaço para relaxar, cuidar e sair se sentindo renovada com aquele atendimento próximo, de quem acompanha a sua evolução sessão após sessão.",
       "Agende sua avaliação e descubra o tratamento ideal para você. Sua transformação começa com uma mensagem."
     ],
     citacao: "Resultados eficazes com técnica especializada: agende sua transformação."   // opcional — vazio oculta
