@@ -317,24 +317,6 @@ A solicitação “prossiga” foi interpretada como autorização para avançar
 **Status:** Implementado e validado por CI — 91/91 testes aprovados no commit `069a66ec3e05f2e05d168b66f15e55db0a212f8c`. Validação visual em navegador real continua pendente.
 
 
-**Objetivo:** oferecer uma alternativa ao zoom cinematográfico, com deslocamento lateral mínimo e suave, sem somar movimentos fortes.
-
-### Passos
-1. Inspecionar a animação atual da camada de imagem antes de alterar qualquer regra.
-2. Tornar o tipo de movimento configurável em `js/config.js`, se a estrutura atual permitir fazê-lo sem duplicar configurações.
-3. Permitir escolher entre o zoom existente e um deslocamento lateral discreto; não executar os dois efeitos simultaneamente por padrão.
-4. Garantir que a camada tenha área suficiente para não revelar bordas vazias durante o deslocamento.
-5. Preservar o enquadramento responsivo e o conteúdo estático sobre a imagem.
-6. Manter o movimento desativado para quem usa `prefers-reduced-motion: reduce`.
-
-### Critérios de conclusão
-- O movimento lateral é sutil e não compete com o conteúdo.
-- Não surgem bordas vazias, rolagem horizontal ou mudanças de layout.
-- A opção padrão mantém o comportamento atual até que a nova alternativa seja validada.
-- O usuário consegue desativar o movimento sem perder conteúdo ou funcionalidade.
-
-**Status:** ⏳ Planejado — iniciar somente após concluir o Bloco 7.
-
 ---
 
 ## Bloco 9 — Efeito de iluminação ambiente sutil
@@ -410,10 +392,10 @@ A solicitação “prossiga” foi interpretada como autorização para avançar
 
 ## Ordem de execução a partir daqui
 
-1. **Concluir o Bloco 7** — auditoria final, testes de regressão e validação visual do que já existe.
-2. **Bloco 8** — movimento lateral como alternativa configurável ao zoom.
-3. **Bloco 9** — iluminação ambiente sutil, somente se agregar valor sem complexidade excessiva.
-4. **Bloco 10** — dissolução entre imagens, recurso opcional para clientes que configurarem várias capas.
+1. **Fechar a pendência visual do Bloco 7** — conferir hero, foco, menu, CTAs e imagem em navegador real quando houver ambiente de validação.
+2. **Fechar a pendência visual do Bloco 8** — verificar zoom, lateral e movimento desativado em desktop e celular.
+3. **Bloco 9** — avaliar iluminação ambiente sutil, somente se agregar valor sem complexidade excessiva.
+4. **Bloco 10** — avaliar dissolução entre imagens, recurso opcional para clientes que configurarem várias capas.
 5. **Bloco 11** — auditoria integrada e regressão de todos os efeitos.
 
 Não antecipar os blocos seguintes. Ao terminar cada etapa, revisar o código, executar os testes disponíveis, registrar limitações reais neste documento e só então avançar.
