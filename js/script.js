@@ -305,9 +305,26 @@
       });
     }
 
-    if (hero.imagem && String(hero.imagem).trim()) {
-      var section = $("#inicio");
-      if (section) {
+    var section = $("#inicio");
+    if (section) {
+      // A configuração antiga continua usando zoom quando movimento não é informado.
+      var movimento = ["zoom", "lateral", "nenhum"].includes(hero.movimento)
+        ? hero.movimento
+        : "zoom";
+      section.classList.remove(
+        "hero--movimento-zoom",
+        "hero--movimento-lateral",
+        "hero--movimento-desativado"
+      );
+      if (movimento === "lateral") {
+        section.classList.add("hero--movimento-lateral");
+      } else if (movimento === "nenhum") {
+        section.classList.add("hero--movimento-desativado");
+      } else {
+        section.classList.add("hero--movimento-zoom");
+      }
+
+      if (hero.imagem && String(hero.imagem).trim()) {
         // A imagem é configurável; composição e contraste ficam no CSS do tema.
         section.style.setProperty("--hero-imagem", "url(" + JSON.stringify(String(hero.imagem).trim()) + ")");
         section.classList.add("hero--com-imagem");
