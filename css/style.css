@@ -369,9 +369,27 @@ button {
   gap: 0.7rem;
 }
 
+/* Logo maior, mantendo proporção e adaptação entre cabeçalho e rodapé. */
 .logo__img {
-  height: 42px;
+  height: 54px;
   width: auto;
+  flex-shrink: 0;
+}
+
+@media (min-width: 821px) {
+  .cabecalho .logo__img {
+    height: clamp(54px, 4.5vw, 62px);
+  }
+}
+
+@media (max-width: 820px) {
+  .cabecalho .logo__img {
+    height: 48px;
+  }
+}
+
+.rodape .logo__img {
+  height: 52px;
 }
 
 .logo__texto {
