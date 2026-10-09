@@ -75,9 +75,10 @@ const $$ = (s) => [...site.doc.querySelectorAll(s)];
 
 check(site.erros.length === 0, "sem erros de runtime");
 check(
-  /@media \(prefers-reduced-motion: reduce\)[\s\S]*?animation-duration:\s*0\.01ms\s*!important/.test(css) &&
-  /@media \(prefers-reduced-motion: reduce\)[\s\S]*?transition-duration:\s*0\.01ms\s*!important/.test(css),
-  "acessibilidade: movimento reduzido desativa animações e transições não essenciais"
+  /@media \(prefers-reduced-motion: reduce\)[\s\S]*?animation:\s*none\s*!important/.test(css) &&
+  /@media \(prefers-reduced-motion: reduce\)[\s\S]*?transition-duration:\s*0\.01ms\s*!important/.test(css) &&
+  /@media \(prefers-reduced-motion: reduce\)[\s\S]*?transition-delay:\s*0s\s*!important/.test(css),
+  "acessibilidade: movimento reduzido desativa animações e elimina atrasos de transição"
 );
 check(
   /@media \(max-width: 420px\)[\s\S]*?\.hero__titulo[\s\S]*?font-size:\s*clamp\(2\.2rem, 10vw, 2\.6rem\)/.test(css),
