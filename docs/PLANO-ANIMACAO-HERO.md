@@ -2,7 +2,7 @@
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 6 implementados e revisados por inspeção; Bloco 7 com auditoria automatizada aprovada (87/87 testes no commit `386901b8123388aa9429845dd084670d249f4160`); validação visual manual em navegador real pendente; Blocos 8 a 11 planejados  
+**Status:** Blocos 1 a 7 implementados/revisados por inspeção e testes; Bloco 8 implementado com 94/94 testes aprovados no CI; Bloco 9 avaliado, sem alteração funcional por já existir iluminação temática; validação visual em navegador real ainda pendente; Blocos 10 e 11 planejados  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ## Regras para toda a execução
@@ -281,12 +281,12 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px. Suíte automatizada aprovada (86/86); contraste e responsividade visual em dispositivos reais pendentes. |
 | 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos vazios são ocultados, CTA de WhatsApp sem destino não aparece e o fallback de imagem é testado. Suíte automatizada aprovada (86/86); validação visual de imagem ausente/inválida pendente. |
 | 7. Auditoria final | Auditoria automatizada aprovada; validação manual pendente | No commit atual `386901b8123388aa9429845dd084670d249f4160`, GitHub Actions confirmou **87/87 testes aprovados** ([execução](https://github.com/alair-code/salao-estetica/actions/runs/37925536025)) e GitHub Pages concluiu a publicação ([execução](https://github.com/alair-code/salao-estetica/actions/runs/37925535971)). A ferramenta não conseguiu carregar a página para inspeção visual. `hero.imagem` está vazio na configuração da branch, então o fundo alternativo é esperado. Falta inspeção visual em navegador real: desktop/celular, contraste, foco/teclado, menu, CTAs, imagem válida/inválida e console. **Não iniciar o Bloco 8 até esta limitação visual ser resolvida ou explicitamente aceita.** |
-| 8. Movimento lateral | Implementado; testes automatizados aprovados | `hero.movimento` aceita `zoom`, `lateral` e `nenhum`; CI aprovou 91/91 testes no commit `069a66e`. Inspeção visual em navegador real permanece pendente. |
+| 8. Movimento lateral | Implementado; testes automatizados aprovados | `hero.movimento` aceita `zoom`, `lateral` e `nenhum`; CI aprovou 94/94 testes no commit `781f93d`. Inspeção visual em navegador real permanece pendente. |
 | 9. Iluminação ambiente | Avaliado; efeito adicional não implementado | O hero já usa gradientes radiais temáticos. Para evitar duplicação e complexidade sem benefício visual demonstrado, foi mantida a composição atual; nenhuma mudança funcional neste bloco. Validação visual ainda pendente. |
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 6 implementados/revisados por inspeção; auditoria automatizada do Bloco 7 aprovada com 87/87 testes no commit `386901b8123388aa9429845dd084670d249f4160`; validação visual direta continua pendente nesta ferramenta; configuração atual usa fundo alternativo porque `hero.imagem` está vazia  
+**Status atualizado em 09/10/2026:** Blocos 1 a 7 implementados/revisados; Bloco 8 com 94/94 testes aprovados; Bloco 9 avaliado sem mudanças funcionais; validação visual em navegador real continua pendente; a configuração padrão usa o fundo alternativo porque `hero.imagem` está vazia  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ---
