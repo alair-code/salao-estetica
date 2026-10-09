@@ -126,8 +126,8 @@ check(
 check($("#heroTitulo").textContent.includes("toque de cuidado"), "hero: título + destaque renderizados");
 check(
   $("#inicio").classList.contains("hero--com-slides") &&
-    $("#inicio .hero__slide").length === 2 &&
-    $("#inicio .hero__slide").every((slide) => slide.style.backgroundImage.includes("images.unsplash.com")),
+    $$("#inicio .hero__slide").length === 2 &&
+    $$("#inicio .hero__slide").every((slide) => slide.style.backgroundImage.includes("images.unsplash.com")),
   "hero: configuração publicada ativa duas fotos demonstrativas para a transição visual"
 );
 const configMovimentoLateral = configReal
@@ -307,11 +307,10 @@ check(
   site.doc.documentElement.style.getPropertyValue("--cor-primaria").trim() === "#b76e79",
   "paleta do config aplicada via CSS vars"
 );
-check(!$("#inicio").classList.contains("hero--com-imagem"), "hero sem imagem mantém fundo alternativo");
-check(
-  !$("#inicio").style.getPropertyValue("--hero-imagem"),
-  "hero sem imagem não cria camada de mídia"
-);
+const configSemImagem = configReal.replace(/imagens: \[[\s\S]*?\],/, 'imagens: [],');
+const siteSemImagem = montarSite(configSemImagem);
+check(!siteSemImagem.doc.querySelector("#inicio").classList.contains("hero--com-imagem"), "hero sem imagem mantém fundo alternativo");
+check(!siteSemImagem.doc.querySelector("#inicio").style.getPropertyValue("--hero-imagem"), "hero sem imagem não cria camada de mídia");
 
 // Interações: lightbox
 $(".galeria-item").click();
@@ -414,7 +413,7 @@ check(B.erros.length === 0, "sem config.js: sem crash");
 check(B.doc.title.length > 0, "sem config.js: fallback do HTML preservado");
 
 const configHeroVazio = configReal.replace(
-  /hero: \{[\s\S]*?imagem: ""[^\n]*\n\s*movimento: "[^"]+"[^\n]*\n\s*\}/,
+  /hero: \{[\s\S]*?movimento: "[^"]+"[^\n]*\n\s*\}/,
   'hero: { etiqueta: "", titulo: "", destaque: "", descricao: "", textoBotaoPrimario: "", textoBotaoSecundario: "", imagem: "   " }'
 );
 const animacoesHeroVazio = [];
