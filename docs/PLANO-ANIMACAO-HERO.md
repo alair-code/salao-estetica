@@ -214,6 +214,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - Refinado `renderHero()` para ocultar etiqueta, título, descrição e botões quando os respectivos valores opcionais estiverem vazios, evitando espaços sem conteúdo no topo do site.
 - O grupo de ações também é ocultado quando os dois botões estão vazios. Se apenas um texto de botão estiver preenchido, o botão correspondente continua disponível.
 - Refinado o fallback do CTA principal: se o WhatsApp não estiver configurado, o botão de agendamento é ocultado para não exibir um link sem destino; o botão secundário continua funcionando.
+- A animação de entrada ignora elementos ocultos, para não animar campos vazios nem acrescentar atrasos desnecessários aos itens visíveis.
 - A imagem continua opcional: caminho vazio ou composto apenas por espaços não ativa a camada fotográfica; o fundo alternativo permanece disponível.
 - Adicionados testes para campos opcionais vazios, fallback de imagem e ausência de WhatsApp, garantindo que o CTA principal seja ocultado sem desativar o botão secundário.
 
@@ -265,6 +266,6 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 
 **Revisão do Bloco 5:** corrigido um detalhe de acessibilidade: apenas encurtar a duração da animação ainda deixava os atrasos em cascata do menu mobile ativos. Agora animações CSS são desativadas e os atrasos de transição são zerados quando movimento reduzido está ativo. O teste verifica essas regras e o ajuste tipográfico em telas estreitas. A suíte ainda não foi executada; contraste e responsividade visual permanecem pendentes.
 
-**Revisão do Bloco 6:** `renderHero()` agora oculta campos opcionais vazios, evita marcação de destaque sem conteúdo e oculta o CTA principal quando não há WhatsApp configurado. Foram adicionados testes para a ausência de texto, botões, imagem e WhatsApp. A suíte ainda não foi executada; validação visual continua pendente.
+**Revisão do Bloco 6:** `renderHero()` agora oculta campos opcionais vazios, evita marcação de destaque sem conteúdo e oculta o CTA principal quando não há WhatsApp configurado. Foram adicionados testes para a ausência de texto, botões, imagem e WhatsApp, além de verificar que campos ocultos não recebem animação. A suíte ainda não foi executada; validação visual continua pendente.
 
 **Próxima ação:** o Bloco 6 está pronto para seguir para o **Bloco 7 — Auditoria final e testes de regressão**, mantendo a execução dos testes e a validação visual como pendências.
