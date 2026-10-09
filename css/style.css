@@ -1483,14 +1483,13 @@ button {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
+    animation: none !important;
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
   }
 
   .hero--com-imagem::after {
-    animation: none !important;
     transform: scale(1.02);
     will-change: auto;
   }
@@ -1498,10 +1497,6 @@ button {
   [data-reveal] {
     opacity: 1;
     transform: none;
-  }
-
-  .whatsapp-flutuante::before {
-    animation: none !important;
   }
 }
 
