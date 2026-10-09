@@ -38,8 +38,8 @@ var siteConfig = {
 
   /* ---------- 2. IDENTIDADE VISUAL ---------- */
   identidade: {
-    logo: "",                                   // ex.: "assets/images/logo.png" — vazio = usa o nome em texto
-    favicon: "assets/images/favicon.svg",
+    logo: "assets/images/logo.png",
+    favicon: "assets/images/favicon.png",
     instagram: "https://www.instagram.com/andreia_massoterapia_estetica/",
     facebook: "",                               // ex.: "https://facebook.com/suapagina"
 
