@@ -324,9 +324,32 @@
         section.classList.add("hero--movimento-zoom");
       }
 
-      if (hero.imagem && String(hero.imagem).trim()) {
-        // A imagem é configurável; composição e contraste ficam no CSS do tema.
-        section.style.setProperty("--hero-imagem", "url(" + JSON.stringify(String(hero.imagem).trim()) + ")");
+      var imagemPrincipal = typeof hero.imagem === "string" ? hero.imagem.trim() : "";
+      var imagensHero = Array.isArray(hero.imagens)
+        ? hero.imagens.filter(function (imagem) {
+            return typeof imagem === "string" && imagem.trim().length > 0;
+          }).map(function (imagem) { return imagem.trim(); })
+        : [];
+
+      if (imagensHero.length >= 2) {
+        // Mantém apenas duas camadas ativas: reduz downloads e preserva o hero antigo.
+        var slides = document.createElement("div");
+        slides.className = "hero__slides";
+        slides.setAttribute("aria-hidden", "true");
+        imagensHero = imagensHero.slice(0, 2);
+        imagensHero.forEach(function (imagem, indice) {
+          var slide = document.createElement("span");
+          slide.className = "hero__slide" + (indice === 0 ? " is-primeiro" : " is-segundo");
+          slide.style.backgroundImage =
+            "linear-gradient(90deg, var(--cor-escura) 0%, color-mix(in srgb, var(--cor-escura) 82%, transparent) 48%, color-mix(in srgb, var(--cor-escura) 46%, transparent) 100%), linear-gradient(0deg, color-mix(in srgb, var(--cor-escura) 38%, transparent), color-mix(in srgb, var(--cor-escura) 24%, transparent)), url(" +
+            JSON.stringify(imagem) + ")";
+          slides.appendChild(slide);
+        });
+        section.appendChild(slides);
+        section.classList.add("hero--com-slides", "hero--com-imagem");
+      } else if (imagemPrincipal) {
+        // Compatibilidade: uma imagem continua usando a camada e o movimento atuais.
+        section.style.setProperty("--hero-imagem", "url(" + JSON.stringify(imagemPrincipal) + ")");
         section.classList.add("hero--com-imagem");
       }
     }
