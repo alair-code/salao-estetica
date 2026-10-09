@@ -101,6 +101,10 @@ check(
   "responsividade: título do hero ajusta a tipografia em telas estreitas"
 );
 check(
+  /\.hero\s*\{[^}]*min-height:\s*100vh;[^}]*min-height:\s*100svh;/s.test(css),
+  "hero: altura de viewport tem fallback 100vh antes de 100svh"
+);
+check(
   /\.hero\s*\{[\s\S]{0,900}color-mix\(in srgb, var\(--cor-primaria\)/.test(css) &&
     /color-mix\(in srgb, var\(--cor-dourado\)/.test(css) &&
     /@supports not \(color: color-mix\(in srgb, #000 50%, transparent\)\)[\s\S]*?\.hero:not\(\.hero--com-imagem\)\s*\{\s*background:\s*var\(--cor-escura\)/.test(css),
