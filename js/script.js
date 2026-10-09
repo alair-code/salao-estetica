@@ -807,7 +807,9 @@
       return;
     }
 
-    var elementos = $$(".hero__etiqueta, .hero__titulo, .hero__descricao, .hero__acoes", hero);
+    var elementos = $(".hero__etiqueta, .hero__titulo, .hero__descricao, .hero__acoes", hero).filter(function (el) {
+      return !el.hidden;
+    });
     elementos.forEach(function (el, indice) {
       try {
         el.animate(
