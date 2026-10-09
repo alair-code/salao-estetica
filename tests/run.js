@@ -110,6 +110,17 @@ check(
   chamadasAnimacao.map((item) => item.options.delay).join(",") === "0,90,180,270",
   "hero: entrada em sequência com atrasos curtos"
 );
+const siteAnimacaoFalha = montarSite(configReal, (w) => {
+  w.Element.prototype.animate = function () {
+    throw new Error("Falha simulada da Web Animations API");
+  };
+});
+check(siteAnimacaoFalha.erros.length === 0, "hero: falha da API de animação não gera erro de runtime");
+check(
+  !siteAnimacaoFalha.doc.querySelector("#heroTitulo").hidden &&
+    !siteAnimacaoFalha.doc.querySelector(".hero__acoes .botao--whatsapp").hidden,
+  "hero: conteúdo e CTA permanecem visíveis quando a animação falha"
+);
 const chamadasMovimentoReduzido = [];
 montarSite(configReal, (w) => {
   w.matchMedia = (query) => ({ matches: query.includes("prefers-reduced-motion"), media: query });
