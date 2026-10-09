@@ -100,6 +100,12 @@ check(
   /@media \(max-width: 420px\)[\s\S]*?\.hero__titulo[\s\S]*?font-size:\s*clamp\(2\.2rem, 10vw, 2\.6rem\)/.test(css),
   "responsividade: título do hero ajusta a tipografia em telas estreitas"
 );
+check(
+  /\.hero\s*\{[\s\S]{0,900}color-mix\(in srgb, var\(--cor-primaria\)/.test(css) &&
+    /color-mix\(in srgb, var\(--cor-dourado\)/.test(css) &&
+    /@supports not \(color: color-mix\(in srgb, #000 50%, transparent\)\)[\s\S]*?\.hero:not\(\.hero--com-imagem\)\s*\{\s*background:\s*var\(--cor-escura\)/.test(css),
+  "hero: gradientes acompanham a paleta configurada e têm fallback sem color-mix"
+);
 check($("#heroTitulo").textContent.includes("toque de cuidado"), "hero: título + destaque renderizados");
 check($(".hero__etiqueta").textContent.trim().length > 0, "hero: etiqueta permanece disponível");
 check($(".hero__descricao").textContent.trim().length > 0, "hero: descrição permanece disponível");
