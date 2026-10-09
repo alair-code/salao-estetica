@@ -246,14 +246,14 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 
 - Encontrado um defeito em `initHeroEntrance()`: o código usava `querySelector()` (`$`) para obter um único elemento e depois chamava `.filter()`. Isso podia lançar erro e impedir a sequência de animação.
 - Corrigido em `js/script.js`: agora usa `querySelectorAll()` (`$$`) antes de filtrar os elementos ocultos. A correção está no commit `26bd3191ef4abb2f2e2679de0f9712a25d890a65`.
-- A suíte contém verificações para erros de runtime, os quatro grupos animados, campos ocultos e movimento reduzido. Foi acrescentado um caso em que `Element.prototype.animate()` lança uma exceção, verificando que o conteúdo e o CTA continuam visíveis. Esses testes ainda precisam ser executados.
-- Tentativa de executar `git clone` e `npm ci && npm test` falhou antes da instalação porque o ambiente não conseguiu resolver `github.com` (erro DNS). Nenhum teste automatizado é declarado como aprovado.
+- A suíte contém verificações para erros de runtime, os quatro grupos animados, campos ocultos, movimento reduzido, ícones, links e interações do template. Após a execução remota, foram corrigidos dois defeitos nos próprios testes: contagem de CTAs usando seletor de elemento único e simulação de WhatsApp ausente que alterava o campo errado.
+- A execução local neste ambiente continuou bloqueada por DNS ao acessar `github.com`; para obter resultado real, foi adicionado o workflow `.github/workflows/testes.yml`, que instala dependências e executa a suíte no GitHub Actions.
 - A revisão estática confirmou a configuração centralizada em `js/config.js`, o tratamento de movimento reduzido, a ocultação de campos vazios e o fallback do CTA principal sem WhatsApp.
 - Teste de regressão acrescentado em `tests/run.js` no commit `245008a811eaca9c7d38225dd6673b7942e1fbf3` para simular falha da Web Animations API e confirmar que conteúdo/CTA continuam disponíveis.
 - Reforçada a cobertura em `tests/run.js` para os ícones do WhatsApp/redes sociais e para todos os elementos `[data-icone]`.
 - A revisão identificou que alguns elementos `[data-icone]` são criados dinamicamente depois da primeira renderização dos ícones. Corrigido em `js/script.js` com a função reutilizável `renderStaticIcons()`, executada antes da inicialização e novamente depois da renderização das seções. Commit `b3bc5a743e4b85adbffbe7667fa0badabc03c4df`.
-- A suíte automatizada **não foi executada**: a tentativa de clonar o repositório falhou porque o ambiente não conseguiu resolver `github.com` (erro DNS). Não há resultado de aprovação.
-- **Pendências:** executar `npm ci && npm test` em ambiente com acesso ao repositório e ao npm; validar visualmente desktop/mobile, foco por teclado, imagem configurada/inválida e console do navegador.
+- A execução da suíte no GitHub Actions passou: **85 testes aprovados, 0 falhas**, no commit `3e3900358049ccd3180051a5eef3f6553535f259` ([ver execução](https://github.com/alair-code/salao-estetica/actions/runs/37919205240)). O workflow usa Node.js 24 porque a versão resolvida de `jsdom` exige runtime mais recente que Node 20.
+- **Pendências:** validar visualmente desktop/mobile, foco por teclado, imagem configurada/inválida e console do navegador. A aprovação headless não substitui inspeção visual em navegador real.
 ---
 
 ## Registro de execução
@@ -268,11 +268,11 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes adicionados, ainda não executados; validação visual pendente. |
 | 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px; testes adicionados. Suíte não executada; contraste e responsividade visual em dispositivos reais pendentes. |
 | 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos vazios são ocultados, CTA de WhatsApp sem destino não aparece e o fallback de imagem é testado. Suíte ainda não executada; validação visual de imagem ausente/inválida pendente. |
-| 7. Auditoria final | Em andamento | Corrigida a seleção dos elementos animados e a renderização dos ícones dinâmicos; testes ampliados, mas não executados devido a falha DNS ao acessar GitHub. Validação visual pendente. |
+| 7. Auditoria final | Em andamento | Corrigida a seleção dos elementos animados e a renderização dos ícones dinâmicos; workflow do GitHub Actions executou a suíte com 85 testes aprovados e 0 falhas. Validação visual em navegador real ainda pendente. |
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 6 implementados/revisados por inspeção; Bloco 7 em andamento — correções estáticas aplicadas, testes automatizados e validação visual pendentes  
+**Status:** Blocos 1 a 6 implementados/revisados por inspeção; Bloco 7 em andamento — testes automatizados aprovados (85/85 no GitHub Actions), validação visual em navegador real pendente  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ---
