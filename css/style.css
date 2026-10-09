@@ -650,6 +650,17 @@ button {
   will-change: opacity;
 }
 
+.hero__slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, var(--cor-escura) 0%, var(--cor-escura) 30%, transparent 100%),
+    linear-gradient(0deg, var(--cor-escura), transparent);
+  opacity: 0.82;
+}
+
 .hero__slide.is-primeiro {
   opacity: 1;
   animation: hero-crossfade-primeiro 16s ease-in-out infinite;
@@ -670,12 +681,6 @@ button {
   0%, 42% { opacity: 0; }
   50%, 92% { opacity: 1; }
   100% { opacity: 0; }
-}
-
-@supports not (color: color-mix(in srgb, #000 50%, transparent)) {
-  .hero__slide {
-    background-image: linear-gradient(90deg, var(--cor-escura), transparent) !important;
-  }
 }
 
 .hero--com-imagem::before {
