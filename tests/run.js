@@ -105,12 +105,37 @@ check(
   "hero: altura de viewport tem fallback 100vh antes de 100svh"
 );
 check(
+  /@keyframes hero-pan-lateral[\s\S]*?translateX\(-1\.2%\)[\s\S]*?translateX\(1\.2%\)/.test(css) &&
+    /\.hero--movimento-lateral\.hero--com-imagem::after[\s\S]*?inset:\s*-7%[\s\S]*?animation:\s*hero-pan-lateral/.test(css),
+  "hero: movimento lateral é suave e mantém a camada ampliada para evitar bordas vazias"
+);
+check(
+  /\.hero--movimento-desativado\.hero--com-imagem::after[\s\S]*?animation:\s*none/.test(css),
+  "hero: movimento pode ser desativado sem remover a imagem"
+);
+check(
   /\.hero\s*\{[\s\S]{0,900}color-mix\(in srgb, var\(--cor-primaria\)/.test(css) &&
     /color-mix\(in srgb, var\(--cor-dourado\)/.test(css) &&
     /@supports not \(color: color-mix\(in srgb, #000 50%, transparent\)\)[\s\S]*?\.hero:not\(\.hero--com-imagem\)\s*\{\s*background:\s*var\(--cor-escura\)/.test(css),
   "hero: gradientes acompanham a paleta configurada e têm fallback sem color-mix"
 );
 check($("#heroTitulo").textContent.includes("toque de cuidado"), "hero: título + destaque renderizados");
+const configMovimentoLateral = configReal
+  .replace('imagem: ""', 'imagem: "assets/images/hero.jpg"')
+  .replace('movimento: "zoom"', 'movimento: "lateral"');
+const siteMovimentoLateral = montarSite(configMovimentoLateral);
+check(
+  siteMovimentoLateral.doc.querySelector("#inicio").classList.contains("hero--movimento-lateral") &&
+    siteMovimentoLateral.doc.querySelector("#inicio").classList.contains("hero--com-imagem"),
+  "hero: configuração lateral ativa a alternativa somente quando há imagem configurada"
+);
+const configMovimentoDesativado = configMovimentoLateral.replace('movimento: "lateral"', 'movimento: "nenhum"');
+const siteMovimentoDesativado = montarSite(configMovimentoDesativado);
+check(
+  siteMovimentoDesativado.doc.querySelector("#inicio").classList.contains("hero--movimento-desativado") &&
+    siteMovimentoDesativado.doc.querySelector("#inicio").classList.contains("hero--com-imagem"),
+  "hero: movimento desativado mantém a camada de imagem"
+);
 check($(".hero__etiqueta").textContent.trim().length > 0, "hero: etiqueta permanece disponível");
 check($(".hero__descricao").textContent.trim().length > 0, "hero: descrição permanece disponível");
 check($$(".hero__acoes .botao").length === 2, "hero: CTAs preservados");
