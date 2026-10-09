@@ -125,17 +125,19 @@ check(
 );
 check($("#heroTitulo").textContent.includes("toque de cuidado"), "hero: título + destaque renderizados");
 check(
-  $("#inicio").classList.contains("hero--com-imagem") &&
-    $("#inicio").style.getPropertyValue("--hero-imagem").includes("images.unsplash.com"),
-  "hero: configuração publicada ativa uma fotografia demonstrativa na capa"
+  $("#inicio").classList.contains("hero--com-slides") &&
+    $("#inicio .hero__slide").length === 2 &&
+    $("#inicio .hero__slide").every((slide) => slide.style.backgroundImage.includes("images.unsplash.com")),
+  "hero: configuração publicada ativa duas fotos demonstrativas para a transição visual"
 );
 const configMovimentoLateral = configReal
   .replace(/(\n    imagem: ")[^"]*(")/, '$1assets/images/hero.jpg$2')
+  .replace(/    imagens: \[[\s\S]*?\n    \],/, '    imagens: [],')
   .replace('movimento: "zoom"', 'movimento: "lateral"');
 const siteMovimentoLateral = montarSite(configMovimentoLateral);
 const configDuasImagens = configReal
   .replace(/(\n    imagem: ")[^"]*(")/, '$1$2')
-  .replace('movimento: "zoom"', 'movimento: "zoom", imagens: ["assets/images/hero-1.jpg", "assets/images/hero-2.jpg"]');
+  .replace(/    imagens: \[[\s\S]*?\n    \],/, '    imagens: ["assets/images/hero-1.jpg", "assets/images/hero-2.jpg"],');
 const siteDuasImagens = montarSite(configDuasImagens);
 check(
   siteDuasImagens.doc.querySelector("#inicio").classList.contains("hero--com-slides") &&
@@ -149,7 +151,7 @@ check(
 );
 const configUmaImagemLista = configReal
   .replace(/(\n    imagem: ")[^"]*(")/, '$1$2')
-  .replace('movimento: "zoom"', 'movimento: "zoom", imagens: ["assets/images/hero-1.jpg"]');
+  .replace(/    imagens: \[[\s\S]*?\n    \],/, '    imagens: ["assets/images/hero-1.jpg"],');
 const siteUmaImagemLista = montarSite(configUmaImagemLista);
 check(
   !siteUmaImagemLista.doc.querySelector("#inicio").classList.contains("hero--com-slides") &&
@@ -160,7 +162,7 @@ check(
 );
 const configImagemLegadaComListaUnica = configReal
   .replace(/(\n    imagem: ")[^"]*(")/, '$1assets/images/capa-legada.jpg$2')
-  .replace('movimento: "zoom"', 'movimento: "zoom", imagens: ["assets/images/hero-1.jpg"]');
+  .replace(/    imagens: \[[\s\S]*?\n    \],/, '    imagens: ["assets/images/hero-1.jpg"],');
 const siteImagemLegadaComListaUnica = montarSite(configImagemLegadaComListaUnica);
 check(
   siteImagemLegadaComListaUnica.doc.querySelector("#inicio").style.getPropertyValue("--hero-imagem").includes("capa-legada.jpg"),
