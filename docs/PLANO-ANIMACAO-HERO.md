@@ -268,11 +268,11 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes adicionados, ainda não executados; validação visual pendente. |
 | 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px; testes adicionados. Suíte não executada; contraste e responsividade visual em dispositivos reais pendentes. |
 | 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos vazios são ocultados, CTA de WhatsApp sem destino não aparece e o fallback de imagem é testado. Suíte ainda não executada; validação visual de imagem ausente/inválida pendente. |
- → `$`); ampliados os testes de regressão para falha da Web Animations API e renderização dos ícones estáticos. Os testes ainda não foram executados neste ambiente; validação visual pendente. |
+| 7. Auditoria final | Em andamento | Corrigida a seleção dos elementos animados e a renderização dos ícones dinâmicos; testes ampliados, mas não executados devido a falha DNS ao acessar GitHub. Validação visual pendente. |
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 6 implementados/revisados por inspeção; Bloco 7 em andamento — auditoria estática e correção aplicadas, testes e validação visual pendentes  
+**Status:** Blocos 1 a 6 implementados/revisados por inspeção; Bloco 7 em andamento — correções estáticas aplicadas, testes automatizados e validação visual pendentes  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ---
