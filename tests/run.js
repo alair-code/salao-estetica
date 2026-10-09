@@ -316,8 +316,8 @@ check(
 );
 
 const configSemWhatsApp = configReal.replace(
-  /whatsapp: "5533984368440"/,
-  'whatsapp: ""'
+  /(contato:\s*\{\s*whatsapp:\s*)"5533984368440"/,
+  '$1""'
 );
 const siteSemWhatsAppHero = montarSite(configSemWhatsApp);
 check(siteSemWhatsAppHero.erros.length === 0, "hero sem WhatsApp: sem erro de runtime");
