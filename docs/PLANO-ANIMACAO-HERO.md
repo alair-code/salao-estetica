@@ -281,6 +281,7 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px. Suíte automatizada aprovada (86/86); contraste e responsividade visual em dispositivos reais pendentes. |
 | 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos vazios são ocultados, CTA de WhatsApp sem destino não aparece e o fallback de imagem é testado. Suíte automatizada aprovada (86/86); validação visual de imagem ausente/inválida pendente. |
 | 7. Auditoria final | Auditoria automatizada aprovada; validação manual pendente | No commit atual `386901b8123388aa9429845dd084670d249f4160`, GitHub Actions confirmou **87/87 testes aprovados** ([execução](https://github.com/alair-code/salao-estetica/actions/runs/37925536025)) e GitHub Pages concluiu a publicação ([execução](https://github.com/alair-code/salao-estetica/actions/runs/37925535971)). A ferramenta não conseguiu carregar a página para inspeção visual. `hero.imagem` está vazio na configuração da branch, então o fundo alternativo é esperado. Falta inspeção visual em navegador real: desktop/celular, contraste, foco/teclado, menu, CTAs, imagem válida/inválida e console. **Não iniciar o Bloco 8 até esta limitação visual ser resolvida ou explicitamente aceita.** |
+| 8. Movimento lateral | Implementado; testes automatizados aprovados | `hero.movimento` aceita `zoom`, `lateral` e `nenhum`; CI aprovou 91/91 testes no commit `069a66e`. Inspeção visual em navegador real permanece pendente. |
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
@@ -313,7 +314,7 @@ A solicitação “prossiga” foi interpretada como autorização para avançar
 - A opção padrão mantém o zoom atual.
 - O usuário consegue desativar o movimento sem perder conteúdo ou funcionalidade.
 
-**Status:** Implementado no código; testes automatizados e publicação pendentes.
+**Status:** Implementado e validado por CI — 91/91 testes aprovados no commit `069a66ec3e05f2e05d168b66f15e55db0a212f8c`. Validação visual em navegador real continua pendente.
 
 
 **Objetivo:** oferecer uma alternativa ao zoom cinematográfico, com deslocamento lateral mínimo e suave, sem somar movimentos fortes.
