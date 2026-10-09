@@ -2,7 +2,7 @@
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 7 implementados/revisados por inspeção e testes; Bloco 8 implementado com 94/94 testes aprovados no CI; Bloco 9 avaliado, sem alteração funcional por já existir iluminação temática; validação visual em navegador real ainda pendente; Bloco 10 revisado e refinado; CI final pendente; Bloco 11 planejado  
+**Status:** Blocos 1 a 7 implementados/revisados por inspeção e testes; Bloco 8 implementado com 94/94 testes aprovados no CI; Bloco 9 avaliado, sem alteração funcional por já existir iluminação temática; validação visual em navegador real ainda pendente; Bloco 10 revisado e refinado; Bloco 11 auditado; CI final pendente; validação visual real ainda pendente  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ## Regras para toda a execução
@@ -402,12 +402,18 @@ A solicitação “prossiga” foi interpretada como autorização para avançar
 9. Manter todas as alterações na branch `manutencao`; não integrar com `main` sem autorização explícita.
 
 ### Critérios de conclusão
-- Os testes foram executados e seus resultados estão registrados sem suposições.
+- Os testes automatizados de regressão passam no CI e seus resultados são registrados sem suposições.
 - Os efeitos podem ser desativados e não são necessários para acessar o conteúdo.
-- A capa continua responsiva, legível, personalizável e funcional com ou sem imagens.
+- A configuração antiga continua compatível e a lista opcional funciona com zero, uma ou duas imagens válidas.
 - Limitações de validação visual ou de dispositivos reais ficam declaradas.
 
-**Status:** ⏳ Planejado — iniciar somente após concluir os Blocos 8, 9 e 10.
+### Resultado da auditoria integrada
+- Reinspecionados `js/script.js`, `css/style.css`, `js/config.js`, `index.html` e `tests/run.js`, incluindo a lógica de movimento, camadas, contraste, responsividade e movimento reduzido.
+- Corrigido um caso real: quando `hero.imagens` tinha uma única imagem e `hero.imagem` estava vazia, nenhuma fotografia era exibida. Agora essa imagem é usada como capa estática; se a propriedade legada tiver valor, ela mantém prioridade.
+- Acrescentados testes para os dois cenários acima. Mantida a limitação de imagens CSS sem evento confiável de erro por URL.
+- O CI será consultado após esta alteração para registrar o resultado real. A inspeção visual em navegador real não pôde ser feita neste ambiente e continua pendente.
+
+**Status:** revisão técnica concluída; confirmar o CI mais recente antes de fechar o bloco.
 
 ---
 
@@ -416,7 +422,7 @@ A solicitação “prossiga” foi interpretada como autorização para avançar
 1. **Fechar a pendência visual do Bloco 7** — conferir hero, foco, menu, CTAs e imagem em navegador real quando houver ambiente de validação.
 2. **Fechar a pendência visual do Bloco 8** — verificar zoom, lateral e movimento desativado em desktop e celular.
 3. **Bloco 9** — avaliar iluminação ambiente sutil, somente se agregar valor sem complexidade excessiva.
-4. **Bloco 10** — implementado; falta validar visualmente com imagens reais.
-5. **Bloco 11** — auditoria integrada e regressão de todos os efeitos.
+4. **Bloco 10** — implementado e testado; validação visual real com imagens representativas continua pendente.
+5. **Bloco 11** — auditoria integrada realizada; correção de fallback de imagem única e testes de regressão adicionados. Validar CI final e manter pendência visual registrada.
 
 Não antecipar os blocos seguintes. Ao terminar cada etapa, revisar o código, executar os testes disponíveis, registrar limitações reais neste documento e só então avançar.
