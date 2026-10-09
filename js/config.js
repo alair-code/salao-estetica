@@ -97,7 +97,7 @@ var siteConfig = {
     etiqueta: "Massoterapeuta & Esteticista",
     titulo: "Sua transformação começa",
     destaque: "com um toque de cuidado",
-    descricao: "Massagem modeladora, drenagem linfática e tratamentos faciais e corporais com técnica especializada. Resultados que você sente na primeira sessão — e um cuidado que vai além do esperado.",
+    descricao: "Massagem modeladora, drenagem linfática e tratamentos faciais e corporais com técnica especializada. Resultados que você sente na primeira sessão e um cuidado que vai além do esperado.",
     textoBotaoPrimario: "Quero agendar minha sessão",
     textoBotaoSecundario: "Ver tratamentos",
     // Fotos demonstrativas para ativar o crossfade no template publicado.
