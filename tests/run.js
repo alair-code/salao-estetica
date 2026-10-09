@@ -75,6 +75,14 @@ const $$ = (s) => [...site.doc.querySelectorAll(s)];
 
 check(site.erros.length === 0, "sem erros de runtime");
 check(
+  [".whatsapp-flutuante", ".rodape__rede[aria-label=\"Instagram\"]", ".rodape__rede[aria-label=\"Facebook\"]", ".rodape__rede[aria-label=\"WhatsApp\"]"]
+    .every((seletor) => {
+      const elemento = site.doc.querySelector(seletor);
+      return elemento && elemento.querySelector("svg.icon");
+    }),
+  "ícones do WhatsApp flutuante e das redes sociais são renderizados"
+);
+check(
   /@media \(prefers-reduced-motion: reduce\)[\s\S]*?animation:\s*none\s*!important/.test(css) &&
   /@media \(prefers-reduced-motion: reduce\)[\s\S]*?transition-duration:\s*0\.01ms\s*!important/.test(css) &&
   /@media \(prefers-reduced-motion: reduce\)[\s\S]*?transition-delay:\s*0s\s*!important/.test(css),
