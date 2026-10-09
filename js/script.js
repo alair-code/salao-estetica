@@ -331,6 +331,11 @@
           }).map(function (imagem) { return imagem.trim(); })
         : [];
 
+      // Uma única imagem na lista vira capa estática se a propriedade legada estiver vazia.
+      if (!imagemPrincipal && imagensHero.length === 1) {
+        imagemPrincipal = imagensHero[0];
+      }
+
       if (imagensHero.length >= 2) {
         // Mantém apenas duas camadas ativas: reduz downloads e preserva o hero antigo.
         var slides = document.createElement("div");
