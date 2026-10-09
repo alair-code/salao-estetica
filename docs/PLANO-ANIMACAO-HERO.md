@@ -289,7 +289,32 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 
 ---
 
+### Decisão de continuidade do Bloco 7 — 09/10/2026
+
+A solicitação “prossiga” foi interpretada como autorização para avançar apesar da limitação visual já registrada. A inspeção manual em navegador real continua pendente e não será declarada como concluída. Os testes automatizados e a publicação do commit anterior passaram; essa evidência não substitui a verificação visual em desktop/celular.
+
+---
+
 ## Bloco 8 — Movimento lateral configurável da imagem
+
+**Objetivo:** oferecer uma alternativa ao zoom cinematográfico, com deslocamento lateral mínimo e suave, sem somar movimentos fortes.
+
+### Implementação
+- Adicionada a opção `hero.movimento` em `js/config.js`: `"zoom"` (padrão), `"lateral"` ou `"nenhum"`.
+- Configurações antigas sem essa propriedade continuam usando o zoom atual.
+- O movimento lateral atua apenas na camada decorativa da fotografia; texto, botões e layout permanecem fora da animação.
+- A camada lateral usa ampliação e margem excedente para reduzir o risco de revelar bordas vazias durante o deslocamento.
+- A opção `"nenhum"` mantém a fotografia estática; `prefers-reduced-motion: reduce` continua desativando animações independentemente da configuração.
+- Nenhuma dependência nova foi adicionada.
+
+### Critérios de conclusão
+- O movimento lateral é sutil e não compete com o conteúdo.
+- Não surgem bordas vazias, rolagem horizontal ou mudanças de layout.
+- A opção padrão mantém o zoom atual.
+- O usuário consegue desativar o movimento sem perder conteúdo ou funcionalidade.
+
+**Status:** Implementado no código; testes automatizados e publicação pendentes.
+
 
 **Objetivo:** oferecer uma alternativa ao zoom cinematográfico, com deslocamento lateral mínimo e suave, sem somar movimentos fortes.
 
