@@ -75,12 +75,16 @@ const $$ = (s) => [...site.doc.querySelectorAll(s)];
 
 check(site.erros.length === 0, "sem erros de runtime");
 check(
-  [".whatsapp-flutuante", ".rodape__rede[aria-label=\"Instagram\"]", ".rodape__rede[aria-label=\"Facebook\"]", ".rodape__rede[aria-label=\"WhatsApp\"]"]
+  [".whatsapp-flutuante", ".rodape__rede[aria-label=\\\"Instagram\\\"]", ".rodape__rede[aria-label=\\\"Facebook\\\"]", ".rodape__rede[aria-label=\\\"WhatsApp\\\"]"]
     .every((seletor) => {
       const elemento = site.doc.querySelector(seletor);
-      return elemento && elemento.querySelector("svg.icon");
+      return elemento && elemento.querySelector("[data-icone] svg.icon");
     }),
   "ícones do WhatsApp flutuante e das redes sociais são renderizados"
+);
+check(
+  [...site.doc.querySelectorAll("[data-icone]")].every((elemento) => elemento.querySelector("svg.icon")),
+  "todos os ícones estáticos possuem SVG após a inicialização"
 );
 check(
   /@media \(prefers-reduced-motion: reduce\)[\s\S]*?animation:\s*none\s*!important/.test(css) &&
