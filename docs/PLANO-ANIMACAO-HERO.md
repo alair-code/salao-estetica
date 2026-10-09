@@ -244,6 +244,17 @@ Nenhum arquivo funcional foi alterado no Bloco 1. Naquele momento, a auditoria f
 
 ### Resultado parcial da auditoria final
 
+### Revisão complementar do Bloco 7 — 09/10/2026
+
+- Reinspecionados `initHeroEntrance()`, `renderHero()`, a camada CSS da imagem, a regra `prefers-reduced-motion` e os testes de regressão.
+- A entrada do conteúdo só anima elementos visíveis; se a Web Animations API estiver ausente ou falhar, o conteúdo continua disponível. A preferência por movimento reduzido interrompe a animação do hero.
+- A imagem é opcional: quando `hero.imagem` está vazia, a classe e a camada fotográfica não são ativadas e o fundo alternativo continua sendo usado. O CSS declara `100vh` antes de `100svh` como fallback de altura.
+- A suíte headless cobre regressões de comportamento, mas não consegue confirmar contraste real, enquadramento em telas físicas, foco visual do navegador ou mensagens do console durante uma navegação real.
+- Não foi encontrada nesta revisão estática uma falha objetiva que justificasse alterar o JavaScript ou o CSS sem evidência adicional. Por isso, não foi introduzida mudança funcional apenas para gerar um diff.
+- O commit `756095f698a67849c368078e5ec7620cd5c4c6be` passou nos workflows de testes e publicação do GitHub Actions. O log dos testes confirmou **87/87 aprovados**. O aviso de depreciação `DEP0040` sobre `punycode` apareceu no encerramento do job e não falhou a suíte; não há evidência de que seja causado pelo código do hero.
+- **Decisão:** revisão técnica automatizada aprovada; Bloco 7 continua aberto somente pela validação visual manual prevista nos critérios. Não iniciar o Bloco 8 antes de resolver ou aceitar explicitamente essa limitação.
+
+
 - Encontrado um defeito em `initHeroEntrance()`: o código usava `querySelector()` (`$`) para obter um único elemento e depois chamava `.filter()`. Isso podia lançar erro e impedir a sequência de animação.
 - Corrigido em `js/script.js`: agora usa `querySelectorAll()` (`$$`) antes de filtrar os elementos ocultos. A correção está no commit `26bd3191ef4abb2f2e2679de0f9712a25d890a65`.
 - A suíte contém verificações para erros de runtime, os quatro grupos animados, campos ocultos, movimento reduzido, ícones, links e interações do template. Após a execução remota, foram corrigidos dois defeitos nos próprios testes: contagem de CTAs usando seletor de elemento único e simulação de WhatsApp ausente que alterava o campo errado.
