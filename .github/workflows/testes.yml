@@ -1,0 +1,29 @@
+name: Testes do template
+
+on:
+  push:
+    branches:
+      - manutencao
+  pull_request:
+    branches:
+      - manutencao
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testes:
+    name: Testes automatizados
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar código
+        uses: actions/checkout@v5
+      - name: Configurar Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Instalar dependências
+        run: npm install
+      - name: Executar testes de regressão
+        run: npm test

@@ -273,19 +273,87 @@
 
   function renderHero() {
     var hero = config.hero || {};
+    var etiqueta = $(".hero__etiqueta");
     var titulo = $("#heroTitulo");
+    var descricao = $(".hero__descricao");
+    var acoes = $(".hero__acoes");
+    var botaoPrimario = $(".hero__acoes .botao--whatsapp");
+    var botaoSecundario = $(".hero__acoes .botao--contorno");
+
+    // Campos opcionais vazios não devem deixar espaços em branco no hero.
+    if (etiqueta) etiqueta.hidden = !isFilled(hero.etiqueta);
+    if (descricao) descricao.hidden = !isFilled(hero.descricao);
     if (titulo) {
-      if (hero.destaque) {
+      var temTitulo = isFilled(hero.titulo) || isFilled(hero.destaque);
+      titulo.hidden = !temTitulo;
+      if (isFilled(hero.destaque)) {
         titulo.innerHTML =
           escapeHtml(hero.titulo) + " <em>" + escapeHtml(hero.destaque) + "</em>";
       } else {
         titulo.textContent = hero.titulo || "";
       }
     }
-    if (hero.imagem) {
-      var section = $("#inicio");
-      if (section) {
-        section.style.backgroundImage = "linear-gradient(rgba(28,20,16,.78), rgba(28,20,16,.82)), url('" + hero.imagem + "')";
+    var temWhatsApp = isFilled(config.contato && config.contato.whatsapp);
+    if (botaoPrimario) {
+      // Não exibe CTA de agendamento se não houver destino configurado.
+      botaoPrimario.hidden = !isFilled(hero.textoBotaoPrimario) || !temWhatsApp;
+    }
+    if (botaoSecundario) botaoSecundario.hidden = !isFilled(hero.textoBotaoSecundario);
+    if (acoes) {
+      acoes.hidden = ![botaoPrimario, botaoSecundario].some(function (botao) {
+        return botao && !botao.hidden;
+      });
+    }
+
+    var section = $("#inicio");
+    if (section) {
+      // A configuração antiga continua usando zoom quando movimento não é informado.
+      var movimento = ["zoom", "lateral", "nenhum"].includes(hero.movimento)
+        ? hero.movimento
+        : "zoom";
+      section.classList.remove(
+        "hero--movimento-zoom",
+        "hero--movimento-lateral",
+        "hero--movimento-desativado"
+      );
+      if (movimento === "lateral") {
+        section.classList.add("hero--movimento-lateral");
+      } else if (movimento === "nenhum") {
+        section.classList.add("hero--movimento-desativado");
+      } else {
+        section.classList.add("hero--movimento-zoom");
+      }
+
+      var imagemPrincipal = typeof hero.imagem === "string" ? hero.imagem.trim() : "";
+      var imagensHero = Array.isArray(hero.imagens)
+        ? hero.imagens.filter(function (imagem) {
+            return typeof imagem === "string" && imagem.trim().length > 0;
+          }).map(function (imagem) { return imagem.trim(); })
+        : [];
+
+      // Uma única imagem na lista vira capa estática se a propriedade legada estiver vazia.
+      if (!imagemPrincipal && imagensHero.length === 1) {
+        imagemPrincipal = imagensHero[0];
+      }
+
+      if (imagensHero.length >= 2) {
+        // Mantém apenas duas camadas ativas: reduz downloads e preserva o hero antigo.
+        var slides = document.createElement("div");
+        slides.className = "hero__slides";
+        slides.setAttribute("aria-hidden", "true");
+        imagensHero = imagensHero.slice(0, 2);
+        imagensHero.forEach(function (imagem, indice) {
+          var slide = document.createElement("span");
+          slide.className = "hero__slide" + (indice === 0 ? " is-primeiro" : " is-segundo");
+          // Deixa os gradientes no CSS para que exista fallback sem color-mix().
+          slide.style.backgroundImage = "url(" + JSON.stringify(imagem) + ")";
+          slides.appendChild(slide);
+        });
+        section.appendChild(slides);
+        section.classList.add("hero--com-slides", "hero--com-imagem");
+      } else if (imagemPrincipal) {
+        // Compatibilidade: uma imagem continua usando a camada e o movimento atuais.
+        section.style.setProperty("--hero-imagem", "url(" + JSON.stringify(imagemPrincipal) + ")");
         section.classList.add("hero--com-imagem");
       }
     }
@@ -294,7 +362,6 @@
     var temServicos = (config.servicos || []).some(function (c) {
       return c && c.itens && c.itens.length > 0;
     });
-    var botaoSecundario = $(".hero__acoes .botao--contorno");
     if (botaoSecundario && !temServicos) botaoSecundario.setAttribute("href", "#contato");
   }
 
@@ -766,9 +833,64 @@
     elementos.forEach(function (el) { observer.observe(el); });
   }
 
+  /* ---------- 13b. Entrada suave do hero ---------- */
+
+  function initHeroEntrance() {
+    var hero = $("#inicio");
+    if (!hero) return;
+
+    // Sem Web Animations API, sem matchMedia ou com movimento reduzido,
+    // o conteúdo permanece visível e não depende da animação.
+    if (typeof Element === "undefined" ||
+        typeof Element.prototype.animate !== "function" ||
+        typeof window.matchMedia !== "function") return;
+
+    try {
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    } catch (e) {
+      return;
+    }
+
+    var elementos = $$(".hero__etiqueta, .hero__titulo, .hero__descricao, .hero__acoes", hero).filter(function (el) {
+      return !el.hidden;
+    });
+    elementos.forEach(function (el, indice) {
+      try {
+        el.animate(
+          [
+            { opacity: 0, transform: "translateY(12px)" },
+            { opacity: 1, transform: "translateY(0)" }
+          ],
+          {
+            duration: 620,
+            delay: indice * 90,
+            easing: "cubic-bezier(0.22, 1, 0.36, 1)",
+            fill: "both"
+          }
+        );
+      } catch (e) {
+        // Uma falha de animação nunca deve ocultar ou bloquear o conteúdo.
+      }
+    });
+  }
+
   /* ---------- 14. Boot ---------- */
 
+  function renderStaticIcons() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-icone]"), function (el) {
+      try {
+        el.innerHTML = icon(el.getAttribute("data-icone"));
+      } catch (e) {
+        // Uma falha de ícone não deve impedir as demais inicializações.
+      }
+    });
+  }
+
   function init() {
+    // Renderiza primeiro os ícones do HTML para preservar os controles essenciais
+    // mesmo que uma inicialização posterior falhe.
+    renderStaticIcons();
+
     applyColors();
     applySeo();
     bindFixedTexts();
@@ -785,15 +907,16 @@
     renderDepoimentos();
     renderHorarios();
 
+    // Algumas seções criam elementos [data-icone] dinamicamente durante o render.
+    // Uma segunda passagem garante que também recebam SVG sem duplicar lógica.
+    renderStaticIcons();
+
     initMenu();
     initHeaderScroll();
     initScrollspy();
     initReveals();
+    initHeroEntrance();
 
-    // Ícones estáticos escritos direto no HTML.
-    $$("[data-icone]").forEach(function (el) {
-      el.innerHTML = icon(el.getAttribute("data-icone"));
-    });
   }
 
   if (document.readyState === "loading") {

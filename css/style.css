@@ -519,13 +519,22 @@ button {
 /* ---------- Hero ---------- */
 .hero {
   position: relative;
+  min-height: 100vh; /* Fallback para navegadores sem suporte a svh. */
   min-height: 100svh;
   display: flex;
   align-items: center;
   padding-block: clamp(7rem, 14vh, 9rem) clamp(4rem, 10vh, 6rem);
   background:
-    radial-gradient(58% 72% at 82% 12%, rgba(183, 110, 121, 0.16), transparent 62%),
-    radial-gradient(46% 60% at 12% 88%, rgba(200, 161, 90, 0.14), transparent 60%),
+    radial-gradient(
+      58% 72% at 82% 12%,
+      color-mix(in srgb, var(--cor-primaria) 16%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      46% 60% at 12% 88%,
+      color-mix(in srgb, var(--cor-dourado) 14%, transparent),
+      transparent 60%
+    ),
     var(--cor-escura);
   color: #f7f1ea;
   overflow: hidden;
@@ -541,8 +550,190 @@ button {
 }
 
 .hero--com-imagem {
+  /* A fotografia fica numa camada própria, independente do conteúdo. */
+  background-image: none;
+  isolation: isolate;
+}
+
+.hero--com-imagem::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: -5%;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--cor-escura) 94%, transparent) 0%,
+      color-mix(in srgb, var(--cor-escura) 82%, transparent) 48%,
+      color-mix(in srgb, var(--cor-escura) 46%, transparent) 100%
+    ),
+    linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--cor-escura) 38%, transparent),
+      color-mix(in srgb, var(--cor-escura) 24%, transparent)
+    ),
+    var(--hero-imagem);
   background-size: cover;
-  background-position: center;
+  background-position: center right;
+  transform: scale(1.02);
+  animation: hero-zoom-cinematico 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Alternativa configurável: movimento lateral discreto, sem animar o conteúdo.
+   A camada excede a área do hero para evitar revelar bordas vazias. */
+.hero--movimento-lateral.hero--com-imagem::after {
+  inset: -7%;
+  transform: scale(1.06);
+  animation: hero-pan-lateral 32s ease-in-out infinite alternate;
+}
+
+.hero--movimento-desativado.hero--com-imagem::after {
+  animation: none;
+  transform: scale(1.02);
+  will-change: auto;
+}
+
+@keyframes hero-pan-lateral {
+  from { transform: scale(1.06) translateX(-1.2%); }
+  to { transform: scale(1.06) translateX(1.2%); }
+}
+
+/* Fallback para navegadores sem color-mix(): mantém a fotografia e
+   usa a cor configurável do tema, sem depender de tons fixos do cliente. */
+@supports not (color: color-mix(in srgb, #000 50%, transparent)) {
+  /* Sem color-mix, prioriza um fundo sólido e temático em vez de perder o fundo. */
+  .hero:not(.hero--com-imagem) {
+    background: var(--cor-escura);
+  }
+
+  .hero--com-imagem::after {
+    background-image:
+      linear-gradient(
+        90deg,
+        var(--cor-escura) 0%,
+        var(--cor-escura) 30%,
+        transparent 100%
+      ),
+      linear-gradient(
+        0deg,
+        var(--cor-escura),
+        transparent
+      ),
+      var(--hero-imagem);
+  }
+}
+
+/* Dissolução opcional entre duas imagens configuradas no hero.imagens.
+   A imagem principal antiga permanece intacta quando a lista não é usada. */
+.hero--com-slides::after {
+  opacity: 0;
+  animation: none;
+  will-change: auto;
+}
+
+.hero__slides {
+  position: absolute;
+  z-index: 0;
+  inset: -5%;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.hero__slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center right;
+  transform: scale(1.04);
+  will-change: opacity;
+}
+
+.hero__slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  /* Área de texto protegida: mantém o lado esquerdo escuro mesmo em fotos claras. */
+  background:
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--cor-escura) 98%, transparent) 0%,
+      color-mix(in srgb, var(--cor-escura) 94%, transparent) 38%,
+      color-mix(in srgb, var(--cor-escura) 76%, transparent) 62%,
+      color-mix(in srgb, var(--cor-escura) 24%, transparent) 100%
+    ),
+    linear-gradient(
+      0deg,
+      color-mix(in srgb, var(--cor-escura) 58%, transparent) 0%,
+      transparent 68%
+    );
+}
+
+.hero__slide.is-primeiro {
+  opacity: 1;
+  animation: hero-crossfade-primeiro 16s ease-in-out infinite, hero-zoom-cinematico 28s ease-in-out infinite alternate;
+}
+
+.hero__slide.is-segundo {
+  opacity: 0;
+  animation: hero-crossfade-segundo 16s ease-in-out infinite, hero-zoom-cinematico 28s ease-in-out infinite alternate;
+}
+
+/* A opção lateral também funciona no modo de duas imagens. */
+.hero--movimento-lateral.hero--com-slides .hero__slide.is-primeiro {
+  animation: hero-crossfade-primeiro 16s ease-in-out infinite, hero-pan-lateral 32s ease-in-out infinite alternate;
+}
+
+.hero--movimento-lateral.hero--com-slides .hero__slide.is-segundo {
+  animation: hero-crossfade-segundo 16s ease-in-out infinite, hero-pan-lateral 32s ease-in-out infinite alternate;
+}
+
+@keyframes hero-crossfade-primeiro {
+  0%, 42% { opacity: 1; }
+  50%, 92% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes hero-crossfade-segundo {
+  0%, 42% { opacity: 0; }
+  50%, 92% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Sem movimento configurado, mantém apenas a primeira imagem estática. */
+.hero--movimento-desativado.hero--com-slides .hero__slide {
+  animation: none;
+  opacity: 0;
+  transform: none;
+  will-change: auto;
+}
+
+.hero--movimento-desativado.hero--com-slides .hero__slide.is-primeiro {
+  opacity: 1;
+}
+
+/* Fallback temático para navegadores que não suportam color-mix(). */
+@supports not (color: color-mix(in srgb, #000 50%, transparent)) {
+  .hero__slide::after {
+    background:
+      linear-gradient(90deg, var(--cor-escura) 0%, var(--cor-escura) 30%, transparent 100%),
+      linear-gradient(0deg, var(--cor-escura), transparent);
+  }
+}
+
+.hero--com-imagem::before {
+  z-index: 1;
+}
+
+.hero--com-imagem .hero__conteudo {
+  z-index: 2;
+}
+
+@keyframes hero-zoom-cinematico {
+  from { transform: scale(1.02); }
+  to { transform: scale(1.09); }
 }
 
 .hero__conteudo {
@@ -568,6 +759,7 @@ button {
   font-size: clamp(2.6rem, 6.5vw, 4.3rem);
   color: #fdf9f4;
   letter-spacing: 0.01em;
+  text-wrap: balance;
 }
 
 .hero__titulo em {
@@ -1413,34 +1605,40 @@ button {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .hero--com-slides .hero__slide {
+    animation: none !important;
+    opacity: 0 !important;
+    transform: none !important;
+    will-change: auto;
+  }
+
+  .hero--com-slides .hero__slide.is-primeiro {
+    opacity: 1 !important;
+  }
+
   html {
     scroll-behavior: auto;
   }
 
-  .cabecalho__conteudo,
-  .navegacao.is-open > * {
-    animation: none;
+  /* Desativa animações e transições não essenciais em todo o site,
+     incluindo menu mobile e efeitos de hover, não apenas o hero. */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
   }
 
-  .botao--primario::after {
-    transition: none;
+  .hero--com-imagem::after {
+    transform: scale(1.02);
+    will-change: auto;
   }
 
   [data-reveal] {
     opacity: 1;
     transform: none;
-    transition: none;
-  }
-
-  .whatsapp-flutuante::before {
-    animation: none;
-  }
-
-  .galeria-item img,
-  .botao,
-  .servico-card,
-  .diferencial-card {
-    transition: none;
   }
 }
 
@@ -1523,6 +1721,14 @@ button {
   .hero {
     min-height: auto;
   }
+
+  .hero--com-imagem::after {
+    background-position: 64% center;
+  }
+}
+
+.hero--com-slides .hero__slide {
+  background-position: 64% center;
 }
 
 @media (max-width: 640px) {
@@ -1575,6 +1781,10 @@ button {
 }
 
 @media (max-width: 420px) {
+  .hero__titulo {
+    font-size: clamp(2.2rem, 10vw, 2.6rem);
+  }
+
   .servicos-grid,
   .galeria-grade {
     grid-template-columns: 1fr;
