@@ -524,8 +524,16 @@ button {
   align-items: center;
   padding-block: clamp(7rem, 14vh, 9rem) clamp(4rem, 10vh, 6rem);
   background:
-    radial-gradient(58% 72% at 82% 12%, rgba(183, 110, 121, 0.16), transparent 62%),
-    radial-gradient(46% 60% at 12% 88%, rgba(200, 161, 90, 0.14), transparent 60%),
+    radial-gradient(
+      58% 72% at 82% 12%,
+      color-mix(in srgb, var(--cor-primaria) 16%, transparent),
+      transparent 62%
+    ),
+    radial-gradient(
+      46% 60% at 12% 88%,
+      color-mix(in srgb, var(--cor-dourado) 14%, transparent),
+      transparent 60%
+    ),
     var(--cor-escura);
   color: #f7f1ea;
   overflow: hidden;
@@ -575,6 +583,11 @@ button {
 /* Fallback para navegadores sem color-mix(): mantém a fotografia e
    usa a cor configurável do tema, sem depender de tons fixos do cliente. */
 @supports not (color: color-mix(in srgb, #000 50%, transparent)) {
+  /* Sem color-mix, prioriza um fundo sólido e temático em vez de perder o fundo. */
+  .hero:not(.hero--com-imagem) {
+    background: var(--cor-escura);
+  }
+
   .hero--com-imagem::after {
     background-image:
       linear-gradient(
