@@ -282,6 +282,7 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos vazios são ocultados, CTA de WhatsApp sem destino não aparece e o fallback de imagem é testado. Suíte automatizada aprovada (86/86); validação visual de imagem ausente/inválida pendente. |
 | 7. Auditoria final | Auditoria automatizada aprovada; validação manual pendente | No commit atual `386901b8123388aa9429845dd084670d249f4160`, GitHub Actions confirmou **87/87 testes aprovados** ([execução](https://github.com/alair-code/salao-estetica/actions/runs/37925536025)) e GitHub Pages concluiu a publicação ([execução](https://github.com/alair-code/salao-estetica/actions/runs/37925535971)). A ferramenta não conseguiu carregar a página para inspeção visual. `hero.imagem` está vazio na configuração da branch, então o fundo alternativo é esperado. Falta inspeção visual em navegador real: desktop/celular, contraste, foco/teclado, menu, CTAs, imagem válida/inválida e console. **Não iniciar o Bloco 8 até esta limitação visual ser resolvida ou explicitamente aceita.** |
 | 8. Movimento lateral | Implementado; testes automatizados aprovados | `hero.movimento` aceita `zoom`, `lateral` e `nenhum`; CI aprovou 91/91 testes no commit `069a66e`. Inspeção visual em navegador real permanece pendente. |
+| 9. Iluminação ambiente | Avaliado; efeito adicional não implementado | O hero já usa gradientes radiais temáticos. Para evitar duplicação e complexidade sem benefício visual demonstrado, foi mantida a composição atual; nenhuma mudança funcional neste bloco. Validação visual ainda pendente. |
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
@@ -336,7 +337,15 @@ A solicitação “prossiga” foi interpretada como autorização para avançar
 - O fallback sem imagem continua correto.
 - O efeito não cria camadas desnecessárias nem conflitos de desempenho.
 
-**Status:** ⏳ Planejado — iniciar somente após concluir o Bloco 8.
+**Status:** ✅ Avaliado — não implementado por decisão técnica.
+
+### Resultado da avaliação — 09/10/2026
+
+- Inspecionadas as camadas atuais do hero: o fundo já combina gradientes radiais baseados nas cores configuráveis do tema; a camada fotográfica mantém sua própria composição e o conteúdo fica acima dela.
+- O efeito de iluminação estática pretendido já existe no estado atual. Adicionar outra camada ou animar o brilho não demonstra benefício funcional comprovável sem inspeção visual real e poderia aumentar a complexidade ou competir com o texto/fotografia.
+- Para evitar duplicação visual, animação desnecessária e custo adicional de manutenção, **nenhum CSS ou JavaScript foi alterado neste bloco**.
+- A decisão é conservadora: manter a iluminação ambiente existente e reavaliar somente se uma inspeção visual em navegador indicar uma deficiência concreta.
+- Limitação mantida: esta avaliação é estática; não equivale à aprovação visual em desktop ou celular.
 
 ---
 
