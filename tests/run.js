@@ -154,8 +154,9 @@ check(
   "hero: lista com uma imagem mantém o comportamento estático legado"
 );
 check(
-  /hero-crossfade-primeiro[\s\S]*?hero-crossfade-segundo/.test(css) &&
-    /prefers-reduced-motion:\\s*reduce[\\s\\S]*?\.hero--com-slides \.hero__slide[\\s\\S]*?animation:\\s*none !important/.test(css),
+  /@keyframes hero-crossfade-primeiro/.test(css) &&
+    /@keyframes hero-crossfade-segundo/.test(css) &&
+    /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero--com-slides \.hero__slide[\s\S]*?animation:\s*none !important/.test(css),
   "hero: crossfade tem animações CSS e desativa troca com movimento reduzido"
 );
 check(
