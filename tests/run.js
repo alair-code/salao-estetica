@@ -128,6 +128,36 @@ const configMovimentoLateral = configReal
   .replace('imagem: ""', 'imagem: "assets/images/hero.jpg"')
   .replace('movimento: "zoom"', 'movimento: "lateral"');
 const siteMovimentoLateral = montarSite(configMovimentoLateral);
+const configDuasImagens = configReal.replace(
+  'imagem: ""',
+  'imagem: "",\\n    imagens: ["assets/images/hero-1.jpg", "assets/images/hero-2.jpg"]'
+);
+const siteDuasImagens = montarSite(configDuasImagens);
+check(
+  siteDuasImagens.doc.querySelector("#inicio").classList.contains("hero--com-slides") &&
+    siteDuasImagens.doc.querySelectorAll(".hero__slide").length === 2,
+  "hero: duas imagens opcionais criam camadas para crossfade"
+);
+check(
+  siteDuasImagens.doc.querySelector(".hero__slide.is-primeiro").style.backgroundImage.includes("hero-1.jpg") &&
+    siteDuasImagens.doc.querySelector(".hero__slide.is-segundo").style.backgroundImage.includes("hero-2.jpg"),
+  "hero: imagens configuradas são aplicadas às camadas na ordem correta"
+);
+const configUmaImagemLista = configReal.replace(
+  'imagem: ""',
+  'imagem: "",\\n    imagens: ["assets/images/hero-1.jpg"]'
+);
+const siteUmaImagemLista = montarSite(configUmaImagemLista);
+check(
+  !siteUmaImagemLista.doc.querySelector("#inicio").classList.contains("hero--com-slides") &&
+    siteUmaImagemLista.doc.querySelectorAll(".hero__slide").length === 0,
+  "hero: lista com uma imagem mantém o comportamento estático legado"
+);
+check(
+  /hero-crossfade-primeiro[\\s\\S]*?hero-crossfade-segundo/.test(css) &&
+    /prefers-reduced-motion:\\s*reduce[\\s\\S]*?\.hero--com-slides \.hero__slide[\\s\\S]*?animation:\\s*none !important/.test(css),
+  "hero: crossfade tem animações CSS e desativa troca com movimento reduzido"
+);
 check(
   siteMovimentoLateral.doc.querySelector("#inicio").classList.contains("hero--movimento-lateral") &&
     siteMovimentoLateral.doc.querySelector("#inicio").classList.contains("hero--com-imagem"),
