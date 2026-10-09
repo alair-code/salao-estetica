@@ -124,14 +124,18 @@ check(
   "hero: gradientes acompanham a paleta configurada e têm fallback sem color-mix"
 );
 check($("#heroTitulo").textContent.includes("toque de cuidado"), "hero: título + destaque renderizados");
+check(
+  $("#inicio").classList.contains("hero--com-imagem") &&
+    $("#inicio").style.getPropertyValue("--hero-imagem").includes("images.unsplash.com"),
+  "hero: configuração publicada ativa uma fotografia demonstrativa na capa"
+);
 const configMovimentoLateral = configReal
-  .replace('imagem: ""', 'imagem: "assets/images/hero.jpg"')
+  .replace(/(\n    imagem: ")[^"]*(")/, '$1assets/images/hero.jpg$2')
   .replace('movimento: "zoom"', 'movimento: "lateral"');
 const siteMovimentoLateral = montarSite(configMovimentoLateral);
-const configDuasImagens = configReal.replace(
-  'imagem: ""',
-  'imagem: "",\n    imagens: ["assets/images/hero-1.jpg", "assets/images/hero-2.jpg"]'
-);
+const configDuasImagens = configReal
+  .replace(/(\n    imagem: ")[^"]*(")/, '$1$2')
+  .replace('movimento: "zoom"', 'movimento: "zoom", imagens: ["assets/images/hero-1.jpg", "assets/images/hero-2.jpg"]');
 const siteDuasImagens = montarSite(configDuasImagens);
 check(
   siteDuasImagens.doc.querySelector("#inicio").classList.contains("hero--com-slides") &&
@@ -143,10 +147,9 @@ check(
     siteDuasImagens.doc.querySelector(".hero__slide.is-segundo").style.backgroundImage.includes("hero-2.jpg"),
   "hero: imagens configuradas são aplicadas às camadas na ordem correta"
 );
-const configUmaImagemLista = configReal.replace(
-  'imagem: ""',
-  'imagem: "",\n    imagens: ["assets/images/hero-1.jpg"]'
-);
+const configUmaImagemLista = configReal
+  .replace(/(\n    imagem: ")[^"]*(")/, '$1$2')
+  .replace('movimento: "zoom"', 'movimento: "zoom", imagens: ["assets/images/hero-1.jpg"]');
 const siteUmaImagemLista = montarSite(configUmaImagemLista);
 check(
   !siteUmaImagemLista.doc.querySelector("#inicio").classList.contains("hero--com-slides") &&
@@ -156,7 +159,7 @@ check(
   "hero: lista com uma imagem usa capa estática quando hero.imagem está vazio"
 );
 const configImagemLegadaComListaUnica = configReal
-  .replace('imagem: ""', 'imagem: "assets/images/capa-legada.jpg"')
+  .replace(/(\n    imagem: ")[^"]*(")/, '$1assets/images/capa-legada.jpg$2')
   .replace('movimento: "zoom"', 'movimento: "zoom", imagens: ["assets/images/hero-1.jpg"]');
 const siteImagemLegadaComListaUnica = montarSite(configImagemLegadaComListaUnica);
 check(
