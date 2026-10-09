@@ -114,6 +114,10 @@ check(
   "hero: movimento pode ser desativado sem remover a imagem"
 );
 check(
+  /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?animation:\s*none\s*!important/.test(css),
+  "hero: CSS desativa animações com movimento reduzido"
+);
+check(
   /\.hero\s*\{[\s\S]{0,900}color-mix\(in srgb, var\(--cor-primaria\)/.test(css) &&
     /color-mix\(in srgb, var\(--cor-dourado\)/.test(css) &&
     /@supports not \(color: color-mix\(in srgb, #000 50%, transparent\)\)[\s\S]*?\.hero:not\(\.hero--com-imagem\)\s*\{\s*background:\s*var\(--cor-escura\)/.test(css),
@@ -135,6 +139,18 @@ check(
   siteMovimentoDesativado.doc.querySelector("#inicio").classList.contains("hero--movimento-desativado") &&
     siteMovimentoDesativado.doc.querySelector("#inicio").classList.contains("hero--com-imagem"),
   "hero: movimento desativado mantém a camada de imagem"
+);
+const configMovimentoLegado = configReal.replace(/\n\s*movimento: "zoom"/, "");
+const siteMovimentoLegado = montarSite(configMovimentoLegado);
+check(
+  siteMovimentoLegado.doc.querySelector("#inicio").classList.contains("hero--movimento-zoom"),
+  "hero: configuração antiga sem movimento mantém zoom padrão"
+);
+const configMovimentoInvalido = configReal.replace('movimento: "zoom"', 'movimento: "invalido"');
+const siteMovimentoInvalido = montarSite(configMovimentoInvalido);
+check(
+  siteMovimentoInvalido.doc.querySelector("#inicio").classList.contains("hero--movimento-zoom"),
+  "hero: valor de movimento inválido retorna ao zoom seguro"
 );
 check($(".hero__etiqueta").textContent.trim().length > 0, "hero: etiqueta permanece disponível");
 check($(".hero__descricao").textContent.trim().length > 0, "hero: descrição permanece disponível");
