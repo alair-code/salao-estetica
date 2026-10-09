@@ -832,16 +832,20 @@
 
   /* ---------- 14. Boot ---------- */
 
-  function init() {
-    // Renderiza primeiro os ícones estáticos: uma falha em outra inicialização
-    // (por exemplo, uma animação) não pode deixar WhatsApp e redes sociais vazios.
+  function renderStaticIcons() {
     Array.prototype.forEach.call(document.querySelectorAll("[data-icone]"), function (el) {
       try {
         el.innerHTML = icon(el.getAttribute("data-icone"));
       } catch (e) {
-        // Mantém o restante do site funcional se um ícone falhar.
+        // Uma falha de ícone não deve impedir as demais inicializações.
       }
     });
+  }
+
+  function init() {
+    // Renderiza primeiro os ícones do HTML para preservar os controles essenciais
+    // mesmo que uma inicialização posterior falhe.
+    renderStaticIcons();
 
     applyColors();
     applySeo();
@@ -858,6 +862,10 @@
     renderGaleria();
     renderDepoimentos();
     renderHorarios();
+
+    // Algumas seções criam elementos [data-icone] dinamicamente durante o render.
+    // Uma segunda passagem garante que também recebam SVG sem duplicar lógica.
+    renderStaticIcons();
 
     initMenu();
     initHeaderScroll();
