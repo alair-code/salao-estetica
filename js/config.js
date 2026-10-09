@@ -100,9 +100,13 @@ var siteConfig = {
     descricao: "Massagem modeladora, drenagem linfática e tratamentos faciais e corporais com técnica especializada. Resultados que você sente na primeira sessão — e um cuidado que vai além do esperado.",
     textoBotaoPrimario: "Quero agendar minha sessão",
     textoBotaoSecundario: "Ver tratamentos",
-    // Foto demonstrativa para que o efeito fique visível no template publicado.
-    // Troque pela foto autorizada do cliente (de preferência em assets/images/).
-    imagem: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=85",
+    // Fotos demonstrativas para ativar o crossfade no template publicado.
+    // Troque pelas fotos autorizadas do cliente (de preferência em assets/images/).
+    imagem: "",                                 // capa única legada, se preferir
+    imagens: [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1920&q=85",
+      "https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=1920&q=85"
+    ],
     movimento: "zoom"                           // "zoom" (padrão), "lateral" ou "nenhum"
   },
 
