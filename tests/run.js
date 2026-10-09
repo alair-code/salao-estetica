@@ -171,8 +171,10 @@ check(
 check(
   /@keyframes hero-crossfade-primeiro/.test(css) &&
     /@keyframes hero-crossfade-segundo/.test(css) &&
+    /\.hero__slide\.is-primeiro\s*\{[^}]*hero-zoom-cinematico/.test(css) &&
+    /\.hero--movimento-lateral\.hero--com-slides \.hero__slide\.is-primeiro\s*\{[^}]*hero-pan-lateral/.test(css) &&
     /@media\s*\(prefers-reduced-motion:\s*reduce\)[\s\S]*?\.hero--com-slides \.hero__slide[\s\S]*?animation:\s*none !important/.test(css),
-  "hero: crossfade tem animações CSS e desativa troca com movimento reduzido"
+  "hero: crossfade combina zoom/lateral e respeita movimento reduzido"
 );
 const siteSlidesSemMovimento = montarSite(
   configDuasImagens.replace('movimento: "zoom"', 'movimento: "nenhum"')
