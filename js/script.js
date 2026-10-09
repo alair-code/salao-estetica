@@ -318,7 +318,6 @@
     var temServicos = (config.servicos || []).some(function (c) {
       return c && c.itens && c.itens.length > 0;
     });
-    var botaoSecundario = $(".hero__acoes .botao--contorno");
     if (botaoSecundario && !temServicos) botaoSecundario.setAttribute("href", "#contato");
   }
 
