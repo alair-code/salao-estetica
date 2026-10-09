@@ -130,7 +130,7 @@ const configMovimentoLateral = configReal
 const siteMovimentoLateral = montarSite(configMovimentoLateral);
 const configDuasImagens = configReal.replace(
   'imagem: ""',
-  'imagem: "",\\n    imagens: ["assets/images/hero-1.jpg", "assets/images/hero-2.jpg"]'
+  'imagem: "",\n    imagens: ["assets/images/hero-1.jpg", "assets/images/hero-2.jpg"]'
 );
 const siteDuasImagens = montarSite(configDuasImagens);
 check(
@@ -145,7 +145,7 @@ check(
 );
 const configUmaImagemLista = configReal.replace(
   'imagem: ""',
-  'imagem: "",\\n    imagens: ["assets/images/hero-1.jpg"]'
+  'imagem: "",\n    imagens: ["assets/images/hero-1.jpg"]'
 );
 const siteUmaImagemLista = montarSite(configUmaImagemLista);
 check(
@@ -154,7 +154,7 @@ check(
   "hero: lista com uma imagem mantém o comportamento estático legado"
 );
 check(
-  /hero-crossfade-primeiro[\\s\\S]*?hero-crossfade-segundo/.test(css) &&
+  /hero-crossfade-primeiro[\s\S]*?hero-crossfade-segundo/.test(css) &&
     /prefers-reduced-motion:\\s*reduce[\\s\\S]*?\.hero--com-slides \.hero__slide[\\s\\S]*?animation:\\s*none !important/.test(css),
   "hero: crossfade tem animações CSS e desativa troca com movimento reduzido"
 );
