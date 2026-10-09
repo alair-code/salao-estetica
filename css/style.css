@@ -683,6 +683,27 @@ button {
   100% { opacity: 0; }
 }
 
+/* Sem movimento configurado, mantém apenas a primeira imagem estática. */
+.hero--movimento-desativado.hero--com-slides .hero__slide {
+  animation: none;
+  opacity: 0;
+  transform: none;
+  will-change: auto;
+}
+
+.hero--movimento-desativado.hero--com-slides .hero__slide.is-primeiro {
+  opacity: 1;
+}
+
+/* Fallback temático para navegadores que não suportam color-mix(). */
+@supports not (color: color-mix(in srgb, #000 50%, transparent)) {
+  .hero__slide::after {
+    background:
+      linear-gradient(90deg, var(--cor-escura) 0%, var(--cor-escura) 30%, transparent 100%),
+      linear-gradient(0deg, var(--cor-escura), transparent);
+  }
+}
+
 .hero--com-imagem::before {
   z-index: 1;
 }
@@ -1685,6 +1706,10 @@ button {
   .hero--com-imagem::after {
     background-position: 64% center;
   }
+}
+
+.hero--com-slides .hero__slide {
+  background-position: 64% center;
 }
 
 @media (max-width: 640px) {
