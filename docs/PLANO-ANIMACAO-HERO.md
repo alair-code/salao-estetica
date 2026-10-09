@@ -246,9 +246,10 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 
 - Encontrado um defeito em `initHeroEntrance()`: o código usava `querySelector()` (`$`) para obter um único elemento e depois chamava `.filter()`. Isso podia lançar erro e impedir a sequência de animação.
 - Corrigido em `js/script.js`: agora usa `querySelectorAll()` (`$$`) antes de filtrar os elementos ocultos. A correção está no commit `26bd3191ef4abb2f2e2679de0f9712a25d890a65`.
-- A suíte já contém verificações para erros de runtime e para as quatro animações quando todos os grupos estão visíveis; elas ainda precisam ser executadas para confirmar a correção.
+- A suíte contém verificações para erros de runtime, os quatro grupos animados, campos ocultos e movimento reduzido. Foi acrescentado um caso em que `Element.prototype.animate()` lança uma exceção, verificando que o conteúdo e o CTA continuam visíveis. Esses testes ainda precisam ser executados.
 - Tentativa de executar `git clone` e `npm ci && npm test` falhou antes da instalação porque o ambiente não conseguiu resolver `github.com` (erro DNS). Nenhum teste automatizado é declarado como aprovado.
 - A revisão estática confirmou a configuração centralizada em `js/config.js`, o tratamento de movimento reduzido, a ocultação de campos vazios e o fallback do CTA principal sem WhatsApp.
+- Teste de regressão acrescentado em `tests/run.js` no commit `245008a811eaca9c7d38225dd6673b7942e1fbf3` para simular falha da Web Animations API e confirmar que conteúdo/CTA continuam disponíveis.
 - **Pendências:** executar `npm ci && npm test` em ambiente com acesso ao repositório e ao npm; validar visualmente desktop/mobile, foco por teclado, imagem configurada/inválida e console do navegador.
 ---
 
