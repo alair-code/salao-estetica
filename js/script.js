@@ -340,9 +340,8 @@
         imagensHero.forEach(function (imagem, indice) {
           var slide = document.createElement("span");
           slide.className = "hero__slide" + (indice === 0 ? " is-primeiro" : " is-segundo");
-          slide.style.backgroundImage =
-            "linear-gradient(90deg, var(--cor-escura) 0%, color-mix(in srgb, var(--cor-escura) 82%, transparent) 48%, color-mix(in srgb, var(--cor-escura) 46%, transparent) 100%), linear-gradient(0deg, color-mix(in srgb, var(--cor-escura) 38%, transparent), color-mix(in srgb, var(--cor-escura) 24%, transparent)), url(" +
-            JSON.stringify(imagem) + ")";
+          // Deixa os gradientes no CSS para que exista fallback sem color-mix().
+          slide.style.backgroundImage = "url(" + JSON.stringify(imagem) + ")";
           slides.appendChild(slide);
         });
         section.appendChild(slides);
