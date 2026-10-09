@@ -286,7 +286,7 @@
     if (titulo) {
       var temTitulo = isFilled(hero.titulo) || isFilled(hero.destaque);
       titulo.hidden = !temTitulo;
-      if (hero.destaque) {
+      if (isFilled(hero.destaque)) {
         titulo.innerHTML =
           escapeHtml(hero.titulo) + " <em>" + escapeHtml(hero.destaque) + "</em>";
       } else {
