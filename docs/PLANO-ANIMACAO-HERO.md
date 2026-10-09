@@ -2,7 +2,7 @@
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 6 implementados e revisados por inspeção; Bloco 7 em andamento — testes automatizados aprovados (86/86), validação visual em navegador real pendente; Blocos 8 a 11 planejados  
+**Status:** Blocos 1 a 6 implementados e revisados por inspeção; Bloco 7 em andamento — última execução confirmada: 86/86 testes; foi acrescentado um teste para o fallback `100vh` e a nova execução do CI ainda precisa ser confirmada; validação visual em navegador real pendente; Blocos 8 a 11 planejados  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ## Regras para toda a execução
@@ -254,6 +254,7 @@ Nenhum arquivo funcional foi alterado no Bloco 1. Naquele momento, a auditoria f
 - A revisão identificou que alguns elementos `[data-icone]` são criados dinamicamente depois da primeira renderização dos ícones. Corrigido em `js/script.js` com a função reutilizável `renderStaticIcons()`, executada antes da inicialização e novamente depois da renderização das seções. Commit `b3bc5a743e4b85adbffbe7667fa0badabc03c4df`.
 - A execução da suíte no GitHub Actions passou: **86 testes aprovados, 0 falhas**, no commit `3e3900358049ccd3180051a5eef3f6553535f259` ([ver execução](https://github.com/alair-code/salao-estetica/actions/runs/37919205240)). O workflow usa Node.js 24 porque a versão resolvida de `jsdom` exige runtime mais recente que Node 20.
 - **Pendências:** validar visualmente desktop/mobile, foco por teclado, imagem configurada/inválida e console do navegador. A aprovação headless não substitui inspeção visual em navegador real.
+- Na revisão seguinte, identificado e corrigido um detalhe de compatibilidade: `.hero` agora declara `min-height: 100vh` antes de `100svh`, mantendo o comportamento moderno e oferecendo fallback para navegadores que não reconhecem a unidade `svh`. Foi acrescentado um teste de regressão para essa ordem; a nova execução do GitHub Actions precisa ser confirmada antes de registrar o resultado atualizado.
 ---
 
 ## Registro de execução
@@ -268,11 +269,11 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 | 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes automatizados aprovados (86/86); validação visual pendente. |
 | 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px. Suíte automatizada aprovada (86/86); contraste e responsividade visual em dispositivos reais pendentes. |
 | 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos vazios são ocultados, CTA de WhatsApp sem destino não aparece e o fallback de imagem é testado. Suíte automatizada aprovada (86/86); validação visual de imagem ausente/inválida pendente. |
-| 7. Auditoria final | Em andamento | Corrigida a seleção dos elementos animados e a renderização dos ícones dinâmicos; workflow do GitHub Actions executou a suíte com 86 testes aprovados e 0 falhas. Validação visual em navegador real ainda pendente. |
+| 7. Auditoria final | Em andamento | Execução anterior do GitHub Actions: 86 testes aprovados e 0 falhas. Refinado o fallback de altura do Hero (`100vh` antes de `100svh`) e adicionado teste de regressão; aguardando confirmação da nova execução. Validação visual em navegador real ainda pendente. |
 
 **Projeto:** Salão e Estética — template reutilizável  
 **Branch obrigatória:** `manutencao`  
-**Status:** Blocos 1 a 6 implementados/revisados por inspeção; Bloco 7 em andamento — testes automatizados aprovados (86/86 no GitHub Actions), validação visual em navegador real pendente  
+**Status:** Blocos 1 a 6 implementados/revisados por inspeção; Bloco 7 em andamento — última execução confirmada de 86/86 testes; nova verificação de compatibilidade adicionada e aguardando CI; validação visual em navegador real pendente  
 **Objetivo:** transformar a primeira dobra (hero) em uma capa elegante, moderna e chamativa, adequada a salão de beleza e estética, sem prejudicar leitura, acessibilidade, desempenho ou personalização por cliente.
 
 ---
