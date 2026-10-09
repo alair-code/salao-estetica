@@ -186,7 +186,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - O foco visível já existente e a estrutura dos CTAs foram preservados; a imagem e o movimento continuam decorativos, sem serem necessários para compreender o conteúdo.
 - Foram adicionadas verificações à suíte para as regras de movimento reduzido e o ajuste tipográfico em telas estreitas.
 
-**Limites desta etapa:** as verificações foram adicionadas, mas a suíte não foi executada neste ambiente remoto. Não houve medição automatizada de contraste nem inspeção visual em navegador, teclado, leitor de tela ou dispositivos reais. O enquadramento da fotografia configurada também permanece dependente de validação visual.
+**Limites desta etapa:** a suíte automatizada passou (85/85). Ainda não houve medição automatizada de contraste nem inspeção visual em navegador, teclado, leitor de tela ou dispositivos reais. O enquadramento da fotografia configurada também permanece dependente de validação visual.
 
 ---
 
@@ -218,7 +218,7 @@ Nenhum arquivo funcional foi alterado neste bloco. A auditoria foi feita por ins
 - A imagem continua opcional: caminho vazio ou composto apenas por espaços não ativa a camada fotográfica; o fundo alternativo permanece disponível.
 - Adicionados testes para campos opcionais vazios, fallback de imagem e ausência de WhatsApp, garantindo que o CTA principal seja ocultado sem desativar o botão secundário.
 
-**Limites desta etapa:** os testes foram adicionados, mas não executados neste ambiente remoto. O comportamento com arquivo de imagem existente e inexistente precisa ser confirmado visualmente no navegador; o CSS preserva o fundo alternativo caso a imagem não carregue.
+**Limites desta etapa:** a suíte automatizada passou (85/85). O comportamento com arquivo de imagem existente e inexistente ainda precisa ser confirmado visualmente no navegador; o CSS preserva o fundo alternativo caso a imagem não carregue.
 
 ---
 
@@ -262,12 +262,12 @@ Atualizar esta tabela ao terminar cada bloco, sem marcar etapas que não foram r
 
 | Bloco | Status | Evidência / observações |
 |---|---|---|
-| 1. Auditoria e base visual | Concluído e revisado | Auditoria refinada; gradiente com cores fixas registrado como ponto de atenção. Nenhum arquivo funcional alterado. Testes automatizados e validação visual não executados. |
-| 2. Composição da capa | Implementado; revisão por inspeção concluída | CSS com gradiente ligado à cor do tema, imagem configurável separada e enquadramento desktop/mobile definido. Testes adicionados, mas ainda não executados; validação visual com fotografia real pendente. |
-| 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Validação visual, testes automatizados e desempenho em dispositivos reais ainda pendentes. |
-| 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes adicionados, ainda não executados; validação visual pendente. |
-| 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px; testes adicionados. Suíte não executada; contraste e responsividade visual em dispositivos reais pendentes. |
-| 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos vazios são ocultados, CTA de WhatsApp sem destino não aparece e o fallback de imagem é testado. Suíte ainda não executada; validação visual de imagem ausente/inválida pendente. |
+| 1. Auditoria e base visual | Concluído e revisado | Auditoria refinada; gradiente com cores fixas registrado como ponto de atenção. Nenhum arquivo funcional alterado. Suíte automatizada executada no GitHub Actions: 85/85 testes aprovados. Validação visual ainda pendente. |
+| 2. Composição da capa | Implementado; revisão por inspeção concluída | CSS com gradiente ligado à cor do tema, imagem configurável separada e enquadramento desktop/mobile definido. Suíte automatizada aprovada (85/85); validação visual com fotografia real pendente. |
+| 3. Movimento cinematográfico | Implementado e refinado; revisão por inspeção concluída | Zoom CSS lento em camada isolada, respeita movimento reduzido e possui fallback de contraste/imagem para navegadores sem `color-mix()`. Testes automatizados aprovados (85/85); validação visual e desempenho em dispositivos reais ainda pendentes. |
+| 4. Entrada do conteúdo | Implementado; revisão por inspeção concluída | Web Animations API com sequência curta; conteúdo permanece visível sem suporte à API e com movimento reduzido. Testes automatizados aprovados (85/85); validação visual pendente. |
+| 5. Acessibilidade e responsividade | Implementado; revisão por inspeção concluída | Movimento reduzido desativa animações CSS e remove atrasos de transição; ajuste tipográfico do hero até 420 px; testes adicionados. Suíte automatizada aprovada (85/85); contraste e responsividade visual em dispositivos reais pendentes. |
+| 6. Personalização e fallback | Implementado; revisão por inspeção concluída | Configuração continua centralizada em `js/config.js`; campos vazios são ocultados, CTA de WhatsApp sem destino não aparece e o fallback de imagem é testado. Suíte automatizada aprovada (85/85); validação visual de imagem ausente/inválida pendente. |
 | 7. Auditoria final | Em andamento | Corrigida a seleção dos elementos animados e a renderização dos ícones dinâmicos; workflow do GitHub Actions executou a suíte com 85 testes aprovados e 0 falhas. Validação visual em navegador real ainda pendente. |
 
 **Projeto:** Salão e Estética — template reutilizável  
