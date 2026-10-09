@@ -411,9 +411,9 @@ A solicitação “prossiga” foi interpretada como autorização para avançar
 - Reinspecionados `js/script.js`, `css/style.css`, `js/config.js`, `index.html` e `tests/run.js`, incluindo a lógica de movimento, camadas, contraste, responsividade e movimento reduzido.
 - Corrigido um caso real: quando `hero.imagens` tinha uma única imagem e `hero.imagem` estava vazia, nenhuma fotografia era exibida. Agora essa imagem é usada como capa estática; se a propriedade legada tiver valor, ela mantém prioridade.
 - Acrescentados testes para os dois cenários acima. Mantida a limitação de imagens CSS sem evento confiável de erro por URL.
-- O CI será consultado após esta alteração para registrar o resultado real. A inspeção visual em navegador real não pôde ser feita neste ambiente e continua pendente.
+- O CI do commit `5560306baf9e513de0ecc4d1d1384f99185cd3c0` foi consultado: 102/102 testes passaram. A inspeção visual em navegador real não pôde ser feita neste ambiente e continua pendente.
 
-**Status:** ✅ Auditoria técnica concluída; 102/102 testes aprovados no CI do commit `5560306baf9e513de0ecc4d1d1384f99185cd3c0`. Validação visual real continua pendente.
+**Status:** ✅ Auditoria técnica concluída; 102/102 testes aprovados no CI do commit `95203ea82eab64bdc36ecc24808c472332cbecdf`. Validação visual real continua pendente.
 
 ---
 
